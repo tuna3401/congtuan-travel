@@ -1,0 +1,2007 @@
+﻿<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Lê Tuấn Driver | Dịch Vụ Xe Riêng Đẳng Cấp Doanh Nhân & Gia Đình</title>
+  <meta name="description"
+    content="Dịch vụ xe riêng chính chủ tài xế Lê Tuấn. Chuyên tuyến Sân bay Nội Bài, Hạ Long, Ninh Bình, liên tỉnh. Đón trước 10 phút, xe sang không mùi, giá trọn gói minh bạch.">
+  <meta name="keywords"
+    content="Lê Tuấn Driver, xe tiện chuyến Hà Nội, xe riêng Nội Bài, xe đi Hạ Long, thuê xe có lái cao cấp, taxi riêng">
+
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lê Tuấn Driver - Chuyên Cơ Mặt Đất Đẳng Cấp Doanh Nhân">
+  <meta property="og:description"
+    content="Chính chủ tài xế Lê Tuấn đón tiễn. Cam kết đón trước 10 phút, xe sang êm ái, giá trọn gói niêm yết.">
+  <meta property="og:image" content="assets/images/car-exterior.jpg">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            platinum: '#F8F9FA',
+            slateDark: '#0F172A',
+            goldSand: '#9E7326',
+            goldLight: '#B8860B',
+            goldShine: '#D4AF37',
+            emeraldLive: '#059669',
+            zaloBlue: '#0068FF'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          },
+          animation: {
+            'shimmer': 'shimmer 2.8s infinite linear',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            shimmer: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(200%)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* EXECUTIVE LIGHT THEME (PLATINUM & WARM SAND) */
+    body {
+      background-color: #F8F9FA;
+      color: #0F172A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background-color: #F3D692;
+      color: #0F172A;
+    }
+
+    /* Ambient Warm Sand & Platinum Mesh Glow */
+    .bg-mesh-light {
+      background: radial-gradient(circle at 50% 0%, rgba(243, 214, 146, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 90% 15%, rgba(229, 195, 120, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 10% 40%, rgba(241, 245, 249, 0.8) 0%, transparent 60%),
+        #F8F9FA;
+    }
+
+    /* Gold Text Gradient */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #9E7326 0%, #B8860B 50%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Executive Card Hover Enhancement */
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px -8px rgba(158, 115, 38, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+      border-color: rgba(212, 175, 55, 0.45);
+    }
+
+    /* Tactile Recessed Switch (Light Edition) */
+    .tactile-switch-track {
+      background-color: #EAEFF5;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    .tactile-thumb-active {
+      background-color: #FFFFFF;
+      color: #9E7326;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+      font-weight: 700;
+    }
+
+    /* Shimmer Button */
+    .btn-gold-shimmer {
+      background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #B8860B 100%);
+      position: relative;
+      overflow: hidden;
+      color: #FFFFFF;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-gold-shimmer:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -4px rgba(184, 134, 11, 0.38);
+    }
+
+    .btn-gold-shimmer::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: rotate(25deg);
+      animation: btnShimmer 3.2s infinite ease-in-out;
+    }
+
+    @keyframes btnShimmer {
+      0% {
+        left: -60%;
+      }
+
+      40% {
+        left: 140%;
+      }
+
+      100% {
+        left: 140%;
+      }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9E7326;
+    }
+  </style>
+</head>
+
+<body class="bg-[#F8F9FA] bg-mesh-light min-h-screen text-[#0F172A] antialiased pb-24 lg:pb-8">
+
+  <!-- TOP DISPATCH STATUS BAR -->
+  <div class="bg-white/80 backdrop-blur-md border-b border-slate-200/80 py-1.5 px-4 text-xs">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+        </span>
+        <span class="text-emerald-700 font-bold uppercase tracking-widest text-[10px]">Trực Tuyến 24/7</span>
+        <span class="text-slate-300 hidden sm:inline">|</span>
+        <span class="text-slate-600 hidden sm:inline">Chính chủ tài xế Lê Tuấn đón tiễn tận nơi</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="tel:0337545188"
+          class="text-[#9E7326] hover:text-[#B8860B] transition flex items-center space-x-1 font-bold">
+          <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
+          </svg>
+          Hotline VIP: 0337.545.188
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION HEADER -->
+  <header
+    class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/90 transition-all duration-300"
+    id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- BRAND LOGO -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div
+          class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#B8860B] via-[#D4AF37] to-[#9E7326] p-[1.5px] shadow-md group-hover:scale-105 transition-transform duration-300">
+          <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center">
+            <!-- Shield Monogram SVG -->
+            <svg class="w-6 h-6 text-[#9E7326]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 2l7 4v6c0 5.25-3.5 10-7 11-3.5-1-7-5.75-7-11V6l7-4z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span
+              class="text-lg font-bold font-display tracking-tight text-[#0F172A] group-hover:text-[#9E7326] transition">LÊ
+              TUẤN</span>
+            <span
+              class="px-1.5 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase bg-amber-50 text-[#9E7326] border border-amber-200/70">VIP
+              CHAUFFEUR</span>
+          </div>
+          <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Chuyên Cơ Mặt Đất • Hà Nội</p>
+        </div>
+      </a>
+
+      <!-- DESKTOP NAV LINKS -->
+      <nav class="hidden lg:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+        <a href="#cockpit" class="hover:text-[#9E7326] transition py-2 relative group">
+          Đặt Xe Nhanh
+          <span
+            class="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9E7326] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#fleet" class="hover:text-[#9E7326] transition py-2 relative group">
+          Khoang Xe Sang
+          <span
+            class="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9E7326] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#commitments" class="hover:text-[#9E7326] transition py-2 relative group">
+          3 Cam Kết Vàng
+          <span
+            class="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9E7326] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#routes" class="hover:text-[#9E7326] transition py-2 relative group">
+          Bảng Giá Tuyến
+          <span
+            class="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9E7326] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#reviews" class="hover:text-[#9E7326] transition py-2 relative group">
+          Đánh Giá
+          <span
+            class="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9E7326] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#faq" class="hover:text-[#9E7326] transition py-2 relative group">
+          Hỏi Đáp
+          <span
+            class="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9E7326] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+      </nav>
+
+      <!-- CALL BUTTON & ZALO CHAT -->
+      <div class="hidden sm:flex items-center space-x-3">
+        <a href="https://zalo.me/0337545188" target="_blank" rel="noopener noreferrer"
+          class="px-4 py-2 rounded-xl bg-blue-50 border border-blue-200 text-[#0068FF] hover:bg-[#0068FF] hover:text-white transition flex items-center space-x-2 text-xs font-bold">
+          <svg class="w-4 h-4" viewBox="0 0 48 48" fill="currentColor">
+            <path
+              d="M24 4C12.95 4 4 12.52 4 23.03c0 5.67 2.62 10.74 6.78 14.28-.43 2.58-1.56 5.86-3.08 7.85 3.51-.54 7.21-2.12 9.5-3.4 2.15.58 4.43.9 6.8.9 11.05 0 20-8.52 20-19.03S35.05 4 24 4z" />
+          </svg>
+          <span>Chat Zalo</span>
+        </a>
+
+        <a href="tel:0337545188"
+          class="btn-gold-shimmer px-5 py-2.5 rounded-xl text-xs font-bold flex items-center space-x-2 shadow-md shadow-amber-500/20">
+          <svg class="w-4 h-4 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
+          </svg>
+          <span>0337.545.188</span>
+        </a>
+      </div>
+
+      <!-- MOBILE MENU TOGGLE -->
+      <div class="lg:hidden flex items-center space-x-2">
+        <a href="tel:0337545188" class="p-2 rounded-lg bg-amber-50 text-[#9E7326] border border-amber-200">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
+          </svg>
+        </a>
+        <button id="mobileMenuBtn" aria-label="Mở menu"
+          class="p-2 rounded-lg text-slate-700 hover:text-black bg-slate-100 border border-slate-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- MOBILE DROPDOWN DRAWER -->
+    <div id="mobileDrawer"
+      class="hidden lg:hidden bg-white/98 border-b border-slate-200 px-6 py-5 space-y-4 shadow-xl backdrop-blur-2xl">
+      <a href="#cockpit" class="block text-slate-700 hover:text-[#9E7326] font-semibold py-1">Đặt Xe Nhanh</a>
+      <a href="#fleet" class="block text-slate-700 hover:text-[#9E7326] font-semibold py-1">Khoang Xe Sang</a>
+      <a href="#commitments" class="block text-slate-700 hover:text-[#9E7326] font-semibold py-1">3 Cam Kết Vàng</a>
+      <a href="#routes" class="block text-slate-700 hover:text-[#9E7326] font-semibold py-1">Bảng Giá Tuyến Phổ Biến</a>
+      <a href="#reviews" class="block text-slate-700 hover:text-[#9E7326] font-semibold py-1">Đánh Giá Khách Hàng</a>
+      <a href="#faq" class="block text-slate-700 hover:text-[#9E7326] font-semibold py-1">Câu Hỏi Thường Gặp</a>
+      <div class="pt-4 border-t border-slate-200 flex flex-col gap-3">
+        <a href="tel:0337545188"
+          class="btn-gold-shimmer text-center py-3 rounded-xl text-xs uppercase tracking-wider font-bold shadow-md">
+          Gọi Ngay: 0337.545.188
+        </a>
+        <a href="https://zalo.me/0337545188" target="_blank"
+          class="bg-[#0068FF] text-white text-center py-3 rounded-xl text-xs font-bold flex items-center justify-center space-x-2">
+          <span>Nhắn Zalo Trực Tiếp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="relative z-10">
+
+    <!-- ==========================================
+         TẦNG 1: THE EXECUTIVE COCKPIT (HERO + FORM)
+         SPLIT SCREEN DUAL-PANE TRÊN DESKTOP
+         ABOVE THE FOLD TRÊN MOBILE
+         ========================================== -->
+    <section id="cockpit" class="relative pt-6 sm:pt-10 pb-16 lg:pt-12 lg:pb-20 overflow-hidden">
+
+      <!-- Subtle Decorative Light Elements -->
+      <div class="absolute -top-32 left-1/4 w-96 h-96 bg-amber-200/20 rounded-full blur-[130px] pointer-events-none">
+      </div>
+      <div class="absolute top-1/2 -right-32 w-96 h-96 bg-emerald-200/15 rounded-full blur-[140px] pointer-events-none">
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- DUAL-PANE DESKTOP GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+          <!-- LEFT COLUMN: HERO SHOWCASE, COMMITMENTS & SOCIAL PROOF (COL 7) -->
+          <div class="lg:col-span-7 space-y-6 sm:space-y-8">
+
+            <!-- PRESTIGE BADGE -->
+            <div
+              class="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-[#9E7326]">
+                Dịch Vụ Xe Riêng VIP • Chính Chủ Cầm Lái 100%
+              </span>
+            </div>
+
+            <!-- HERO HEADLINE -->
+            <div class="space-y-3">
+              <h1
+                class="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold leading-tight font-display tracking-tight text-[#0F172A]">
+                <span>Chuyên Cơ Mặt Đất</span><br>
+                <span class="text-gold-gradient">Đẳng Cấp Doanh Nhân</span>
+              </h1>
+              <p class="text-base sm:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed">
+                Đích thân tài xế <strong class="text-[#0F172A] font-semibold">Lê Tuấn</strong> phục vụ trọn vẹn từng
+                hành
+                trình. Cam kết có mặt đón trước 10 phút, khoang xe tĩnh lặng thơm mát, mức giá trọn gói niêm yết không
+                phát sinh phụ phí.
+              </p>
+            </div>
+
+            <!-- DRIVER PROFILE MINI CARD -->
+            <div
+              class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-2xl p-4 sm:p-5 flex items-center space-x-4">
+              <div class="relative flex-shrink-0">
+                <div
+                  class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-tr from-[#B8860B] to-slate-200 shadow-md">
+                  <img src="assets/images/avatar.jpg" alt="Tài xế Lê Tuấn"
+                    class="w-full h-full object-cover rounded-[14px]"
+                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80';">
+                </div>
+                <div class="absolute -bottom-1 -right-1 bg-white p-0.5 rounded-full shadow">
+                  <span class="flex h-3.5 w-3.5 rounded-full bg-emerald-500 items-center justify-center">
+                    <svg class="w-2 h-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center space-x-2">
+                  <h3 class="text-base sm:text-lg font-bold font-display tracking-tight text-[#0F172A] truncate">Tài Xế
+                    Lê Tuấn</h3>
+                  <span
+                    class="text-[10px] bg-amber-50 text-[#9E7326] px-2 py-0.5 rounded font-bold tracking-widest uppercase border border-amber-200">Chính
+                    Chủ</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-0.5 font-medium">10+ năm kinh nghiệm tuyến Hà Nội - Nội Bài & Liên
+                  tỉnh</p>
+                <div class="flex items-center space-x-3 mt-2 text-xs">
+                  <div class="flex items-center text-amber-500 font-bold">
+                    <span class="mr-1">★ 4.98</span>
+                    <span class="text-slate-400 text-[11px] font-normal">(1.240+ đánh giá)</span>
+                  </div>
+                  <span class="text-slate-300">•</span>
+                  <span class="text-emerald-700 font-semibold flex items-center">
+                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd" />
+                    </svg>
+                    10.000+ cuốc an toàn
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 CORE PILLARS QUICK TICKER -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-1">
+              <div
+                class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-xl p-3 sm:p-4 text-center">
+                <div class="text-xl sm:text-2xl font-bold font-display tracking-tight text-[#9E7326]">10 Phút</div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 mt-1 uppercase tracking-widest font-bold">Đón
+                  Trước Giờ Hẹn</div>
+              </div>
+              <div
+                class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-xl p-3 sm:p-4 text-center">
+                <div class="text-xl sm:text-2xl font-bold font-display tracking-tight text-[#0F172A]">100%</div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 mt-1 uppercase tracking-widest font-bold">Xe Sang
+                  Không Mùi</div>
+              </div>
+              <div
+                class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-xl p-3 sm:p-4 text-center">
+                <div class="text-xl sm:text-2xl font-bold font-display tracking-tight text-emerald-600">0 Đồng</div>
+                <div class="text-[10px] sm:text-[11px] text-slate-500 mt-1 uppercase tracking-widest font-bold">Phí Chờ
+                  Delay Bay</div>
+              </div>
+            </div>
+
+            <!-- LUXURY FLEET QUICK PREVIEW -->
+            <div
+              class="relative rounded-2xl overflow-hidden bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] group">
+              <div class="aspect-[16/8] w-full overflow-hidden bg-slate-100">
+                <img src="assets/images/car-exterior.jpg" alt="Ngoại thất xe sang Lê Tuấn Driver"
+                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80';">
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/35 to-transparent flex items-end p-5">
+                <div class="flex items-center justify-between w-full">
+                  <div>
+                    <span class="text-[10px] uppercase tracking-widest text-[#F3D692] font-bold">Dòng Xe VIP Phục
+                      Vụ</span>
+                    <h4 class="text-white text-base font-bold font-display tracking-tight">Sedan & SUV Hạng Thương Gia
+                      Đời Mới</h4>
+                  </div>
+                  <a href="#fleet"
+                    class="text-xs font-bold px-3 py-1.5 rounded-lg bg-white/20 hover:bg-[#9E7326] text-white transition flex items-center space-x-1 backdrop-blur-md">
+                    <span>Xem khoang xe</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: THE EXECUTIVE BOOKING COCKPIT (STICKY ON DESKTOP) (COL 5) -->
+          <div class="lg:col-span-5 lg:sticky lg:top-24">
+
+            <div
+              class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-3xl p-5 sm:p-7 relative overflow-hidden"
+              id="bookingBox">
+
+              <!-- Subtle Ambient Warm Radial Light -->
+              <div class="absolute top-0 right-0 w-36 h-36 bg-amber-200/20 rounded-full blur-3xl pointer-events-none">
+              </div>
+
+              <!-- FORM HEADER -->
+              <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-5">
+                <div>
+                  <h2 class="text-lg sm:text-xl font-bold text-[#0F172A] font-display tracking-tight">ĐẶT CHUYẾN TỨC THÌ
+                  </h2>
+                  <p class="text-xs text-slate-500 mt-0.5">Xác nhận nhanh trong 60 giây • Không cần cọc</p>
+                </div>
+                <div
+                  class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-bold tracking-widest uppercase">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                  <span>Giá Trực Tiếp</span>
+                </div>
+              </div>
+
+              <!-- TACTILE RECESSED SWITCH: BAO TOÀN XE VS ĐI GHÉP TIẾT KIỆM -->
+              <div class="mb-5">
+                <label class="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-2">Hình Thức Phục
+                  Vụ</label>
+                <div class="tactile-switch-track p-1 rounded-xl flex items-center cursor-pointer select-none relative"
+                  id="switchContainer">
+                  <button type="button" id="btnModeCharter"
+                    class="bg-white text-[#9E7326] shadow-sm font-bold flex-1 py-2 rounded-lg text-xs text-center transition-all duration-300 flex items-center justify-center space-x-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <span>Bao Toàn Xe (VIP)</span>
+                  </button>
+                  <button type="button" id="btnModeShared"
+                    class="text-slate-600 hover:text-slate-900 flex-1 py-2 rounded-lg text-xs font-semibold text-center transition-all duration-300 flex items-center justify-center space-x-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span>Đi Ghép Tiện Chuyến</span>
+                  </button>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1.5 flex items-center space-x-1">
+                  <svg class="w-3.5 h-3.5 text-[#9E7326]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                      clip-rule="evenodd" />
+                  </svg>
+                  <span id="modeDescription">Riêng tư tuyệt đối, đưa đón tận cửa đúng giờ quý khách chọn.</span>
+                </div>
+              </div>
+
+              <!-- BOOKING FORM -->
+              <form id="bookingForm" class="space-y-3.5" novalidate>
+
+                <!-- FIELD: TUYẾN ĐƯỜNG PHỔ BIẾN / ĐIỂM ĐẾN -->
+                <div>
+                  <label for="routeSelect" class="block text-xs font-bold text-slate-700 mb-1">
+                    Lộ Trình / Điểm Đến <span class="text-[#9E7326]">*</span>
+                  </label>
+                  <div class="relative">
+                    <select id="routeSelect"
+                      class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3.5 py-2.5 text-sm appearance-none cursor-pointer pr-10 transition">
+                      <option value="HN_NB" data-charter="250000" data-shared="150000">Hà Nội ⇄ Sân Bay Nội Bài</option>
+                      <option value="HN_HL" data-charter="1200000" data-shared="350000">Hà Nội ⇄ TP. Hạ Long (Quảng
+                        Ninh)</option>
+                      <option value="HN_NBINH" data-charter="950000" data-shared="200000">Hà Nội ⇄ Tràng An / Ninh Bình
+                      </option>
+                      <option value="HN_HP" data-charter="1050000" data-shared="250000">Hà Nội ⇄ TP. Hải Phòng (Cao Tốc
+                        5B)</option>
+                      <option value="INTER_PROV" data-charter="8500" data-shared="0">Liên Tỉnh Theo Km (8.500đ -
+                        10.000đ/km)</option>
+                      <option value="CUSTOM" data-charter="0" data-shared="0">Tuyến Theo Yêu Cầu Riêng (Báo giá trực
+                        tiếp)</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FIELD: ĐIỂM ĐÓN CỤ THỂ -->
+                <div>
+                  <label for="pickupAddress" class="block text-xs font-bold text-slate-700 mb-1">
+                    Điểm Đón Cụ Thể <span class="text-[#9E7326]">*</span>
+                  </label>
+                  <div class="relative">
+                    <input type="text" id="pickupAddress"
+                      placeholder="VD: Số 12 Liễu Giai, Ba Đình (hoặc Sảnh T1/T2 Nội Bài)"
+                      class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] placeholder-slate-400 focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3.5 py-2.5 text-sm transition"
+                      required>
+                    <span class="absolute right-3 top-3 text-slate-400">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- TWO-COLUMN GRID: NGÀY GIỜ & SỐ LƯỢNG KHÁCH -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label for="pickupTime" class="block text-xs font-bold text-slate-700 mb-1">
+                      Thời Gian Đón <span class="text-[#9E7326]">*</span>
+                    </label>
+                    <input type="datetime-local" id="pickupTime"
+                      class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3 py-2.5 text-xs transition">
+                  </div>
+                  <div>
+                    <label for="paxCount" class="block text-xs font-bold text-slate-700 mb-1">
+                      Hành Khách & Hành Lý
+                    </label>
+                    <select id="paxCount"
+                      class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3 py-2.5 text-xs appearance-none cursor-pointer transition">
+                      <option value="1 khách - 1 vali">1 Khách (Gọn nhẹ)</option>
+                      <option value="2-3 khách - 2 vali" selected>2 - 3 Khách (2 vali tiêu chuẩn)</option>
+                      <option value="4 khách - 4 vali lớn">4 Khách (4 vali lớn / Full cốp)</option>
+                      <option value="Có gậy Golf / Hàng cồng kềnh">Có túi Gậy Golf / Đồ cồng kềnh</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- FLIGHT CODE INPUT (AUTO HIGHLIGHTED IF AIRPORT) -->
+                <div id="flightBox" class="block">
+                  <div class="flex items-center justify-between mb-1">
+                    <label for="flightNumber" class="text-xs font-bold text-slate-700 flex items-center space-x-1">
+                      <span>Mã Chuyến Bay</span>
+                      <span class="text-[10px] text-emerald-700 font-normal">(Radar tự động theo dõi delay)</span>
+                    </label>
+                    <span class="text-[10px] text-slate-400">Tùy chọn</span>
+                  </div>
+                  <input type="text" id="flightNumber" placeholder="VD: VN218 hoặc VJ152"
+                    class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] placeholder-slate-400 focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3.5 py-2 text-xs transition uppercase tracking-wider">
+                </div>
+
+                <!-- TWO-COLUMN GRID: HỌ TÊN & SỐ ĐIỆN THOẠI -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label for="customerName" class="block text-xs font-bold text-slate-700 mb-1">
+                      Họ Tên Quý Khách <span class="text-[#9E7326]">*</span>
+                    </label>
+                    <input type="text" id="customerName" placeholder="Anh/Chị..."
+                      class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] placeholder-slate-400 focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3.5 py-2.5 text-sm transition"
+                      required>
+                  </div>
+                  <div>
+                    <label for="customerPhone" class="block text-xs font-bold text-slate-700 mb-1">
+                      Số Điện Thoại (Zalo) <span class="text-[#9E7326]">*</span>
+                    </label>
+                    <input type="tel" id="customerPhone" placeholder="0337.xxx.xxx"
+                      class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] placeholder-slate-400 focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3.5 py-2.5 text-sm transition"
+                      required>
+                  </div>
+                </div>
+
+                <!-- ERROR FEEDBACK -->
+                <div id="formErrorMessage"
+                  class="hidden text-xs text-red-600 bg-red-50 border border-red-200 rounded-xl p-2.5 items-center space-x-2">
+                  <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clip-rule="evenodd" />
+                  </svg>
+                  <span id="errorText">Vui lòng điền đầy đủ họ tên và số điện thoại hợp lệ.</span>
+                </div>
+
+                <!-- ESTIMATED PRICE TICKER -->
+                <div class="rounded-2xl p-3.5 bg-amber-50/70 border border-amber-200/80 mt-2">
+                  <div class="flex items-baseline justify-between">
+                    <div>
+                      <span class="text-[10px] uppercase tracking-widest text-slate-600 font-bold">Cước Ước Tính Trọn
+                        Gói:</span>
+                      <p class="text-[10px] text-slate-500">(Đã gồm xăng dầu, cầu đường cao tốc)</p>
+                    </div>
+                    <div class="text-right">
+                      <span id="priceDisplay"
+                        class="text-2xl sm:text-3xl font-bold text-[#9E7326] font-display tracking-tight">250.000
+                        đ</span>
+                      <span id="priceUnit" class="text-xs text-slate-500 block font-normal">/ chuyến trọn gói</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SUBMIT BUTTONS -->
+                <div class="space-y-2 pt-1">
+                  <!-- PRIMARY SUBMIT: SEND & REDIRECT ZALO -->
+                  <button type="submit" id="btnSubmitBooking"
+                    class="btn-gold-shimmer w-full py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg shadow-amber-500/20">
+                    <svg class="w-5 h-5" viewBox="0 0 48 48" fill="currentColor">
+                      <path
+                        d="M24 4C12.95 4 4 12.52 4 23.03c0 5.67 2.62 10.74 6.78 14.28-.43 2.58-1.56 5.86-3.08 7.85 3.51-.54 7.21-2.12 9.5-3.4 2.15.58 4.43.9 6.8.9 11.05 0 20-8.52 20-19.03S35.05 4 24 4z" />
+                    </svg>
+                    <span>XÁC NHẬN ĐẶT CHUYẾN QUA ZALO</span>
+                  </button>
+
+                  <!-- DIRECT CALL SECONDARY -->
+                  <a href="tel:0337545188"
+                    class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-slate-700 transition flex items-center justify-center space-x-2">
+                    <svg class="w-3.5 h-3.5 text-[#9E7326]" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
+                    </svg>
+                    <span>Cần Xe Gấp? Gọi Ngay: 0337.545.188</span>
+                  </a>
+                </div>
+
+                <div class="text-[11px] text-slate-500 text-center flex items-center justify-center space-x-1.5 pt-1">
+                  <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                  <span>Bảo mật thông tin 100% • Tài xế liên hệ xác nhận sau 1 phút</span>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         TẦNG 2: THE FLEET & COMFORT (SHOWCASE XE)
+         ĐƯỜNG DẪN ẢNH CỤC BỘ KÈM FALLBACK SANG TRỌNG
+         ========================================== -->
+    <section id="fleet" class="py-16 sm:py-20 border-t border-slate-200 relative bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-[10px] uppercase tracking-widest text-[#9E7326] font-bold">The Fleet & Comfort</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] mt-2 font-display tracking-tight">Khoang Lái Hạng
+            Thương Gia</h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-3">
+            Tất cả các hành trình đều được vận hành trên những dòng xe đời mới, bảo dưỡng định kỳ tại chính hãng, chăm
+            sóc tỉ mỉ từng chi tiết nhằm mang lại sự thư thái tuyệt đối.
+          </p>
+        </div>
+
+        <!-- 3-PILLAR SHOWCASE CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <!-- CARD 1: NGOẠI THẤT XE SANG (car-exterior.jpg) -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl overflow-hidden group flex flex-col">
+            <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+              <img src="assets/images/car-exterior.jpg" alt="Ngoại thất xe sang Lê Tuấn Driver góc nghiêng 45 độ"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80';">
+              <div
+                class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200 text-[#9E7326] text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                Ngoại Thất Sang Trọng
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold font-display tracking-tight text-[#0F172A] mb-2">Diện Mạo Lịch Lãm & Đẳng
+                  Cấp</h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Xe đen bóng bẩy chuẩn phong cách xe nguyên thủ và doanh nhân. Đèn LED ma trận sang trọng, vận hành đầm
+                  chắc, cách âm vượt trội trên mọi dải tốc độ.
+                </p>
+              </div>
+              <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Dòng xe: Sedan / CUV đời mới</span>
+                <span class="text-emerald-700 font-bold">Bảo dưỡng định kỳ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2: NỘI THẤT KHOANG LÁI & GHẾ DA (car-interior.jpg) -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl overflow-hidden group flex flex-col">
+            <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+              <img src="assets/images/car-interior.jpg" alt="Nội thất khoang sau ghế da êm ái"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?auto=format&fit=crop&w=1200&q=80';">
+              <div
+                class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200 text-[#9E7326] text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                Khoang Hạng Thương Gia
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold font-display tracking-tight text-[#0F172A] mb-2">Ghế Da Êm Ái & Tĩnh Lặng
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Ghế bọc da cao cấp êm ru, khoảng để chân rộng thênh thang. Hệ thống điều hòa 2 vùng độc lập kèm màng
+                  lọc không khí PM2.5 khử khuẩn, tuyệt đối không mùi xe.
+                </p>
+              </div>
+              <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Không gian: Tối đa 4 khách</span>
+                <span class="text-[#9E7326] font-bold">Tĩnh âm tiêu chuẩn</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3: TIỆN ÍCH THƯƠNG GIA (car-amenities.jpg) -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl overflow-hidden group flex flex-col">
+            <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+              <img src="assets/images/car-amenities.jpg" alt="Tiện nghi nước suối khăn lạnh và cổng sạc nhanh"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80';">
+              <div
+                class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200 text-[#9E7326] text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                Tiện Ích Chu Đáo
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold font-display tracking-tight text-[#0F172A] mb-2">Trang Bị Chuẩn Mực Tinh Tế
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Miễn phí nước khoáng tinh khiết, khăn lạnh cao cấp, củ sạc nhanh đa năng hỗ trợ Type-C & iPhone, phát
+                  sóng Wifi tốc độ cao phục vụ làm việc liên tục trên xe.
+                </p>
+              </div>
+              <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Tiện ích: Nước + Sạc + Wifi</span>
+                <span class="text-emerald-700 font-bold">Hoàn toàn miễn phí</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         TẦNG 3: 3 CAM KẾT VÀNG (EXECUTIVE COMMITMENTS)
+         VÒNG TRÒN ICON XANH NGỌC NHẠT BG-EMERALD-50
+         ========================================== -->
+    <section id="commitments" class="py-16 sm:py-20 border-t border-slate-200 relative bg-[#F8F9FA]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-[10px] uppercase tracking-widest text-[#9E7326] font-bold">Tâm Quyết Người Cầm Lái</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] mt-2 font-display tracking-tight">3 Cam Kết Vàng Vượt
+            Trội</h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-3">
+            Không phải là dịch vụ gọi xe đại trà, mỗi chuyến đi cùng Lê Tuấn là một trải nghiệm được cá nhân hóa tuyệt
+            đối với sự an tâm cao nhất.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- CAM KẾT 1: CHÍNH CHỦ LÁI XE -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-7 flex flex-col justify-between">
+            <div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mb-5 shadow-sm">
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold font-display tracking-tight text-[#0F172A] mb-2">1. Chính Chủ Cầm Lái 100%
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Tài xế Lê Tuấn trực tiếp đón tiễn quý khách. Tuyệt đối không sang nhượng chuyến hay giao xe cho tài xế
+                lạ
+                thiếu kinh nghiệm làm phiền quý khách.
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-slate-100 flex items-center text-xs text-emerald-700 font-bold">
+              ✓ An tâm tuyệt đối trên từng km
+            </div>
+          </div>
+
+          <!-- CAM KẾT 2: ĐÓN TRƯỚC 10 PHÚT CHUẨN XÁC -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-7 flex flex-col justify-between">
+            <div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mb-5 shadow-sm">
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold font-display tracking-tight text-[#0F172A] mb-2">2. Đón Trước 10 Phút Chuẩn
+                Xác</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Tôn trọng từng phút giây quý báu của hành khách. Luôn chủ động có mặt trước giờ hẹn tối thiểu 10 phút,
+                gửi
+                tin nhắn thông báo vị trí đỗ thuận tiện nhất.
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-slate-100 flex items-center text-xs text-emerald-700 font-bold">
+              ✓ Đúng giờ, không để khách chờ dù 1 phút
+            </div>
+          </div>
+
+          <!-- CAM KẾT 3: VẬN HÀNH ĐIỀM ĐẠM & GIÁ TRỌN GÓI -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-7 flex flex-col justify-between">
+            <div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mb-5 shadow-sm">
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="2.5" />
+                  <path stroke-linecap="round" d="M12 3v6.5M12 14.5V21M3.5 14l6.5-2M20.5 14l-6.5-2" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold font-display tracking-tight text-[#0F172A] mb-2">3. Vận Hành Êm Ái & Giá Minh
+                Bạch</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Lái xe chuẩn phong thái VIP: không phanh gấp, không mùi khó chịu. Báo giá trọn gói bao gồm xăng xe, cầu
+                đường,
+                không phát sinh phụ phí ẩn.
+              </p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-slate-100 flex items-center text-xs text-emerald-700 font-bold">
+              ✓ Trọn gói niêm yết, không phí ẩn
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         TẦNG 4: DANH MỤC BẢNG GIÁ CÁC TUYẾN PHỔ BIẾN
+         (NỘI BÀI, HẠ LONG, NINH BÌNH, LIÊN TỈNH)
+         ========================================== -->
+    <section id="routes" class="py-16 sm:py-20 border-t border-slate-200 relative bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-[10px] uppercase tracking-widest text-[#9E7326] font-bold">Lộ Trình Cốt Lõi</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] mt-2 font-display tracking-tight">Bảng Cước Niêm Yết
+            Các Tuyến</h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-3">
+            Bảng giá minh bạch áp dụng cho cả hình thức Bao Toàn Xe và Đi Ghép Tiện Chuyến. Bấm chọn tuyến để cập nhật
+            form đặt xe ngay lập tức.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- ROUTE 1: HÀ NỘI ⇄ NỘI BÀI -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group">
+            <div
+              class="absolute -top-3 right-4 bg-gradient-to-r from-[#B8860B] to-[#D4AF37] text-white text-[10px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full shadow-md">
+              Tuyến Hot
+            </div>
+            <div>
+              <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1 flex items-center">
+                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+                Sân Bay Quốc Tế
+              </div>
+              <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">Hà Nội ⇄ Nội Bài</h3>
+              <p class="text-xs text-slate-500 mb-4">Đón tiễn 2 chiều mọi quận huyện Hà Nội lên sảnh T1, T2 Nội Bài.</p>
+
+              <div class="space-y-2 py-3 border-y border-slate-100">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500">Đi ghép 1 ghế:</span>
+                  <span class="font-bold font-display tracking-tight text-[#0F172A]">từ 150.000 đ</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-[#9E7326] font-bold">Bao trọn xe:</span>
+                  <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">chỉ từ 250.000 đ</span>
+                </div>
+              </div>
+
+              <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
+                <li class="flex items-center">✓ Miễn phí 60 phút chờ máy bay delay</li>
+                <li class="flex items-center">✓ Đón đúng giờ, hỗ trợ xách vali</li>
+              </ul>
+            </div>
+
+            <button type="button" onclick="selectRouteFromCard('HN_NB', 'charter')"
+              class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
+              Chọn Tuyến Này
+            </button>
+          </div>
+
+          <!-- ROUTE 2: HÀ NỘI ⇄ HẠ LONG -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group">
+            <div>
+              <div class="text-[10px] font-bold text-[#9E7326] uppercase tracking-widest mb-1 flex items-center">
+                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clip-rule="evenodd" />
+                </svg>
+                Cao Tốc 5B Mới
+              </div>
+              <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">Hà Nội ⇄ Hạ Long</h3>
+              <p class="text-xs text-slate-500 mb-4">Tuyến cao tốc Hải Phòng - Hạ Long chỉ 1h45p êm ru tới Bãi Cháy/Hòn
+                Gai.</p>
+
+              <div class="space-y-2 py-3 border-y border-slate-100">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500">Đi ghép tiện chuyến:</span>
+                  <span class="font-bold font-display tracking-tight text-[#0F172A]">từ 350.000 đ</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-[#9E7326] font-bold">Bao trọn xe:</span>
+                  <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">chỉ từ 1.200.000 đ</span>
+                </div>
+              </div>
+
+              <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
+                <li class="flex items-center">✓ Đã bao gồm vé cao tốc 5B</li>
+                <li class="flex items-center">✓ Đưa đón tận khách sạn, resort</li>
+              </ul>
+            </div>
+
+            <button type="button" onclick="selectRouteFromCard('HN_HL', 'charter')"
+              class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
+              Chọn Tuyến Này
+            </button>
+          </div>
+
+          <!-- ROUTE 3: HÀ NỘI ⇄ NINH BÌNH -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group">
+            <div>
+              <div class="text-[10px] font-bold text-[#9E7326] uppercase tracking-widest mb-1 flex items-center">
+                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd"
+                    d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707l6 6A1 1 0 009 21V8.414l-5.293-5.121zm16.586 0L15 8.414V21a1 1 0 00.707-.293l6-6A1 1 0 0022 14V4a1 1 0 00-.293-.707z"
+                    clip-rule="evenodd" />
+                </svg>
+                Du Lịch & Công Tác
+              </div>
+              <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">Hà Nội ⇄ Ninh Bình</h3>
+              <p class="text-xs text-slate-500 mb-4">Tràng An, Bái Đính, Tam Cốc hoặc TP. Ninh Bình chỉ 1h15p di chuyển.
+              </p>
+
+              <div class="space-y-2 py-3 border-y border-slate-100">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500">Đi ghép tiện chuyến:</span>
+                  <span class="font-bold font-display tracking-tight text-[#0F172A]">từ 200.000 đ</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-[#9E7326] font-bold">Bao trọn xe:</span>
+                  <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">chỉ từ 950.000 đ</span>
+                </div>
+              </div>
+
+              <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
+                <li class="flex items-center">✓ Tuyến cao tốc Pháp Vân - Cầu Giẽ</li>
+                <li class="flex items-center">✓ Phục vụ chờ theo ngày giá ưu đãi</li>
+              </ul>
+            </div>
+
+            <button type="button" onclick="selectRouteFromCard('HN_NBINH', 'charter')"
+              class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
+              Chọn Tuyến Này
+            </button>
+          </div>
+
+          <!-- ROUTE 4: LIÊN TỈNH THEO KM -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group">
+            <div>
+              <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1 flex items-center">
+                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd"
+                    d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 5a1 1 0 011 1v1a1 1 0 11-2 0V6a1 1 0 011-1zm12 0a1 1 0 011 1v1a1 1 0 11-2 0V6a1 1 0 011-1zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm14 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z"
+                    clip-rule="evenodd" />
+                </svg>
+                Lộ Trình Tự Do
+              </div>
+              <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">Liên Tỉnh Theo Km</h3>
+              <p class="text-xs text-slate-500 mb-4">Hải Phòng, Thái Bình, Nam Định, Phú Thọ, Vĩnh Phúc, Bắc Ninh, v.v.
+              </p>
+
+              <div class="space-y-2 py-3 border-y border-slate-100">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500">Đơn giá km (1 chiều):</span>
+                  <span class="font-bold font-display tracking-tight text-[#0F172A]">9.000 - 10.000 đ</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-[#9E7326] font-bold">Khứ hồi 2 chiều:</span>
+                  <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">chỉ từ 8.500 đ/km</span>
+                </div>
+              </div>
+
+              <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
+                <li class="flex items-center">✓ Giảm tới 70% chiều về</li>
+                <li class="flex items-center">✓ Xe riêng sạch thơm, không tính giờ chờ</li>
+              </ul>
+            </div>
+
+            <button type="button" onclick="selectRouteFromCard('INTER_PROV', 'charter')"
+              class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
+              Chọn Tuyến Này
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         TẦNG 5: TRẢI NGHIỆM KHÁCH HÀNG (REVIEWS)
+         THẺ TRẮNG NỔI KHỐI SANG TRỌNG
+         ========================================== -->
+    <section id="reviews" class="py-16 sm:py-20 border-t border-slate-200 relative bg-[#F8F9FA]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-[10px] uppercase tracking-widest text-[#9E7326] font-bold">Khách Hàng Thân Thiết</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] mt-2 font-display tracking-tight">Trải Nghiệm Thực Tế
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-3">
+            Sự hài lòng và tín nhiệm tuyệt đối từ các chuyên gia, doanh nhân và gia đình thường xuyên sử dụng dịch vụ
+            của Lê Tuấn Driver.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <!-- REVIEW 1: DOANH NHÂN HÀ NỘI -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-1 text-amber-500 mb-4">
+                <span>★★★★★</span>
+                <span class="text-xs text-slate-400 ml-2 font-bold">5.0 / 5.0</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 italic leading-relaxed mb-6">
+                "Tôi thường xuyên có các chuyến bay sáng sớm lúc 5h30 sáng tại Nội Bài. Anh Tuấn luôn có mặt dưới sảnh
+                chung cư trước 15 phút. Xe cực kỳ sạch sẽ, không hề có mùi thuốc lá hay mùi hương liệu khó chịu. Lái xe
+                đầm chắc, êm ru giúp tôi tranh thủ ngủ tiếp một giấc ngon lành."
+              </p>
+            </div>
+            <div class="flex items-center space-x-3 pt-4 border-t border-slate-100">
+              <div
+                class="w-10 h-10 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center font-bold text-[#9E7326] text-xs">
+                TH
+              </div>
+              <div>
+                <h4 class="text-sm font-bold font-display tracking-tight text-[#0F172A]">Anh Trần Hoàng Nam</h4>
+                <p class="text-[11px] text-slate-500">Giám Đốc Tài Chính • Cầu Giấy, Hà Nội</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- REVIEW 2: GIA ĐÌNH DU LỊCH -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-1 text-amber-500 mb-4">
+                <span>★★★★★</span>
+                <span class="text-xs text-slate-400 ml-2 font-bold">5.0 / 5.0</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 italic leading-relaxed mb-6">
+                "Cả nhà mình đi du lịch Hạ Long mang theo rất nhiều hành lý và có 2 bé nhỏ. Anh Tuấn cực kỳ chu đáo, xếp
+                gọn gàng 4 vali lớn vào cốp, chuẩn bị sẵn khăn lạnh và nước suối cho các bé. Lái xe rất từ tốn, không
+                phanh gấp nên các bé không bị say xe chút nào."
+              </p>
+            </div>
+            <div class="flex items-center space-x-3 pt-4 border-t border-slate-100">
+              <div
+                class="w-10 h-10 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center font-bold text-[#9E7326] text-xs">
+                MT
+              </div>
+              <div>
+                <h4 class="text-sm font-bold font-display tracking-tight text-[#0F172A]">Chị Nguyễn Minh Thư</h4>
+                <p class="text-[11px] text-slate-500">Chủ Doanh Nghiệp Spa • Hoàn Kiếm, Hà Nội</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- REVIEW 3: CHUYÊN GIA NƯỚC NGOÀI -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-1 text-amber-500 mb-4">
+                <span>★★★★★</span>
+                <span class="text-xs text-slate-400 ml-2 font-bold">5.0 / 5.0</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 italic leading-relaxed mb-6">
+                "Outstanding chauffeur service in Hanoi. Mr. Tuan is always strictly on time, very courteous, and drives
+                smoothly. The car interior is immaculate with high-speed Wi-Fi and charging cables. Highly recommended
+                for business executives and airport transfers."
+              </p>
+            </div>
+            <div class="flex items-center space-x-3 pt-4 border-t border-slate-100">
+              <div
+                class="w-10 h-10 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center font-bold text-[#9E7326] text-xs">
+                DM
+              </div>
+              <div>
+                <h4 class="text-sm font-bold font-display tracking-tight text-[#0F172A]">Mr. David Miller</h4>
+                <p class="text-[11px] text-slate-500">Senior Plant Director • FDI KCN Tràng Duệ</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         TẦNG 6: CÂU HỎI THƯỜNG GẶP FAQ
+         ACCORDION TRẮNG SỨ MƯỢT MÀ
+         ========================================== -->
+    <section id="faq" class="py-16 sm:py-20 border-t border-slate-200 relative bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-14">
+          <span class="text-[10px] uppercase tracking-widest text-[#9E7326] font-bold">Chính Sách Linh Hoạt</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] mt-2 font-display tracking-tight">Câu Hỏi Thường Gặp
+          </h2>
+          <p class="text-slate-600 text-sm mt-3">
+            Giải đáp rõ ràng mọi thắc mắc để quý khách hoàn toàn an tâm trước mỗi hành trình.
+          </p>
+        </div>
+
+        <div class="space-y-3.5">
+
+          <!-- FAQ 1: DELAY CHUYẾN BAY -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-2xl overflow-hidden transition">
+            <button type="button"
+              class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between text-[#0F172A] font-bold font-display tracking-tight text-sm sm:text-base focus:outline-none">
+              <span class="flex items-center space-x-3">
+                <span
+                  class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-200 text-[#9E7326] flex items-center justify-center text-xs font-bold">01</span>
+                <span>Nếu chuyến bay của tôi bị Delay (hoãn giờ bay) thì sao?</span>
+              </span>
+              <svg class="faq-icon w-5 h-5 text-[#9E7326] transform transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Hoàn toàn <strong>MIỄN PHÍ CHỜ ĐỢI</strong>. Khi quý khách cung cấp số hiệu chuyến bay, tài xế Lê Tuấn sẽ
+              trực tiếp theo dõi lịch trình máy bay hạ cánh thực tế qua hệ thống radar hàng không quốc tế. Bất kể chuyến
+              bay bị hoãn bao lâu, xe luôn có mặt sẵn sàng ở làn đón khi quý khách vừa lấy xong hành lý.
+            </div>
+          </div>
+
+          <!-- FAQ 2: CHÍNH SÁCH HỦY / ĐỔI GIỜ -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-2xl overflow-hidden transition">
+            <button type="button"
+              class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between text-[#0F172A] font-bold font-display tracking-tight text-sm sm:text-base focus:outline-none">
+              <span class="flex items-center space-x-3">
+                <span
+                  class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-200 text-[#9E7326] flex items-center justify-center text-xs font-bold">02</span>
+                <span>Tôi có bị mất phí nếu đổi lịch hoặc hủy chuyến không?</span>
+              </span>
+              <svg class="faq-icon w-5 h-5 text-[#9E7326] transform transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Dịch vụ hoạt động dựa trên sự tin cậy lẫn nhau, quý khách không cần phải đặt cọc trước. Nếu có thay đổi
+              công việc đột xuất, quý khách chỉ cần nhắn tin Zalo hoặc gọi điện báo trước tối thiểu 60 phút để tài xế
+              sắp xếp lộ trình mới, hoàn toàn <strong>không thu bất kỳ khoản phí hủy nào</strong>.
+            </div>
+          </div>
+
+          <!-- FAQ 3: XUẤT HÓA ĐƠN VAT CHO CÔNG TY -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-2xl overflow-hidden transition">
+            <button type="button"
+              class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between text-[#0F172A] font-bold font-display tracking-tight text-sm sm:text-base focus:outline-none">
+              <span class="flex items-center space-x-3">
+                <span
+                  class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-200 text-[#9E7326] flex items-center justify-center text-xs font-bold">03</span>
+                <span>Dịch vụ có xuất hóa đơn giá trị gia tăng (VAT) cho doanh nghiệp không?</span>
+              </span>
+              <svg class="faq-icon w-5 h-5 text-[#9E7326] transform transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              <strong>CÓ ĐẦY ĐỦ</strong>. Chúng tôi hỗ trợ xuất hóa đơn điện tử VAT chuẩn theo quy định của Tổng cục
+              Thuế, phục vụ quyết toán chi phí công tác cho các doanh nghiệp, tổ chức và cơ quan nhà nước. Hóa đơn sẽ
+              được gửi trực tiếp về email công ty của quý khách trong ngày.
+            </div>
+          </div>
+
+          <!-- FAQ 4: HÀNH LÝ VÀ GHẾ TRẺ EM -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-2xl overflow-hidden transition">
+            <button type="button"
+              class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between text-[#0F172A] font-bold font-display tracking-tight text-sm sm:text-base focus:outline-none">
+              <span class="flex items-center space-x-3">
+                <span
+                  class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-200 text-[#9E7326] flex items-center justify-center text-xs font-bold">04</span>
+                <span>Cốp xe có chứa được nhiều vali lớn hoặc gậy golf không?</span>
+              </span>
+              <svg class="faq-icon w-5 h-5 text-[#9E7326] transform transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Khoang cốp của xe rất rộng rãi, có thể chứa thoải mái từ 3 đến 4 vali cỡ lớn (size 28 inch) hoặc 2 bộ túi
+              gậy Golf chuyên dụng. Nếu gia đình có trẻ nhỏ dưới 3 tuổi, quý khách vui lòng ghi chú để tài xế chuẩn bị
+              sẵn ghế trẻ em an toàn Isofix.
+            </div>
+          </div>
+
+          <!-- FAQ 5: NÊN ĐẶT XE TRƯỚC BAO LÂU -->
+          <div
+            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-2xl overflow-hidden transition">
+            <button type="button"
+              class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between text-[#0F172A] font-bold font-display tracking-tight text-sm sm:text-base focus:outline-none">
+              <span class="flex items-center space-x-3">
+                <span
+                  class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-200 text-[#9E7326] flex items-center justify-center text-xs font-bold">05</span>
+                <span>Tôi nên đặt trước bao lâu để chắc chắn có xe?</span>
+              </span>
+              <svg class="faq-icon w-5 h-5 text-[#9E7326] transform transition-transform duration-300" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              class="faq-content hidden px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Để được phục vụ tốt nhất, quý khách nên đặt trước 2 - 4 tiếng (hoặc đặt trước từ tối hôm trước nếu cần đón
+              sáng sớm). Trong trường hợp khẩn cấp cần đi ngay, xin vui lòng gọi hotline <strong
+                class="text-[#9E7326]">0337.545.188</strong> để được bố trí xe trong vòng 10 - 15 phút tại nội
+              thành Hà Nội.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         TẦNG 7: THE PRIVATE CONCIERGE & BANNER
+         HOTLINE MẠ VÀNG, QR ZALO & SỐNG ĐỘNG 24/7
+         ========================================== -->
+    <section id="contact" class="py-16 sm:py-20 border-t border-slate-200 relative bg-[#F8F9FA]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- LUXURY PRIVATE CONCIERGE BANNER -->
+        <div
+          class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+
+          <div
+            class="absolute -right-20 -bottom-20 w-80 h-80 bg-amber-200/20 rounded-full blur-3xl pointer-events-none">
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+            <!-- LEFT DETAILS -->
+            <div class="lg:col-span-8 space-y-4">
+              <div
+                class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-bold tracking-widest uppercase">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span>Private Concierge 24/7</span>
+              </div>
+              <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] font-display tracking-tight">
+                Liên Hệ Trực Tiếp Tài Xế Lê Tuấn
+              </h2>
+              <p class="text-sm sm:text-base text-slate-600 max-w-xl leading-relaxed">
+                Quý khách có thể kết nối nhanh qua Zalo để gửi định vị đón, trao đổi hành trình đặc biệt hoặc gọi điện
+                thoại trực tiếp mọi lúc mọi nơi kể cả đêm muộn và ngày lễ Tết.
+              </p>
+
+              <div class="pt-3 flex flex-wrap items-center gap-4">
+                <!-- GOLD CALL BUTTON -->
+                <a href="tel:0337545188"
+                  class="btn-gold-shimmer px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-lg shadow-amber-500/20">
+                  <svg class="w-4 h-4 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
+                  </svg>
+                  <span>Gọi Hotline: 0337.545.188</span>
+                </a>
+
+                <!-- DIRECT ZALO BUTTON -->
+                <a href="https://zalo.me/0337545188" target="_blank" rel="noopener noreferrer"
+                  class="px-6 py-3.5 rounded-xl bg-[#0068FF] hover:bg-[#0055d4] text-white transition text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-md">
+                  <svg class="w-4 h-4" viewBox="0 0 48 48" fill="currentColor">
+                    <path
+                      d="M24 4C12.95 4 4 12.52 4 23.03c0 5.67 2.62 10.74 6.78 14.28-.43 2.58-1.56 5.86-3.08 7.85 3.51-.54 7.21-2.12 9.5-3.4 2.15.58 4.43.9 6.8.9 11.05 0 20-8.52 20-19.03S35.05 4 24 4z" />
+                  </svg>
+                  <span>Nhắn Tin Qua Zalo</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- RIGHT QR CODE CARD -->
+            <div class="lg:col-span-4 flex flex-col items-center justify-center">
+              <div class="bg-[#F8F9FA] p-4 sm:p-5 rounded-2xl border border-slate-200 text-center shadow-sm">
+                <div
+                  class="w-48 h-48 sm:w-52 sm:h-52 mx-auto rounded-xl overflow-hidden bg-white p-2.5 flex items-center justify-center border border-slate-200 relative shadow-inner">
+                  <!-- QR Code Generator Link pointing to Zalo -->
+                  <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fzalo.me%2F0337545188&color=0F172A&bgcolor=FFFFFF"
+                    alt="Quét mã QR Zalo Lê Tuấn Driver" class="w-full h-full object-contain"
+                    onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg';">
+                  <!-- Zalo Center Overlay Badge -->
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div
+                      class="w-10 h-10 rounded-full bg-[#0068FF] p-1.5 shadow-md flex items-center justify-center text-white font-bold text-[10px]">
+                      ZALO
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <span class="text-[10px] font-bold text-[#9E7326] tracking-widest uppercase block">Quét Mã QR
+                    Zalo</span>
+                  <span class="text-[11px] text-slate-500">Kết bạn trực tiếp tài xế Lê Tuấn</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       FOOTER LUXURY (DEEP SLATE ANCHOR)
+       ========================================== -->
+  <footer class="bg-[#0F172A] border-t border-slate-800 py-12 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl font-bold font-display tracking-tight text-white">LÊ TUẤN DRIVER</span>
+            <span
+              class="text-[10px] bg-amber-400/20 text-[#F3D692] px-1.5 py-0.5 rounded uppercase font-bold tracking-widest border border-amber-400/30">VIP
+              SERVICE</span>
+          </div>
+          <p class="text-slate-400 max-w-md leading-relaxed text-xs">
+            Dịch vụ xe riêng cá nhân cao cấp phục vụ chuyên tuyến Sân bay Nội Bài, Hạ Long, Ninh Bình và liên tỉnh. Định
+            vị phong cách Chuyên cơ mặt đất - An tâm từng chặng, đẳng cấp từng giây.
+          </p>
+          <div class="pt-2 text-[11px] text-slate-500">
+            Trụ sở phục vụ: Cầu Giấy, Nam Từ Liêm & Sân bay Quốc tế Nội Bài, Hà Nội.
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-[10px] uppercase tracking-widest mb-3">Lộ Trình Trọng Điểm</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#cockpit" class="hover:text-[#F3D692] transition">Hà Nội ⇄ Sân bay Nội Bài</a></li>
+            <li><a href="#cockpit" class="hover:text-[#F3D692] transition">Hà Nội ⇄ TP. Hạ Long</a></li>
+            <li><a href="#cockpit" class="hover:text-[#F3D692] transition">Hà Nội ⇄ Tràng An, Ninh Bình</a></li>
+            <li><a href="#cockpit" class="hover:text-[#F3D692] transition">Hà Nội ⇄ TP. Hải Phòng</a></li>
+            <li><a href="#cockpit" class="hover:text-[#F3D692] transition">Thuê xe công tác liên tỉnh theo km</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-[10px] uppercase tracking-widest mb-3">Thông Tin Liên Hệ</h4>
+          <ul class="space-y-2 text-xs">
+            <li class="flex items-center space-x-2">
+              <span class="text-[#F3D692]">Hotline:</span>
+              <a href="tel:0337545188" class="text-white hover:text-[#F3D692] font-bold font-display">0337.545.188</a>
+            </li>
+            <li class="flex items-center space-x-2">
+              <span class="text-[#F3D692]">Zalo:</span>
+              <a href="https://zalo.me/0337545188" target="_blank"
+                class="text-white hover:text-[#F3D692] font-display">0337 545 188</a>
+            </li>
+            <li class="flex items-center space-x-2">
+              <span class="text-[#F3D692]">Thời gian:</span>
+              <span class="text-emerald-400 font-semibold">24/7 (Kể cả Lễ, Tết)</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div
+        class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500">
+        <div>© 2026 Lê Tuấn Driver. All rights reserved. Bản quyền thuộc về Lê Tuấn.</div>
+        <div class="mt-2 sm:mt-0 flex space-x-4">
+          <span>Chính Sách Bảo Mật</span>
+          <span>•</span>
+          <span>Điều Khoản Phục Vụ</span>
+          <span>•</span>
+          <span>Cam Kết Chất Lượng</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ==========================================
+       MOBILE ONLY: FLOATING ACTION BAR
+       (GỌI TRỰC TIẾP + NHẮN ZALO TRÊN NỀN KÍNH TRẮNG)
+       ẨN TRÊN DESKTOP (lg:hidden)
+       ========================================== -->
+  <div
+    class="fixed bottom-0 left-0 right-0 z-50 p-2.5 sm:p-3 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-[0_-5px_25px_rgba(0,0,0,0.06)] lg:hidden">
+    <div class="max-w-md mx-auto grid grid-cols-2 gap-2.5">
+
+      <!-- BUTTON 1: CALL HOTLINE (NỀN TRẮNG XÁM, CHỮ VÀNG ĐỒNG) -->
+      <a href="tel:0337545188"
+        class="bg-slate-100 hover:bg-slate-200 border border-amber-600/30 text-[#9E7326] py-3 px-3 rounded-xl flex items-center justify-center space-x-2 shadow-sm font-bold transition">
+        <svg class="w-4 h-4 animate-bounce text-[#9E7326]" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
+        </svg>
+        <span class="text-xs font-bold font-display uppercase tracking-wider">Gọi 0337.545.188</span>
+      </a>
+
+      <!-- BUTTON 2: ZALO OFFICIAL CHAT (XANH CHUẨN ZALO) -->
+      <a href="https://zalo.me/0337545188" target="_blank" rel="noopener noreferrer"
+        class="bg-[#0068FF] hover:bg-[#0055d4] text-white py-3 px-3 rounded-xl flex items-center justify-center space-x-2 shadow-sm font-bold transition">
+        <!-- Official Zalo SVG Logo -->
+        <svg class="w-4 h-4" viewBox="0 0 48 48" fill="currentColor">
+          <path
+            d="M24 4C12.95 4 4 12.52 4 23.03c0 5.67 2.62 10.74 6.78 14.28-.43 2.58-1.56 5.86-3.08 7.85 3.51-.54 7.21-2.12 9.5-3.4 2.15.58 4.43.9 6.8.9 11.05 0 20-8.52 20-19.03S35.05 4 24 4z" />
+        </svg>
+        <span class="text-xs font-bold font-display tracking-wider uppercase">Nhắn Zalo Ngay</span>
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       TOAST NOTIFICATION (EXECUTIVE LIGHT PORCELAIN)
+       ========================================== -->
+  <div id="toastSuccess"
+    class="fixed top-6 right-6 z-50 max-w-sm w-full bg-white border border-amber-300 rounded-2xl p-4 shadow-2xl transition-all duration-500 transform translate-y-[-150%] opacity-0 pointer-events-none">
+    <div class="flex items-start space-x-3">
+      <div
+        class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div class="flex-1">
+        <h5 class="text-xs font-bold font-display tracking-tight text-[#0F172A] uppercase">Đang Mở Zalo Để Chốt Chuyến
+        </h5>
+        <p class="text-[11px] text-slate-500 mt-0.5">Thông tin chuyến đi đã được chuyển tiếp. Tài xế Lê Tuấn sẽ phản hồi
+          ngay!</p>
+      </div>
+      <button type="button" onclick="hideToast()" class="text-slate-400 hover:text-slate-700">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       LOGIC XỬ LÝ & TỰ ĐỘNG HÓA JAVASCRIPT
+       ========================================== -->
+  <script>
+    /**
+     * CẤU HÌNH TỰ ĐỘNG HÓA & LIÊN HỆ
+     * Người dùng có thể thay đổi số điện thoại hoặc mã Telegram Bot tại đây
+     */
+    const APP_CONFIG = {
+      driverName: 'Lê Tuấn',
+      hotlineDisplay: '0337.545.188',
+      hotlineTel: '0337545188',
+      zaloPhone: '0337545188',
+      // Cấu hình gửi thông báo Telegram ngầm (Đặt token và chatId thực tế để kích hoạt)
+      telegram: {
+        enabled: true,
+        botToken: 'TELEGRAM_BOT_TOKEN_PLACEHOLDER', // Thay bằng token bot Telegram thực tế (ví dụ: 123456789:ABCdefGhI...)
+        chatId: 'TELEGRAM_CHAT_ID_PLACEHOLDER'       // Thay bằng Chat ID người nhận
+      }
+    };
+
+    // State quản lý hình thức (charter = Bao xe, shared = Ghép xe)
+    let currentServiceMode = 'charter';
+
+    // Bảng cước định giá động
+    const PRICING_MATRIX = {
+      HN_NB: {
+        name: 'Hà Nội ⇄ Sân Bay Nội Bài',
+        charter: 250000,
+        shared: 150000,
+        unit: '/ chuyến trọn gói',
+        sharedUnit: '/ ghế tiện chuyến'
+      },
+      HN_HL: {
+        name: 'Hà Nội ⇄ TP. Hạ Long (Quảng Ninh)',
+        charter: 1200000,
+        shared: 350000,
+        unit: '/ chuyến trọn gói',
+        sharedUnit: '/ ghế tiện chuyến'
+      },
+      HN_NBINH: {
+        name: 'Hà Nội ⇄ Tràng An / Ninh Bình',
+        charter: 950000,
+        shared: 200000,
+        unit: '/ chuyến trọn gói',
+        sharedUnit: '/ ghế tiện chuyến'
+      },
+      HN_HP: {
+        name: 'Hà Nội ⇄ TP. Hải Phòng (Cao Tốc 5B)',
+        charter: 1050000,
+        shared: 250000,
+        unit: '/ chuyến trọn gói',
+        sharedUnit: '/ ghế tiện chuyến'
+      },
+      INTER_PROV: {
+        name: 'Liên Tỉnh Theo Km',
+        charter: 8500,
+        shared: 0,
+        unit: 'đ / km (tùy cự ly)',
+        sharedUnit: 'Liên hệ tài xế'
+      },
+      CUSTOM: {
+        name: 'Tuyến Theo Yêu Cầu Riêng',
+        charter: 0,
+        shared: 0,
+        unit: 'Báo giá trực tiếp',
+        sharedUnit: 'Báo giá trực tiếp'
+      }
+    };
+
+    // DOM Elements
+    const btnModeCharter = document.getElementById('btnModeCharter');
+    const btnModeShared = document.getElementById('btnModeShared');
+    const modeDescription = document.getElementById('modeDescription');
+    const routeSelect = document.getElementById('routeSelect');
+    const priceDisplay = document.getElementById('priceDisplay');
+    const priceUnit = document.getElementById('priceUnit');
+    const bookingForm = document.getElementById('bookingForm');
+    const formErrorMessage = document.getElementById('formErrorMessage');
+    const errorText = document.getElementById('errorText');
+    const pickupTimeInput = document.getElementById('pickupTime');
+    const flightBox = document.getElementById('flightBox');
+
+    // Khởi tạo thời gian mặc định (Sau hiện tại 2 tiếng)
+    function initializeDefaultTime() {
+      const now = new Date();
+      now.setHours(now.getHours() + 2);
+      now.setMinutes(0);
+      const isoString = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+      if (pickupTimeInput) {
+        pickupTimeInput.value = isoString;
+        pickupTimeInput.min = new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+      }
+    }
+
+    // Hiển thị / ẩn ô mã chuyến bay nếu đi Nội Bài
+    function checkAirportFlightBox(routeKey) {
+      if (flightBox) {
+        if (routeKey === 'HN_NB') {
+          flightBox.classList.remove('hidden');
+        } else {
+          flightBox.classList.add('hidden');
+        }
+      }
+    }
+
+    // Hiệu ứng nhảy số Odometer Ticker mượt mà
+    let animationFrameId = null;
+    function animatePriceCounter(targetValue, isCustomText = null) {
+      if (isCustomText) {
+        priceDisplay.textContent = isCustomText;
+        return;
+      }
+
+      // Lấy số hiện tại từ text
+      const currentText = priceDisplay.textContent.replace(/[^\d]/g, '');
+      const startValue = parseInt(currentText, 10) || 0;
+      const duration = 400; // ms
+      const startTime = performance.now();
+
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Easing out quad
+        const easeProgress = 1 - (1 - progress) * (1 - progress);
+        const currentValue = Math.round(startValue + (targetValue - startValue) * easeProgress);
+
+        priceDisplay.textContent = currentValue.toLocaleString('vi-VN') + ' đ';
+
+        if (progress < 1) {
+          animationFrameId = requestAnimationFrame(update);
+        } else {
+          priceDisplay.textContent = targetValue.toLocaleString('vi-VN') + ' đ';
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(update);
+    }
+
+    // Tính toán và cập nhật giá cước hiển thị
+    function updatePrice() {
+      const selectedKey = routeSelect.value;
+      const routeData = PRICING_MATRIX[selectedKey] || PRICING_MATRIX.CUSTOM;
+
+      checkAirportFlightBox(selectedKey);
+
+      if (selectedKey === 'CUSTOM') {
+        animatePriceCounter(0, 'Báo Giá Trực Tiếp');
+        priceUnit.textContent = '/ lộ trình riêng';
+        return;
+      }
+
+      if (selectedKey === 'INTER_PROV') {
+        animatePriceCounter(8500);
+        priceUnit.textContent = '/ km (Khứ hồi giảm 70%)';
+        return;
+      }
+
+      if (currentServiceMode === 'charter') {
+        animatePriceCounter(routeData.charter);
+        priceUnit.textContent = routeData.unit;
+      } else {
+        if (routeData.shared > 0) {
+          animatePriceCounter(routeData.shared);
+          priceUnit.textContent = routeData.sharedUnit;
+        } else {
+          animatePriceCounter(0, 'Liên Hệ Zalo');
+          priceUnit.textContent = '/ hỗ trợ ghép chuyến';
+        }
+      }
+    }
+
+    // Xử lý chuyển đổi nút gạt Bao Xe / Ghép Xe
+    function setServiceMode(mode) {
+      currentServiceMode = mode;
+      if (mode === 'charter') {
+        btnModeCharter.className = 'bg-white text-[#9E7326] shadow-sm font-bold flex-1 py-2 rounded-lg text-xs text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
+        btnModeShared.className = 'text-slate-600 hover:text-slate-900 flex-1 py-2 rounded-lg text-xs font-semibold text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
+        modeDescription.textContent = 'Riêng tư tuyệt đối, đưa đón tận cửa đúng giờ quý khách chọn.';
+      } else {
+        btnModeShared.className = 'bg-white text-[#9E7326] shadow-sm font-bold flex-1 py-2 rounded-lg text-xs text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
+        btnModeCharter.className = 'text-slate-600 hover:text-slate-900 flex-1 py-2 rounded-lg text-xs font-semibold text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
+        modeDescription.textContent = 'Tiết kiệm chi phí, ghép tuyến cùng hướng, cam kết không bắt khách dọc đường.';
+      }
+      updatePrice();
+    }
+
+    btnModeCharter.addEventListener('click', () => setServiceMode('charter'));
+    btnModeShared.addEventListener('click', () => setServiceMode('shared'));
+    routeSelect.addEventListener('change', updatePrice);
+
+    // Hàm gọi khi bấm "Chọn tuyến này" từ bảng giá tầng 4
+    window.selectRouteFromCard = function (routeKey, mode = 'charter') {
+      if (routeSelect) {
+        routeSelect.value = routeKey;
+      }
+      setServiceMode(mode);
+
+      // Cuộn mượt về khung đặt xe
+      const bookingBox = document.getElementById('bookingBox');
+      if (bookingBox) {
+        bookingBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Hiệu ứng nhấp nháy viền để gây chú ý
+        bookingBox.classList.add('ring-2', 'ring-[#9E7326]');
+        setTimeout(() => {
+          bookingBox.classList.remove('ring-2', 'ring-[#9E7326]');
+        }, 1500);
+      }
+    };
+
+    // Kiểm tra định dạng số điện thoại Việt Nam chuẩn
+    function isValidVietnamesePhone(phone) {
+      const cleanPhone = phone.replace(/[\s\.-]/g, '');
+      const regex = /^(0|\+84)(3[2-9]|5[2|6|8|9]|7[0|6-9]|8[1-9]|9[0-9])[0-9]{7}$/;
+      return regex.test(cleanPhone);
+    }
+
+    // Hiển thị Toast thông báo
+    function showToast() {
+      const toast = document.getElementById('toastSuccess');
+      if (toast) {
+        toast.classList.remove('translate-y-[-150%]', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(hideToast, 6000);
+      }
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toastSuccess');
+      if (toast) {
+        toast.classList.add('translate-y-[-150%]', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }
+    }
+    window.hideToast = hideToast;
+
+    // Gửi thông báo ngầm sang Telegram Bot
+    async function sendSilentTelegramNotification(bookingData) {
+      if (!APP_CONFIG.telegram.enabled ||
+        APP_CONFIG.telegram.botToken === 'TELEGRAM_BOT_TOKEN_PLACEHOLDER' ||
+        !APP_CONFIG.telegram.botToken) {
+        console.log('[Telegram Dispatch Info] Bỏ qua gửi Telegram do chưa cấu hình botToken thực tế:', bookingData);
+        return;
+      }
+
+      const textMessage = `🚖 *ĐẶT CHUYẾN MỚI TỪ WEBSITE LÊ TUẤN DRIVER (LIGHT)* 🚖\n\n` +
+        `👤 *Khách hàng:* ${bookingData.customerName}\n` +
+        `📞 *Số điện thoại:* ${bookingData.customerPhone}\n` +
+        `🏷️ *Hình thức:* ${bookingData.modeText}\n` +
+        `📍 *Lộ trình:* ${bookingData.routeName}\n` +
+        `🏠 *Điểm đón:* ${bookingData.pickupAddress}\n` +
+        `⏰ *Thời gian đón:* ${bookingData.pickupTimeFormatted}\n` +
+        `👥 *Khách & Hành lý:* ${bookingData.pax}\n` +
+        (bookingData.flight ? `✈️ *Mã chuyến bay:* ${bookingData.flight}\n` : '') +
+        `💰 *Cước dự tính:* ${bookingData.estimatedPrice}\n\n` +
+        `_Thời gian gửi: ${new Date().toLocaleString('vi-VN')}_`;
+
+      const url = `https://api.telegram.org/bot${APP_CONFIG.telegram.botToken}/sendMessage`;
+
+      try {
+        await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: APP_CONFIG.telegram.chatId,
+            text: textMessage,
+            parse_mode: 'Markdown'
+          })
+        });
+        console.log('[Telegram Dispatch] Đã gửi thông báo thành công');
+      } catch (err) {
+        console.warn('[Telegram Dispatch Error] Không thể gửi thông báo:', err);
+      }
+    }
+
+    // Xử lý Submit Form Đặt Xe
+    bookingForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const routeKey = routeSelect.value;
+      const routeData = PRICING_MATRIX[routeKey] || PRICING_MATRIX.CUSTOM;
+      const pickupAddress = document.getElementById('pickupAddress').value.trim();
+      const pickupTime = document.getElementById('pickupTime').value;
+      const paxCount = document.getElementById('paxCount').value;
+      const flightNumber = document.getElementById('flightNumber').value.trim();
+      const customerName = document.getElementById('customerName').value.trim();
+      const customerPhone = document.getElementById('customerPhone').value.trim();
+
+      // Validate dữ liệu
+      if (!customerName) {
+        showError('Vui lòng nhập Họ Tên của quý khách.');
+        document.getElementById('customerName').focus();
+        return;
+      }
+
+      if (!isValidVietnamesePhone(customerPhone)) {
+        showError('Số điện thoại không đúng định dạng. Vui lòng nhập số điện thoại Việt Nam hợp lệ (VD: 0337545188).');
+        document.getElementById('customerPhone').focus();
+        return;
+      }
+
+      if (!pickupAddress) {
+        showError('Vui lòng nhập Điểm đón cụ thể (Số nhà, tên đường hoặc sảnh sân bay).');
+        document.getElementById('pickupAddress').focus();
+        return;
+      }
+
+      // Xóa thông báo lỗi nếu có
+      hideError();
+
+      const modeText = currentServiceMode === 'charter' ? 'Bao Toàn Xe (VIP)' : 'Đi Ghép Tiện Chuyến';
+      const estimatedPriceText = priceDisplay.textContent + ' ' + priceUnit.textContent;
+
+      // Định dạng ngày giờ thân thiện
+      let timeFormatted = pickupTime;
+      try {
+        if (pickupTime) {
+          const d = new Date(pickupTime);
+          timeFormatted = `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')} ngày ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+        }
+      } catch (ex) { }
+
+      const bookingData = {
+        customerName,
+        customerPhone,
+        modeText,
+        routeName: routeData.name,
+        pickupAddress,
+        pickupTimeFormatted: timeFormatted,
+        pax: paxCount,
+        flight: flightNumber,
+        estimatedPrice: estimatedPriceText
+      };
+
+      // 1. Gửi ngầm thông báo sang Telegram (nếu có cấu hình)
+      sendSilentTelegramNotification(bookingData);
+
+      // 2. Tạo nội dung Zalo Deep Link mã hóa đầy đủ thông tin
+      let zaloMessage = `Chào anh Tuấn Driver, tôi muốn đặt xe từ website:\n\n` +
+        `• Khách hàng: ${customerName}\n` +
+        `• Số điện thoại: ${customerPhone}\n` +
+        `• Hình thức: ${modeText}\n` +
+        `• Lộ trình: ${routeData.name}\n` +
+        `• Điểm đón: ${pickupAddress}\n` +
+        `• Giờ đón: ${timeFormatted}\n` +
+        `• Số khách & Vali: ${paxCount}\n`;
+
+      if (flightNumber) {
+        zaloMessage += `• Mã chuyến bay: ${flightNumber}\n`;
+      }
+      zaloMessage += `• Giá cước ước tính: ${estimatedPriceText}\n\n` +
+        `Nhờ anh kiểm tra và xác nhận lịch trình giúp tôi. Xin cảm ơn!`;
+
+      const zaloDeepLink = `https://zalo.me/${APP_CONFIG.zaloPhone}?text=${encodeURIComponent(zaloMessage)}`;
+
+      // 3. Hiển thị Toast thông báo trạng thái
+      showToast();
+
+      // 4. Chuyển hướng hoặc mở cửa sổ Zalo
+      setTimeout(() => {
+        window.open(zaloDeepLink, '_blank');
+      }, 700);
+    });
+
+    function showError(msg) {
+      if (formErrorMessage && errorText) {
+        errorText.textContent = msg;
+        formErrorMessage.classList.remove('hidden');
+        formErrorMessage.classList.add('flex');
+      }
+    }
+
+    function hideError() {
+      if (formErrorMessage) {
+        formErrorMessage.classList.add('hidden');
+        formErrorMessage.classList.remove('flex');
+      }
+    }
+
+    // FAQ Accordion Toggle Interaction
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('.faq-icon');
+        const isOpen = !content.classList.contains('hidden');
+
+        // Đóng các item khác
+        document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotate-180'));
+
+        if (!isOpen) {
+          content.classList.remove('hidden');
+          if (icon) icon.classList.add('rotate-180');
+        }
+      });
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    if (mobileMenuBtn && mobileDrawer) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileDrawer.classList.toggle('hidden');
+      });
+      // Đóng drawer khi nhấp vào link bên trong
+      mobileDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDrawer.classList.add('hidden');
+        });
+      });
+    }
+
+    // Scroll Header Styling
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 40) {
+        header.classList.add('shadow-md', 'bg-white/95');
+      } else {
+        header.classList.remove('shadow-md', 'bg-white/95');
+      }
+    });
+
+    // Khởi tạo trạng thái ban đầu
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeDefaultTime();
+      updatePrice();
+    });
+  </script>
+</body>
+
+</html>

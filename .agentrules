@@ -1,0 +1,34 @@
+# EXECUTIVE COCKPIT DESIGN & ENGINEERING RULES (LUXURY EDITION)
+
+## 1. TRIẾT LÝ GIAO DIỆN (AESTHETIC PHILOSOPHY)
+- Tuyệt đối KHÔNG thiết kế tối giản phẳng lì (flat design), không dùng giao diện xám xịt đơn điệu.
+- Định vị: Chuyên cơ mặt đất cá nhân (Executive Aviation / Bespoke Automotive Experience).
+- Cảm giác thị giác: Chiều sâu đa tầng (layered depth), kính mờ khói (frosted smoke glassmorphism), phản quang kim loại (metallic sheen) và ánh sáng ambient LED cao cấp.
+
+## 2. BẢNG MÀU CHUẨN MỰC (EXECUTIVE LUXURY PALETTE)
+- Nền tổng thể: Obsidian Void (`#04060A`) kết hợp gradient nền xanh than sâu (`#0B111E`).
+- Thẻ bề mặt: Slate Glass (`#0E1422`) với độ mờ backdrop-blur-xl.
+- Đường viền vi mô (Micro-Borders): 1px với viền vàng kim (`rgba(229, 195, 120, 0.25)`) hoặc viền kim loại xước sáng (`rgba(255, 255, 255, 0.08)`).
+- Điểm nhấn chính (Signature Accents):
+  * Champagne Gold: `#E5C378` (chữ nhấn, viền active, icon vinh danh).
+  * Gold Gradient: `linear-gradient(135deg, #F3D692 0%, #D4AF37 50%, #AA7C11 100%)`.
+  * Radar Emerald: `#00E599` (chỉ báo trực tuyến, cam kết vàng, tính sẵn sàng).
+  * Zalo Blue: `#0068FF` (nhúng icon chuẩn của Zalo, không dùng SVG tự vẽ lệch).
+
+## 3. HIỆU ỨNG CHUYỂN ĐỘNG (MICRO-ANIMATIONS & HAPTICS)
+- Shimmer Beam: Luồng ánh sáng kim loại quét ngang nút bấm chính (`animate-shimmer`).
+- Dynamic Status Radar: Chấm xanh chỉ báo trực tuyến phát xung nhịp tim chậm (`animate-pulse`).
+- Odometer Ticker: Giá cước nhảy số mượt mà khi thay đổi tuyến hoặc chế độ bao xe/đi ghép.
+- Tactile Recessed Switch: Nút gạt Bao xe / Ghép xe mô phỏng rãnh số kim loại ô tô sang trọng.
+
+## 4. QUY CHUẨN HÌNH ẢNH CỤC BỘ (LOCAL ASSET ARCHITECTURE)
+Toàn bộ ảnh phải trỏ đến thư mục cục bộ `assets/images/` để người dùng thay ảnh không cần đụng mã nguồn:
+- `assets/images/avatar.jpg`: Ảnh chân dung tài xế chuyên nghiệp.
+- `assets/images/car-exterior.jpg`: Ảnh ngoại thất xe sang góc nghiêng 45 độ.
+- `assets/images/car-interior.jpg`: Ảnh khoang sau ghế da êm ái.
+- `assets/images/car-amenities.jpg`: Ảnh nước suối, cổng sạc, khăn ướt cao cấp.
+- `assets/images/zalo-icon.png`: Logo Zalo chính thức (kèm fallback online Wikimedia).
+
+## 5. BỐ CỤC ĐÁP ỨNG TOÀN DIỆN (RESPONSIVE BLUEPRINT)
+- Mobile (< 1024px): Bảng điều khiển đặt xe nằm ngay Above the Fold. Kèm thanh nổi cố định (Floating Bar) dưới đáy.
+- Desktop (>= 1024px): Bố cục chia đôi màn hình (Dual-Column 50/50). Bên trái là Hero Trưng bày xe & Đánh giá uy tín; Bên phải là Form đặt xe Sticky sang trọng. Thanh Floating Bar tự động ẩn trên desktop (`lg:hidden`).
