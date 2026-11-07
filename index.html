@@ -24,6 +24,10 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
     rel="stylesheet">
 
+  <!-- Firebase SDK Compat v10.7.1 -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -1592,6 +1596,31 @@
        ========================================== -->
   <script>
     /**
+     * CẤU HÌNH FIREBASE FIRESTORE V10.7.1
+     * Đồng bộ thời gian thực giữa Khách và Bảng Điều Khiển Tài Xế
+     */
+    const firebaseConfig = {
+      apiKey: "AIzaSyA01areD6kFPNlktqfTyM9OG9bCwCmAT6o",
+      authDomain: "thanhaitravel-3f372.firebaseapp.com",
+      projectId: "thanhaitravel-3f372",
+      storageBucket: "thanhaitravel-3f372.firebasestorage.app",
+      messagingSenderId: "24036088347",
+      appId: "1:24036088347:web:b83bc909fdbc5a814236be"
+    };
+
+    let db = null;
+    try {
+      if (typeof firebase !== 'undefined') {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+        db = firebase.firestore();
+      }
+    } catch (fbInitErr) {
+      console.warn('[Firebase] Khởi tạo Firestore lỗi:', fbInitErr);
+    }
+
+    /**
      * CẤU HÌNH TỰ ĐỘNG HÓA & LIÊN HỆ
      * Người dùng có thể thay đổi số điện thoại hoặc mã Telegram Bot tại đây
      */
@@ -1757,6 +1786,34 @@
       }
       if (!driverConfig.images) {
         driverConfig.images = DEFAULT_DRIVER_CONFIG.images;
+      }
+    }
+
+    /**
+     * HỢP NHẤT DỮ LIỆU ĐÁM MÂY VÀO CẤU HÌNH HIỆN TẠI (SAFE MERGE)
+     */
+    function mergeIncomingDriverConfig(incoming) {
+      if (!incoming) return;
+      if (!driverConfig) {
+        driverConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+      }
+      if (incoming.pin) driverConfig.pin = incoming.pin;
+      if (typeof incoming.holidaySurcharge !== 'undefined') driverConfig.holidaySurcharge = incoming.holidaySurcharge;
+      if (typeof incoming.surchargePercent !== 'undefined') driverConfig.surchargePercent = incoming.surchargePercent;
+      if (incoming.profile) {
+        driverConfig.profile = { ...(driverConfig.profile || DEFAULT_DRIVER_CONFIG.profile), ...incoming.profile };
+      }
+      if (incoming.telegram) {
+        driverConfig.telegram = { ...(driverConfig.telegram || DEFAULT_DRIVER_CONFIG.telegram), ...incoming.telegram };
+      }
+      if (Array.isArray(incoming.routes) && incoming.routes.length > 0) {
+        driverConfig.routes = incoming.routes;
+      }
+      if (incoming.images) {
+        driverConfig.images = { ...(driverConfig.images || DEFAULT_DRIVER_CONFIG.images), ...incoming.images };
+      }
+      if (incoming.lastUpdated) {
+        driverConfig.lastUpdated = incoming.lastUpdated;
       }
     }
 
@@ -2342,6 +2399,47 @@
       }
     });
 
+    /**
+     * LẮNG NGHE ĐỒNG BỘ THỜI GIAN THỰC TỪ FIRESTORE (REALTIME SYNC)
+     * Tự động phản chiếu mọi thay đổi từ Admin sang Khách không cần reload
+     */
+    let unsubscribeFirestore = null;
+    function listenToFirestore() {
+      if (!db) {
+        console.warn('[Firestore] SDK chưa sẵn sàng hoặc offline. Tiếp tục dùng cấu hình mặc định/bộ nhớ máy.');
+        return;
+      }
+      try {
+        if (unsubscribeFirestore) {
+          unsubscribeFirestore();
+        }
+        unsubscribeFirestore = db.collection('settings').doc('driver_config').onSnapshot(
+          (docSnap) => {
+            if (docSnap.exists) {
+              const cloudData = docSnap.data();
+              if (cloudData) {
+                console.log('[Firestore] Nhận dữ liệu cập nhật thời gian thực từ Cloud:', cloudData);
+                mergeIncomingDriverConfig(cloudData);
+                localStorage.setItem('DRIVER_CONFIG', JSON.stringify(driverConfig));
+                applyDynamicProfile();
+                applyDynamicImages();
+                renderDynamicRouteSelect();
+                renderDynamicPopularRoutes();
+                updatePrice();
+              }
+            } else {
+              console.log('[Firestore] Document settings/driver_config chưa có trên Cloud, đang dùng cấu hình gốc.');
+            }
+          },
+          (error) => {
+            console.warn('[Firestore] Lỗi lắng nghe onSnapshot:', error);
+          }
+        );
+      } catch (err) {
+        console.warn('[Firestore] Lỗi thiết lập listener Firestore:', err);
+      }
+    }
+
     // Hàm khởi tạo toàn bộ giao diện và dữ liệu động
     function initializeApp() {
       loadDriverConfig();
@@ -2351,6 +2449,7 @@
       renderDynamicPopularRoutes();
       initializeDefaultTime();
       updatePrice();
+      listenToFirestore();
     }
 
     // Lắng nghe thay đổi từ Admin trong trường hợp mở 2 tab cùng lúc

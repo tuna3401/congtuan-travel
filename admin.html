@@ -14,6 +14,10 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
     rel="stylesheet">
 
+  <!-- Firebase SDK Compat v10.7.1 -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -711,15 +715,23 @@
           <!-- Cloud Sync Status -->
           <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-1.5">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-200">Đồng Bộ Đám Mây</span>
-              <span
-                class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-semibold">Firebase
-                Ready</span>
+              <span class="text-xs font-bold text-slate-200">Đồng Bộ Firestore</span>
+              <span id="firestoreStatusBadge"
+                class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-semibold flex items-center space-x-1">
+                <span id="firestoreStatusDot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="firestoreStatusText">Cloud Active</span>
+              </span>
             </div>
-            <p class="text-[11px] text-slate-400 leading-tight">
-              Dữ liệu đang lưu tại <code class="text-goldSand font-mono">localStorage['DRIVER_CONFIG']</code>.
+            <p id="firestorePathText" class="text-[11px] text-slate-400 leading-tight">
+              Đồng bộ thời gian thực: <code class="text-goldSand font-mono">settings/driver_config</code>
             </p>
-            <div class="pt-1 flex items-center space-x-2">
+            <div class="pt-1 flex items-center justify-between">
+              <button type="button" onclick="syncFromFirestoreOnUnlock()" class="text-[11px] text-goldAccent hover:underline font-semibold flex items-center space-x-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>Tải lại từ Cloud</span>
+              </button>
               <button type="button" onclick="resetToDefaultData()" class="text-[11px] text-rose-400 hover:underline">
                 Khôi phục dữ liệu gốc
               </button>
@@ -860,6 +872,30 @@
        JAVASCRIPT LOGIC & DATA SYNCHRONIZATION
        ==================================================== -->
   <script>
+    /**
+     * CẤU HÌNH FIREBASE FIRESTORE V10.7.1
+     */
+    const firebaseConfig = {
+      apiKey: "AIzaSyA01areD6kFPNlktqfTyM9OG9bCwCmAT6o",
+      authDomain: "thanhaitravel-3f372.firebaseapp.com",
+      projectId: "thanhaitravel-3f372",
+      storageBucket: "thanhaitravel-3f372.firebasestorage.app",
+      messagingSenderId: "24036088347",
+      appId: "1:24036088347:web:b83bc909fdbc5a814236be"
+    };
+
+    let db = null;
+    try {
+      if (typeof firebase !== 'undefined') {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+        db = firebase.firestore();
+      }
+    } catch (fbInitErr) {
+      console.warn('[Firebase] Khởi tạo Firebase Firestore lỗi:', fbInitErr);
+    }
+
     /**
      * CẤU TRÚC DỮ LIỆU MẶC ĐỊNH CHO TÀI XẾ (DEFAULT_DRIVER_CONFIG)
      */
@@ -1094,6 +1130,7 @@
         lockscreen.classList.add('hidden');
         dashboard.classList.remove('opacity-0', 'pointer-events-none');
         renderDashboardData();
+        syncFromFirestoreOnUnlock();
       }, 350);
     }
 
@@ -1706,26 +1743,118 @@
     }
 
     /**
-     * KHÔI PHỤC DỮ LIỆU GỐC
+     * TRỢ THỦ HỢP NHẤT DỮ LIỆU CẤU HÌNH (MERGE CONFIG)
      */
-    function resetToDefaultData() {
-      if (confirm('Khôi phục toàn bộ tuyến và hình ảnh về thiết lập gốc của hệ thống?')) {
-        currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
-        saveConfiguration(true);
-        renderDashboardData();
+    function mergeConfig(incoming) {
+      if (!incoming) return;
+      if (incoming.pin) currentConfig.pin = incoming.pin;
+      if (typeof incoming.holidaySurcharge !== 'undefined') currentConfig.holidaySurcharge = incoming.holidaySurcharge;
+      if (typeof incoming.surchargePercent !== 'undefined') currentConfig.surchargePercent = incoming.surchargePercent;
+      if (incoming.profile) {
+        currentConfig.profile = { ...(currentConfig.profile || DEFAULT_DRIVER_CONFIG.profile), ...incoming.profile };
+      }
+      if (incoming.telegram) {
+        currentConfig.telegram = { ...(currentConfig.telegram || DEFAULT_DRIVER_CONFIG.telegram), ...incoming.telegram };
+      }
+      if (Array.isArray(incoming.routes) && incoming.routes.length > 0) {
+        currentConfig.routes = incoming.routes;
+      }
+      if (incoming.images) {
+        currentConfig.images = { ...(currentConfig.images || DEFAULT_DRIVER_CONFIG.images), ...incoming.images };
+      }
+      if (incoming.lastUpdated) {
+        currentConfig.lastUpdated = incoming.lastUpdated;
       }
     }
 
     /**
-     * LƯU CẤU HÌNH (LOCALSTORAGE & FIREBASE PLACEHOLDER)
+     * CẬP NHẬT TRẠNG THÁI CLOUD BADGE
      */
-    function saveConfiguration(showNotification = true) {
+    function updateCloudStatus(state, message) {
+      const badge = document.getElementById('firestoreStatusBadge');
+      const dot = document.getElementById('firestoreStatusDot');
+      const text = document.getElementById('firestoreStatusText');
+      if (!badge || !text) return;
+      text.textContent = message;
+
+      if (state === 'online') {
+        badge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-semibold flex items-center space-x-1';
+        if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse';
+      } else if (state === 'syncing') {
+        badge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800 font-semibold flex items-center space-x-1';
+        if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping';
+      } else {
+        badge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700 font-semibold flex items-center space-x-1';
+        if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-slate-500';
+      }
+    }
+
+    /**
+     * ĐỒNG BỘ DỮ LIỆU TỪ FIRESTORE KHI MỞ KHÓA HOẶC BẤM "TẢI LẠI TỪ CLOUD"
+     */
+    async function syncFromFirestoreOnUnlock() {
+      updateCloudStatus('syncing', 'Đang kết nối Cloud...');
+      if (!db) {
+        updateCloudStatus('offline', 'Chưa kết nối Cloud (Dùng Local)');
+        return;
+      }
+
+      try {
+        const docRef = db.collection('settings').doc('driver_config');
+        const docSnap = await docRef.get();
+        if (docSnap.exists) {
+          const cloudData = docSnap.data();
+          if (cloudData) {
+            mergeConfig(cloudData);
+            localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
+            renderDashboardData();
+            updateCloudStatus('online', 'Cloud Active (Đã đồng bộ)');
+            console.log('[Firestore] Đã nạp dữ liệu mới nhất từ Firestore settings/driver_config');
+            return;
+          }
+        } else {
+          // Document chưa tồn tại: khởi tạo document ban đầu trên Firestore
+          await docRef.set(currentConfig, { merge: true });
+          updateCloudStatus('online', 'Cloud Active (Đã khởi tạo)');
+          console.log('[Firestore] Document settings/driver_config chưa tồn tại, đã tạo mới.');
+        }
+      } catch (err) {
+        console.warn('[Firestore] Lỗi đồng bộ Firestore khi mở khóa:', err);
+        updateCloudStatus('offline', 'Cloud Offline (Dùng Local)');
+      }
+    }
+
+    /**
+     * KHÔI PHỤC DỮ LIỆU GỐC
+     */
+    async function resetToDefaultData() {
+      if (confirm('Khôi phục toàn bộ tuyến và hình ảnh về thiết lập gốc của hệ thống?')) {
+        currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+        renderDashboardData();
+        await saveConfiguration(true);
+      }
+    }
+
+    /**
+     * LƯU CẤU HÌNH (LOCALSTORAGE & FIREBASE FIRESTORE)
+     */
+    async function saveConfiguration(showNotification = true) {
       try {
         currentConfig.lastUpdated = new Date().toISOString();
         localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
 
-        // Gọi đồng bộ ngầm Firebase Firestore nếu đã cấu hình
-        FirestoreDriverSync.saveConfigToCloud(currentConfig);
+        if (db) {
+          updateCloudStatus('syncing', 'Đang lưu Cloud...');
+          try {
+            await db.collection('settings').doc('driver_config').set(currentConfig, { merge: true });
+            const nowTime = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            updateCloudStatus('online', `Cloud Active (Lưu lúc ${nowTime})`);
+            console.log('[Firestore] Đã lưu cấu hình lên settings/driver_config thành công.');
+          } catch (cloudErr) {
+            console.error('[Firestore] Lỗi lưu lên Firestore:', cloudErr);
+            updateCloudStatus('offline', 'Lỗi Cloud (Đã lưu Local)');
+          }
+        }
 
         if (showNotification) {
           showToast('Đã cập nhật cấu hình thành công!');
@@ -1749,60 +1878,34 @@
     }
 
     /**
-     * ==========================================================
-     * FIREBASE FIRESTORE INTEGRATION PLACEHOLDER
-     * Sẵn sàng kết nối cơ sở dữ liệu thời gian thực khi chạy thực tế
-     * ==========================================================
+     * TẢI NGẦM TRƯỚC TỪ CLOUD KHI VỪA VÀO TRANG (ĐỂ CẬP NHẬT MÃ PIN NẾU ĐỔI TỪ THIẾT BỊ KHÁC)
      */
-    const FirestoreDriverSync = {
-      isInitialized: false,
-
-      // Khởi tạo Firebase SDK (Thay config thực tế vào đây)
-      initFirebase(firebaseConfig) {
-        console.log('[FirestoreSync] Khởi tạo kết nối Firebase...', firebaseConfig);
-        this.isInitialized = true;
-      },
-
-      // Tải cấu hình từ Firestore
-      async fetchConfigFromCloud() {
-        if (!this.isInitialized) {
-          console.log('[FirestoreSync] Chưa kích hoạt Firebase. Đang sử dụng localStorage.');
-          return null;
+    async function prefetchConfigFromCloud() {
+      if (!db) return;
+      try {
+        const docSnap = await db.collection('settings').doc('driver_config').get();
+        if (docSnap.exists) {
+          const cloudData = docSnap.data();
+          if (cloudData) {
+            mergeConfig(cloudData);
+            localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
+            if (sessionStorage.getItem('DRIVER_UNLOCKED') === 'true') {
+              renderDashboardData();
+              updateCloudStatus('online', 'Cloud Active');
+            }
+          }
         }
-        try {
-          // Placeholder code:
-          // const doc = await firebase.firestore().collection('drivers').doc('le_tuan').get();
-          // return doc.data();
-          return null;
-        } catch (e) {
-          console.warn('[FirestoreSync] Lỗi tải từ cloud:', e);
-          return null;
-        }
-      },
-
-      // Đồng bộ cấu hình lên Firestore
-      async saveConfigToCloud(configData) {
-        if (!this.isInitialized) {
-          // Firebase chưa bật, lưu hoàn tất trong localStorage
-          return true;
-        }
-        try {
-          // Placeholder code:
-          // await firebase.firestore().collection('drivers').doc('le_tuan').set(configData, { merge: true });
-          console.log('[FirestoreSync] Đã đồng bộ lên Cloud Firestore thành công.');
-          return true;
-        } catch (e) {
-          console.warn('[FirestoreSync] Lỗi đồng bộ Cloud:', e);
-          return false;
-        }
+      } catch (e) {
+        console.warn('[Firestore] Pre-fetch ngầm trước khi mở khóa thất bại:', e);
       }
-    };
+    }
 
     /**
      * KHI TẢI TRANG
      */
     document.addEventListener('DOMContentLoaded', () => {
       loadConfig();
+      prefetchConfigFromCloud();
 
       // Kiểm tra nếu phiên trước đã mở khóa trong cùng tab
       if (sessionStorage.getItem('DRIVER_UNLOCKED') === 'true') {
