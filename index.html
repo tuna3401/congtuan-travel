@@ -1630,6 +1630,13 @@
         carPlate: '30K - Xe riêng chính chủ không mào',
         operatingArea: 'Cầu Giấy, Nam Từ Liêm & Sân bay Quốc tế Nội Bài, Hà Nội'
       },
+      telegram: {
+        enabled: false,
+        botToken: '',
+        botUsername: '',
+        chatId: '',
+        pairedName: ''
+      },
       routes: [
         {
           id: 'HN_NB',
@@ -1741,6 +1748,9 @@
       }
       if (!driverConfig.profile) {
         driverConfig.profile = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG.profile));
+      }
+      if (!driverConfig.telegram) {
+        driverConfig.telegram = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG.telegram));
       }
       if (!driverConfig.routes || !driverConfig.routes.length) {
         driverConfig.routes = DEFAULT_DRIVER_CONFIG.routes;
@@ -2140,14 +2150,22 @@
 
     // Gửi thông báo ngầm sang Telegram Bot
     async function sendSilentTelegramNotification(bookingData) {
-      if (!APP_CONFIG.telegram.enabled ||
-        APP_CONFIG.telegram.botToken === 'TELEGRAM_BOT_TOKEN_PLACEHOLDER' ||
-        !APP_CONFIG.telegram.botToken) {
-        console.log('[Telegram Dispatch Info] Bỏ qua gửi Telegram do chưa cấu hình botToken thực tế:', bookingData);
+      const tgConfig = (driverConfig && driverConfig.telegram && driverConfig.telegram.botToken)
+        ? driverConfig.telegram
+        : APP_CONFIG.telegram;
+
+      if (!tgConfig ||
+        !tgConfig.enabled ||
+        tgConfig.botToken === 'TELEGRAM_BOT_TOKEN_PLACEHOLDER' ||
+        !tgConfig.botToken ||
+        !tgConfig.chatId ||
+        tgConfig.chatId === 'TELEGRAM_CHAT_ID_PLACEHOLDER') {
+        console.log('[Telegram Dispatch Info] Bỏ qua gửi Telegram do chưa cấu hình botToken/chatId thực tế:', bookingData);
         return;
       }
 
-      const textMessage = `🚖 *ĐẶT CHUYẾN MỚI TỪ WEBSITE ${(APP_CONFIG.driverName || 'LÊ TUẤN').toUpperCase()} DRIVER* 🚖\n\n` +
+      const driverDisplayName = (APP_CONFIG.driverName || 'LÊ TUẤN').toUpperCase();
+      const textMessage = `🚖 *ĐẶT CHUYẾN MỚI TỪ WEBSITE ${driverDisplayName} DRIVER* 🚖\n\n` +
         `👤 *Khách hàng:* ${bookingData.customerName}\n` +
         `📞 *Số điện thoại:* ${bookingData.customerPhone}\n` +
         `🏷️ *Hình thức:* ${bookingData.modeText}\n` +
@@ -2159,19 +2177,19 @@
         `💰 *Cước dự tính:* ${bookingData.estimatedPrice}\n\n` +
         `_Thời gian gửi: ${new Date().toLocaleString('vi-VN')}_`;
 
-      const url = `https://api.telegram.org/bot${APP_CONFIG.telegram.botToken}/sendMessage`;
+      const url = `https://api.telegram.org/bot${tgConfig.botToken}/sendMessage`;
 
       try {
         await fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            chat_id: APP_CONFIG.telegram.chatId,
+            chat_id: tgConfig.chatId,
             text: textMessage,
             parse_mode: 'Markdown'
           })
         });
-        console.log('[Telegram Dispatch] Đã gửi thông báo thành công');
+        console.log('[Telegram Dispatch] Đã gửi thông báo thành công tới Telegram:', tgConfig.chatId);
       } catch (err) {
         console.warn('[Telegram Dispatch Error] Không thể gửi thông báo:', err);
       }

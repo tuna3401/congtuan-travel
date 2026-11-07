@@ -570,7 +570,113 @@
 
 
       <!-- ==========================================
-           CARD 4: CÀI ĐẶT BẢO MẬT & ĐỒNG BỘ
+           CARD 4: KẾT NỐI TELEGRAM 1-CHẠM (NHẬN CUỐC TỨC THÌ)
+           ========================================== -->
+      <div class="rounded-2xl bg-cockpitCard border border-cockpitBorder p-4 shadow-md space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0088cc] to-[#229ED9] p-1.5 flex items-center justify-center text-white shadow-md">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center">
+                Kết Nối Telegram 1-Chạm
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Tự động nhận thông báo khi có khách đặt cuốc</p>
+            </div>
+          </div>
+
+          <!-- Connection Status Badge -->
+          <div id="tgStatusBadge" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-[10px] font-bold text-slate-400">
+            <span id="tgStatusDot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+            <span id="tgStatusText">Chưa kết nối</span>
+          </div>
+        </div>
+
+        <!-- Input Fields -->
+        <div class="space-y-3 pt-1">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <!-- Bot Token -->
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">
+                Telegram Bot Token <span class="text-goldAccent">*</span>
+              </label>
+              <input type="text" id="tg_botToken" placeholder="VD: 7421893821:AAHOe8B9w..."
+                class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs font-mono text-slate-200 placeholder-slate-500 focus:border-[#229ED9] focus:outline-none"
+                oninput="handleTelegramInput('botToken', this.value)">
+            </div>
+
+            <!-- Bot Username -->
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">
+                Username của Bot (Không cần gõ @) <span class="text-goldAccent">*</span>
+              </label>
+              <div class="relative flex items-center">
+                <span class="absolute left-3 text-xs text-slate-500 font-mono">@</span>
+                <input type="text" id="tg_botUsername" placeholder="LeTuanDriverBot"
+                  class="w-full bg-slate-900 border border-cockpitBorder rounded-xl pl-7 pr-3 py-2 text-xs font-mono text-slate-200 placeholder-slate-500 focus:border-[#229ED9] focus:outline-none"
+                  oninput="handleTelegramInput('botUsername', this.value)">
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat ID (Auto-populated) -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-bold text-slate-300">
+                Chat ID Tài Xế (Tự Động Bốc Nhận)
+              </label>
+              <span class="text-[10px] text-slate-500">Tự động điền sau khi bấm Bước 2</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <input type="text" id="tg_chatId" placeholder="Chưa có Chat ID (Bấm Bước 2 bên dưới để tự lấy)"
+                class="w-full bg-slate-900/80 border border-cockpitBorder rounded-xl px-3 py-2 text-xs font-mono font-bold text-emerald-400 placeholder-slate-600 focus:border-emerald-500 focus:outline-none"
+                oninput="handleTelegramInput('chatId', this.value)">
+              <button type="button" onclick="sendTestTelegramMessage()" id="btnTestTg"
+                class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 whitespace-nowrap transition disabled:opacity-50">
+                Gửi Thử
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-Step Pairing Action Buttons -->
+        <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2.5">
+          <p class="text-xs font-bold text-goldAccent uppercase tracking-wider flex items-center">
+            <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+            </svg>
+            Quy Trình Kết Nối 2 Bước Nhanh:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <!-- Bước 1 -->
+            <button type="button" onclick="openTelegramBot()"
+              class="w-full py-2.5 px-3 rounded-xl bg-[#0088cc]/20 hover:bg-[#0088cc]/30 border border-[#0088cc]/50 text-[#229ED9] text-xs font-bold flex items-center justify-center space-x-1.5 transition active:scale-95">
+              <span>Bước 1: Mở Bot trên Telegram</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </button>
+
+            <!-- Bước 2 -->
+            <button type="button" onclick="autoPairTelegramChatId()" id="btnAutoPairTg"
+              class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-emerald-950 flex items-center justify-center space-x-1.5 transition active:scale-95">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span>Bước 2: Tự Động Đồng Bộ Chat ID</span>
+            </button>
+          </div>
+
+          <div id="tgPairingFeedback" class="text-xs pt-1 hidden"></div>
+        </div>
+      </div>
+
+
+      <!-- ==========================================
+           CARD 5: CÀI ĐẶT BẢO MẬT & HỆ THỐNG
            ========================================== -->
       <div class="rounded-2xl bg-cockpitCard border border-cockpitBorder p-4 shadow-md space-y-4">
         <div>
@@ -772,6 +878,13 @@
         carPlate: '30K - Xe riêng chính chủ không mào',
         operatingArea: 'Cầu Giấy, Nam Từ Liêm & Sân bay Quốc tế Nội Bài, Hà Nội'
       },
+      telegram: {
+        enabled: false,
+        botToken: '',
+        botUsername: '',
+        chatId: '',
+        pairedName: ''
+      },
       routes: [
         {
           id: 'HN_NB',
@@ -881,6 +994,7 @@
           currentConfig = JSON.parse(raw);
           // Đảm bảo các thuộc tính bắt buộc luôn tồn tại
           if (!currentConfig.profile) currentConfig.profile = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG.profile));
+          if (!currentConfig.telegram) currentConfig.telegram = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG.telegram));
           if (!currentConfig.routes) currentConfig.routes = DEFAULT_DRIVER_CONFIG.routes;
           if (!currentConfig.images) currentConfig.images = DEFAULT_DRIVER_CONFIG.images;
           if (!currentConfig.pin) currentConfig.pin = '1990';
@@ -1022,6 +1136,9 @@
       if (navAvatar && currentConfig.images && currentConfig.images.avatar) {
         navAvatar.src = currentConfig.images.avatar;
       }
+
+      // 5. Kết nối Telegram 1-Chạm
+      renderTelegramUI();
     }
 
     /**
@@ -1056,6 +1173,251 @@
       if (!currentConfig.profile) currentConfig.profile = {};
       currentConfig.profile.hotlineDisplay = val;
       currentConfig.profile.hotlineTel = val.replace(/[^\d+]/g, '');
+    }
+
+    /**
+     * KẾT NỐI TELEGRAM 1-CHẠM (1-CLICK PAIRING)
+     */
+    function renderTelegramUI() {
+      if (!currentConfig || !currentConfig.telegram) return;
+      const tg = currentConfig.telegram;
+
+      const tokenInput = document.getElementById('tg_botToken');
+      const usernameInput = document.getElementById('tg_botUsername');
+      const chatIdInput = document.getElementById('tg_chatId');
+      const testBtn = document.getElementById('btnTestTg');
+      const statusBadge = document.getElementById('tgStatusBadge');
+      const statusDot = document.getElementById('tgStatusDot');
+      const statusText = document.getElementById('tgStatusText');
+
+      if (tokenInput) tokenInput.value = tg.botToken || '';
+      if (usernameInput) usernameInput.value = (tg.botUsername || '').replace(/^@/, '');
+      if (chatIdInput) chatIdInput.value = tg.chatId || '';
+
+      const isConnected = !!(tg.chatId && tg.botToken);
+      if (testBtn) testBtn.disabled = !isConnected;
+
+      if (isConnected) {
+        if (statusBadge) statusBadge.className = 'flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-800 text-[10px] font-bold text-emerald-400';
+        if (statusDot) statusDot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+        if (statusText) statusText.textContent = `Đã kết nối (${tg.pairedName ? tg.pairedName + ' - ' : ''}ID: ${tg.chatId})`;
+      } else {
+        if (statusBadge) statusBadge.className = 'flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-[10px] font-bold text-slate-400';
+        if (statusDot) statusDot.className = 'w-2 h-2 rounded-full bg-slate-500';
+        if (statusText) statusText.textContent = 'Chưa kết nối';
+      }
+    }
+
+    function handleTelegramInput(field, val) {
+      if (!currentConfig.telegram) currentConfig.telegram = {};
+      if (field === 'botUsername') {
+        val = val.trim().replace(/^@/, '');
+      } else {
+        val = val.trim();
+      }
+      currentConfig.telegram[field] = val;
+      if (field === 'chatId') {
+        currentConfig.telegram.enabled = !!(val && currentConfig.telegram.botToken);
+      }
+      renderTelegramUI();
+    }
+
+    function openTelegramBot() {
+      const usernameInput = document.getElementById('tg_botUsername');
+      let botUsername = (usernameInput ? usernameInput.value.trim() : '') || currentConfig.telegram?.botUsername || '';
+      botUsername = botUsername.replace(/^@/, '');
+
+      if (!botUsername) {
+        alert('Vui lòng nhập Username của Bot trước (Ví dụ: LeTuanDriverBot).');
+        if (usernameInput) usernameInput.focus();
+        return;
+      }
+
+      currentConfig.telegram.botUsername = botUsername;
+
+      // Mở link trực tiếp tới Bot với tham số start=connect
+      const tgUrl = `https://t.me/${botUsername}?start=connect`;
+      window.open(tgUrl, '_blank');
+
+      showTelegramFeedback(
+        'info',
+        '👉 Đã mở Bot trên Telegram! Hãy bấm nút <b>START</b> trong ứng dụng Telegram, sau đó quay lại trang này bấm <b>Bước 2</b>.'
+      );
+    }
+
+    async function autoPairTelegramChatId() {
+      const tokenInput = document.getElementById('tg_botToken');
+      const botToken = (tokenInput ? tokenInput.value.trim() : '') || currentConfig.telegram?.botToken || '';
+
+      if (!botToken) {
+        alert('Vui lòng nhập Telegram Bot Token trước khi bấm đồng bộ.');
+        if (tokenInput) tokenInput.focus();
+        return;
+      }
+
+      currentConfig.telegram.botToken = botToken;
+
+      const btnPair = document.getElementById('btnAutoPairTg');
+      const originalText = btnPair.innerHTML;
+      btnPair.disabled = true;
+      btnPair.innerHTML = `
+        <svg class="w-3.5 h-3.5 animate-spin mr-1" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+        </svg>
+        <span>Đang quét Chat ID...</span>
+      `;
+
+      showTelegramFeedback('info', '🔍 Đang kết nối API Telegram để tìm tin nhắn mới nhất của bạn...');
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${botToken}/getUpdates`);
+        const data = await res.json();
+
+        if (!data.ok) {
+          throw new Error(data.description || 'Bot Token không hợp lệ.');
+        }
+
+        const updates = data.result || [];
+        let foundChat = null;
+
+        // Quét ngược từ tin nhắn mới nhất
+        for (let i = updates.length - 1; i >= 0; i--) {
+          const item = updates[i];
+          const msg = item.message || item.edited_message || item.my_chat_member;
+          if (msg && msg.chat && msg.chat.id) {
+            foundChat = msg.chat;
+            break;
+          }
+        }
+
+        if (!foundChat) {
+          showTelegramFeedback(
+            'warning',
+            '⚠️ Chưa thấy tin nhắn nào gửi cho Bot! Vui lòng bấm <b>Bước 1</b>, ấn nút <b>START</b> hoặc gửi 1 tin nhắn bất kỳ cho Bot trên Telegram, rồi quay lại bấm lại <b>Bước 2</b>.'
+          );
+          btnPair.disabled = false;
+          btnPair.innerHTML = originalText;
+          return;
+        }
+
+        // Đã tìm thấy Chat ID
+        const chatId = foundChat.id.toString();
+        const pairedName = foundChat.first_name || foundChat.title || foundChat.username || 'Tài xế';
+
+        currentConfig.telegram.chatId = chatId;
+        currentConfig.telegram.pairedName = pairedName;
+        currentConfig.telegram.enabled = true;
+
+        const chatIdInput = document.getElementById('tg_chatId');
+        if (chatIdInput) chatIdInput.value = chatId;
+
+        // Tự động lưu cấu hình
+        saveConfiguration(false);
+        renderTelegramUI();
+
+        // Gửi tin nhắn chào mừng và xác nhận ngay lập tức vào Telegram
+        showTelegramFeedback('info', `✅ Đã tìm thấy Chat ID: <b>${chatId}</b> (${pairedName}). Đang gửi tin nhắn xác nhận...`);
+
+        const driverName = currentConfig.profile?.driverName || 'Lê Tuấn Driver';
+        const confirmText = `🔔 *KẾT NỐI THÀNH CÔNG!*\n\n` +
+          `Xin chào *${driverName}*,\n` +
+          `Website của bạn đã kết nối thành công với tài khoản Telegram này.\n` +
+          `Từ giờ, bất kỳ khi nào có khách đặt xe trên website, thông báo chi tiết (Tên, SĐT, Điểm đón, Giờ đón, Giá cước) sẽ được gửi tự động tức thì vào đây!\n\n` +
+          `_Thời gian kết nối: ${new Date().toLocaleString('vi-VN')}_`;
+
+        try {
+          await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: chatId,
+              text: confirmText,
+              parse_mode: 'Markdown'
+            })
+          });
+
+          showTelegramFeedback(
+            'success',
+            `🎉 <b>Kết nối thành công!</b> Chat ID <b>${chatId}</b> (${pairedName}) đã được lưu. Bot vừa gửi tin nhắn xác nhận vào máy của bạn!`
+          );
+          showToast('Đã kết nối Telegram thành công!');
+        } catch (sendErr) {
+          console.warn('Lỗi gửi tin nhắn test:', sendErr);
+          showTelegramFeedback(
+            'success',
+            `🎉 Đã bốc Chat ID <b>${chatId}</b> (${pairedName}) thành công!`
+          );
+        }
+
+      } catch (err) {
+        console.error('Lỗi kết nối Telegram:', err);
+        showTelegramFeedback(
+          'error',
+          `❌ Lỗi kết nối: ${err.message || 'Không thể kết nối Telegram API. Vui lòng kiểm tra lại Bot Token.'}`
+        );
+      } finally {
+        btnPair.disabled = false;
+        btnPair.innerHTML = originalText;
+      }
+    }
+
+    async function sendTestTelegramMessage() {
+      const tg = currentConfig.telegram;
+      if (!tg || !tg.botToken || !tg.chatId) {
+        alert('Chưa có đủ Bot Token và Chat ID để gửi thử.');
+        return;
+      }
+
+      const btnTest = document.getElementById('btnTestTg');
+      if (btnTest) btnTest.disabled = true;
+
+      const driverName = currentConfig.profile?.driverName || 'Lê Tuấn Driver';
+      const text = `🔔 *THÔNG BÁO TEST HỆ THỐNG*\n\n` +
+        `Xin chào *${driverName}*,\n` +
+        `Đây là tin nhắn kiểm tra đường truyền thông báo nhận cuốc.\n` +
+        `Kênh Telegram hoạt động bình thường 100%!\n\n` +
+        `⏰ _Gửi lúc: ${new Date().toLocaleString('vi-VN')}_`;
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${tg.botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: tg.chatId,
+            text,
+            parse_mode: 'Markdown'
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          showToast('Đã gửi tin nhắn test thành công!');
+          showTelegramFeedback('success', '✓ Đã gửi tin nhắn test thành công tới Telegram của bạn!');
+        } else {
+          alert('Lỗi gửi tin nhắn: ' + (data.description || 'Không xác định'));
+        }
+      } catch (e) {
+        alert('Lỗi kết nối mạng khi gửi Telegram: ' + e.message);
+      } finally {
+        if (btnTest) btnTest.disabled = false;
+      }
+    }
+
+    function showTelegramFeedback(type, htmlContent) {
+      const fb = document.getElementById('tgPairingFeedback');
+      if (!fb) return;
+      fb.classList.remove('hidden');
+
+      if (type === 'success') {
+        fb.className = 'text-xs pt-1 p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-800 text-emerald-300';
+      } else if (type === 'warning') {
+        fb.className = 'text-xs pt-1 p-2.5 rounded-lg bg-amber-950/60 border border-amber-800 text-amber-300';
+      } else if (type === 'error') {
+        fb.className = 'text-xs pt-1 p-2.5 rounded-lg bg-rose-950/60 border border-rose-800 text-rose-300';
+      } else {
+        fb.className = 'text-xs pt-1 p-2.5 rounded-lg bg-slate-900 border border-cockpitBorder text-slate-300';
+      }
+      fb.innerHTML = htmlContent;
     }
 
     function updateHolidayStatusUI(isActive) {
