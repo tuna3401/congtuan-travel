@@ -380,7 +380,7 @@
               <div class="relative flex-shrink-0">
                 <div
                   class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-tr from-[#B8860B] to-slate-200 shadow-md">
-                  <img src="assets/images/avatar.jpg" alt="Tài xế Lê Tuấn"
+                  <img id="heroAvatarImg" src="assets/images/avatar.jpg" alt="Tài xế Lê Tuấn"
                     class="w-full h-full object-cover rounded-[14px]"
                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80';">
                 </div>
@@ -449,7 +449,7 @@
             <div
               class="relative rounded-2xl overflow-hidden bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] group">
               <div class="aspect-[16/8] w-full overflow-hidden bg-slate-100">
-                <img src="assets/images/car-exterior.jpg" alt="Ngoại thất xe sang Lê Tuấn Driver"
+                <img id="heroCockpitCar" src="assets/images/car-exterior.jpg" alt="Ngoại thất xe sang Lê Tuấn Driver"
                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                   onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80';">
               </div>
@@ -667,6 +667,16 @@
                       <span id="priceUnit" class="text-xs text-slate-500 block font-normal">/ chuyến trọn gói</span>
                     </div>
                   </div>
+                  <!-- Holiday surcharge notice -->
+                  <div id="holidayBadgeNotice" class="hidden mt-2 pt-2 border-t border-amber-200/80 flex items-center justify-between text-[11px] text-amber-900 font-bold">
+                    <span class="flex items-center">
+                      <svg class="w-3.5 h-3.5 mr-1 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      Áp dụng phụ thu Lễ / Tết (+20%)
+                    </span>
+                    <span class="text-[10px] text-amber-700 font-medium">Đã tính vào giá</span>
+                  </div>
                 </div>
 
                 <!-- SUBMIT BUTTONS -->
@@ -737,7 +747,7 @@
           <div
             class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl overflow-hidden group flex flex-col">
             <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
-              <img src="assets/images/car-exterior.jpg" alt="Ngoại thất xe sang Lê Tuấn Driver góc nghiêng 45 độ"
+              <img id="fleetImgExterior" src="assets/images/car-exterior.jpg" alt="Ngoại thất xe sang Lê Tuấn Driver góc nghiêng 45 độ"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80';">
               <div
@@ -765,7 +775,7 @@
           <div
             class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl overflow-hidden group flex flex-col">
             <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
-              <img src="assets/images/car-interior.jpg" alt="Nội thất khoang sau ghế da êm ái"
+              <img id="fleetImgInterior" src="assets/images/car-interior.jpg" alt="Nội thất khoang sau ghế da êm ái"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?auto=format&fit=crop&w=1200&q=80';">
               <div
@@ -793,7 +803,7 @@
           <div
             class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl overflow-hidden group flex flex-col">
             <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
-              <img src="assets/images/car-amenities.jpg" alt="Tiện nghi nước suối khăn lạnh và cổng sạc nhanh"
+              <img id="fleetImgAmenities" src="assets/images/car-amenities.jpg" alt="Tiện nghi nước suối khăn lạnh và cổng sạc nhanh"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80';">
               <div
@@ -938,7 +948,7 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div id="popularRoutesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
           <!-- ROUTE 1: HÀ NỘI ⇄ NỘI BÀI -->
           <div
@@ -1496,12 +1506,19 @@
       <div
         class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500">
         <div>© 2026 Lê Tuấn Driver. All rights reserved. Bản quyền thuộc về Lê Tuấn.</div>
-        <div class="mt-2 sm:mt-0 flex space-x-4">
+        <div class="mt-2 sm:mt-0 flex items-center space-x-4">
           <span>Chính Sách Bảo Mật</span>
           <span>•</span>
           <span>Điều Khoản Phục Vụ</span>
           <span>•</span>
           <span>Cam Kết Chất Lượng</span>
+          <span>•</span>
+          <a href="admin.html" class="hover:text-goldSand transition flex items-center space-x-1" title="Khoang Quản Trị Dành Cho Tài Xế">
+            <svg class="w-3 h-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            <span>Tài Xế</span>
+          </a>
         </div>
       </div>
 
@@ -1596,51 +1613,267 @@
     // State quản lý hình thức (charter = Bao xe, shared = Ghép xe)
     let currentServiceMode = 'charter';
 
-    // Bảng cước định giá động
-    const PRICING_MATRIX = {
-      HN_NB: {
-        name: 'Hà Nội ⇄ Sân Bay Nội Bài',
-        charter: 250000,
-        shared: 150000,
-        unit: '/ chuyến trọn gói',
-        sharedUnit: '/ ghế tiện chuyến'
-      },
-      HN_HL: {
-        name: 'Hà Nội ⇄ TP. Hạ Long (Quảng Ninh)',
-        charter: 1200000,
-        shared: 350000,
-        unit: '/ chuyến trọn gói',
-        sharedUnit: '/ ghế tiện chuyến'
-      },
-      HN_NBINH: {
-        name: 'Hà Nội ⇄ Tràng An / Ninh Bình',
-        charter: 950000,
-        shared: 200000,
-        unit: '/ chuyến trọn gói',
-        sharedUnit: '/ ghế tiện chuyến'
-      },
-      HN_HP: {
-        name: 'Hà Nội ⇄ TP. Hải Phòng (Cao Tốc 5B)',
-        charter: 1050000,
-        shared: 250000,
-        unit: '/ chuyến trọn gói',
-        sharedUnit: '/ ghế tiện chuyến'
-      },
-      INTER_PROV: {
-        name: 'Liên Tỉnh Theo Km',
-        charter: 8500,
-        shared: 0,
-        unit: 'đ / km (tùy cự ly)',
-        sharedUnit: 'Liên hệ tài xế'
-      },
-      CUSTOM: {
-        name: 'Tuyến Theo Yêu Cầu Riêng',
-        charter: 0,
-        shared: 0,
-        unit: 'Báo giá trực tiếp',
-        sharedUnit: 'Báo giá trực tiếp'
+    /**
+     * DỮ LIỆU CẤU HÌNH MẶC ĐỊNH (DEFAULT_DRIVER_CONFIG)
+     * Đảm bảo web luôn chạy mượt mà ngay cả khi chưa có dữ liệu lưu trữ
+     */
+    const DEFAULT_DRIVER_CONFIG = {
+      pin: '1990',
+      holidaySurcharge: false,
+      surchargePercent: 20,
+      routes: [
+        {
+          id: 'HN_NB',
+          name: 'Hà Nội ⇄ Sân Bay Nội Bài',
+          charterPrice: 250000,
+          sharedPrice: 150000,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Đón tiễn 2 chiều mọi quận huyện Hà Nội lên sảnh T1, T2 Nội Bài.',
+          badge: 'Tuyến Hot',
+          category: 'Sân Bay Quốc Tế',
+          features: ['Miễn phí 60 phút chờ máy bay delay', 'Đón đúng giờ, hỗ trợ xách vali'],
+          isActive: true,
+          isAirport: true
+        },
+        {
+          id: 'HN_HL',
+          name: 'Hà Nội ⇄ TP. Hạ Long (Quảng Ninh)',
+          charterPrice: 1200000,
+          sharedPrice: 350000,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Tuyến cao tốc Hải Phòng - Hạ Long chỉ 1h45p êm ru tới Bãi Cháy/Hòn Gai.',
+          badge: 'Cao Tốc 5B',
+          category: 'Cao Tốc 5B Mới',
+          features: ['Đã bao gồm vé cao tốc 5B', 'Đưa đón tận khách sạn, resort'],
+          isActive: true,
+          isAirport: false
+        },
+        {
+          id: 'HN_NBINH',
+          name: 'Hà Nội ⇄ Tràng An / Ninh Bình',
+          charterPrice: 950000,
+          sharedPrice: 200000,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Tràng An, Bái Đính, Tam Cốc hoặc TP. Ninh Bình chỉ 1h15p di chuyển.',
+          badge: 'Du Lịch',
+          category: 'Du Lịch & Công Tác',
+          features: ['Tuyến cao tốc Pháp Vân - Cầu Giẽ', 'Phục vụ chờ theo ngày giá ưu đãi'],
+          isActive: true,
+          isAirport: false
+        },
+        {
+          id: 'HN_HP',
+          name: 'Hà Nội ⇄ TP. Hải Phòng (Cao Tốc 5B)',
+          charterPrice: 1050000,
+          sharedPrice: 250000,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Tuyến cao tốc Hà Nội - Hải Phòng êm ru, giao nhận tận nơi nội thành.',
+          badge: 'Cao Tốc',
+          category: 'Thành Phố Cảng',
+          features: ['Đã bao gồm phí cầu đường', 'Giao nhận tận nơi nội thành Hải Phòng'],
+          isActive: true,
+          isAirport: false
+        },
+        {
+          id: 'INTER_PROV',
+          name: 'Liên Tỉnh Theo Km (8.500đ - 10.000đ/km)',
+          charterPrice: 8500,
+          sharedPrice: 0,
+          charterUnit: 'đ / km (tùy cự ly)',
+          sharedUnit: 'Liên hệ tài xế',
+          description: 'Hải Phòng, Thái Bình, Nam Định, Phú Thọ, Vĩnh Phúc, Bắc Ninh, v.v.',
+          badge: 'Tiết Kiệm',
+          category: 'Lộ Trình Tự Do',
+          features: ['Giảm tới 70% chiều về', 'Xe riêng sạch thơm, không tính giờ chờ'],
+          isActive: true,
+          isAirport: false
+        },
+        {
+          id: 'CUSTOM',
+          name: 'Tuyến Theo Yêu Cầu Riêng (Báo giá trực tiếp)',
+          charterPrice: 0,
+          sharedPrice: 0,
+          charterUnit: 'Báo giá trực tiếp',
+          sharedUnit: 'Báo giá trực tiếp',
+          description: 'Lộ trình thiết kế riêng biệt theo nhu cầu cá nhân hoặc đoàn công tác.',
+          badge: 'Theo Yêu Cầu',
+          category: 'Lộ Trình Cá Nhân',
+          features: ['Hỗ trợ báo giá nhanh 24/7', 'Tư vấn lộ trình tối ưu nhất'],
+          isActive: true,
+          isAirport: false
+        }
+      ],
+      images: {
+        avatar: 'assets/images/avatar.jpg',
+        exterior: 'assets/images/car-exterior.jpg',
+        interior: 'assets/images/car-interior.jpg',
+        amenities: 'assets/images/car-amenities.jpg'
       }
     };
+
+    // State cấu hình nạp từ localStorage
+    let driverConfig = null;
+
+    function loadDriverConfig() {
+      try {
+        const raw = localStorage.getItem('DRIVER_CONFIG');
+        if (raw) {
+          driverConfig = JSON.parse(raw);
+        }
+      } catch (e) {
+        console.warn('[DriverConfig] Lỗi đọc bộ nhớ cục bộ:', e);
+      }
+      if (!driverConfig) {
+        driverConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+      }
+      if (!driverConfig.routes || !driverConfig.routes.length) {
+        driverConfig.routes = DEFAULT_DRIVER_CONFIG.routes;
+      }
+      if (!driverConfig.images) {
+        driverConfig.images = DEFAULT_DRIVER_CONFIG.images;
+      }
+    }
+
+    function getRouteById(id) {
+      if (driverConfig && driverConfig.routes) {
+        const found = driverConfig.routes.find(r => r.id === id);
+        if (found) return found;
+      }
+      return DEFAULT_DRIVER_CONFIG.routes[0];
+    }
+
+    // Tự động đồng bộ ảnh từ cấu hình vào các vị trí hiển thị
+    function applyDynamicImages() {
+      if (!driverConfig || !driverConfig.images) return;
+      const { avatar, exterior, interior, amenities } = driverConfig.images;
+
+      // 1. Avatar tài xế ở Hero
+      const heroAvatar = document.getElementById('heroAvatarImg');
+      if (heroAvatar && avatar) heroAvatar.src = avatar;
+
+      // 2. Xe sang ở Hero Cockpit
+      const heroCar = document.getElementById('heroCockpitCar');
+      if (heroCar && exterior) heroCar.src = exterior;
+
+      // 3. Khối "Khoang Lái Hạng Thương Gia" (The Fleet & Comfort)
+      const fleetExterior = document.getElementById('fleetImgExterior');
+      if (fleetExterior && exterior) fleetExterior.src = exterior;
+
+      const fleetInterior = document.getElementById('fleetImgInterior');
+      if (fleetInterior && interior) fleetInterior.src = interior;
+
+      const fleetAmenities = document.getElementById('fleetImgAmenities');
+      if (fleetAmenities && amenities) fleetAmenities.src = amenities;
+    }
+
+    // Render động danh sách Select Tuyến trong form đặt xe
+    function renderDynamicRouteSelect(selectedId = null) {
+      if (!routeSelect || !driverConfig || !driverConfig.routes) return;
+
+      const activeRoutes = driverConfig.routes.filter(r => r.isActive !== false);
+      const previousValue = selectedId || routeSelect.value;
+      routeSelect.innerHTML = '';
+
+      activeRoutes.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r.id;
+        opt.textContent = r.name;
+        opt.dataset.isAirport = r.isAirport ? 'true' : 'false';
+        routeSelect.appendChild(opt);
+      });
+
+      if (previousValue && activeRoutes.some(r => r.id === previousValue)) {
+        routeSelect.value = previousValue;
+      } else if (activeRoutes.length > 0) {
+        routeSelect.value = activeRoutes[0].id;
+      }
+    }
+
+    // Render động các thẻ bảng giá tại Tầng 4
+    function renderDynamicPopularRoutes() {
+      const container = document.getElementById('popularRoutesContainer');
+      if (!container || !driverConfig || !driverConfig.routes) return;
+
+      const activeRoutes = driverConfig.routes.filter(r => r.isActive !== false && r.id !== 'CUSTOM');
+      const isHoliday = !!(driverConfig && driverConfig.holidaySurcharge);
+      const multiplier = isHoliday ? (1 + (driverConfig.surchargePercent || 20) / 100) : 1;
+
+      container.innerHTML = '';
+
+      activeRoutes.forEach(route => {
+        let charterText = 'Liên hệ';
+        if (route.id === 'INTER_PROV') {
+          const p = Math.round((route.charterPrice * multiplier) / 100) * 100;
+          charterText = `chỉ từ ${p.toLocaleString('vi-VN')} đ/km`;
+        } else if (route.charterPrice > 0) {
+          const p = Math.round((route.charterPrice * multiplier) / 1000) * 1000;
+          charterText = `chỉ từ ${p.toLocaleString('vi-VN')} đ`;
+        } else {
+          charterText = 'Báo giá trực tiếp';
+        }
+
+        let sharedText = 'Báo giá trực tiếp';
+        if (route.id === 'INTER_PROV') {
+          sharedText = '9.000 - 10.000 đ';
+        } else if (route.sharedPrice > 0) {
+          const p = Math.round((route.sharedPrice * multiplier) / 1000) * 1000;
+          sharedText = `từ ${p.toLocaleString('vi-VN')} đ`;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group';
+
+        const badgeHtml = route.badge ? `
+          <div class="absolute -top-3 right-4 bg-gradient-to-r from-[#B8860B] to-[#D4AF37] text-white text-[10px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full shadow-md">
+            ${route.badge}
+          </div>` : '';
+
+        const categoryText = route.category || (route.isAirport ? 'Sân Bay Quốc Tế' : 'Cao Tốc Tuyến Đẹp');
+
+        const featuresList = (route.features && route.features.length)
+          ? route.features.map(f => `<li class="flex items-center">✓ ${f}</li>`).join('')
+          : `<li class="flex items-center">✓ Đón đúng giờ, hỗ trợ xách vali</li><li class="flex items-center">✓ Xe riêng sạch thơm không mùi</li>`;
+
+        card.innerHTML = `
+          ${badgeHtml}
+          <div>
+            <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1 flex items-center">
+              <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+              </svg>
+              ${categoryText}
+            </div>
+            <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">${route.name}</h3>
+            <p class="text-xs text-slate-500 mb-4">${route.description || 'Lộ trình tối ưu, tài xế chính chủ đón tiễn chu đáo.'}</p>
+
+            <div class="space-y-2 py-3 border-y border-slate-100">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500">Đi ghép 1 ghế:</span>
+                <span class="font-bold font-display tracking-tight text-[#0F172A]">${sharedText}</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-[#9E7326] font-bold">Bao trọn xe:</span>
+                <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">${charterText}</span>
+              </div>
+            </div>
+
+            <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
+              ${featuresList}
+            </ul>
+          </div>
+
+          <button type="button" onclick="selectRouteFromCard('${route.id}', 'charter')"
+            class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
+            Chọn Tuyến Này
+          </button>
+        `;
+        container.appendChild(card);
+      });
+    }
 
     // DOM Elements
     const btnModeCharter = document.getElementById('btnModeCharter');
@@ -1715,30 +1948,47 @@
 
     // Tính toán và cập nhật giá cước hiển thị
     function updatePrice() {
+      if (!routeSelect) return;
       const selectedKey = routeSelect.value;
-      const routeData = PRICING_MATRIX[selectedKey] || PRICING_MATRIX.CUSTOM;
+      const routeData = getRouteById(selectedKey);
 
-      checkAirportFlightBox(selectedKey);
+      checkAirportFlightBox(routeData.id || selectedKey);
 
-      if (selectedKey === 'CUSTOM') {
+      // Phụ thu Lễ/Tết nếu tài xế bật trong admin
+      const isHoliday = !!(driverConfig && driverConfig.holidaySurcharge);
+      const holidayNotice = document.getElementById('holidayBadgeNotice');
+      if (holidayNotice) {
+        if (isHoliday) {
+          holidayNotice.classList.remove('hidden');
+        } else {
+          holidayNotice.classList.add('hidden');
+        }
+      }
+
+      const multiplier = isHoliday ? (1 + (driverConfig.surchargePercent || 20) / 100) : 1;
+
+      if (routeData.id === 'CUSTOM' || (routeData.charterPrice === 0 && routeData.sharedPrice === 0)) {
         animatePriceCounter(0, 'Báo Giá Trực Tiếp');
         priceUnit.textContent = '/ lộ trình riêng';
         return;
       }
 
-      if (selectedKey === 'INTER_PROV') {
-        animatePriceCounter(8500);
+      if (routeData.id === 'INTER_PROV') {
+        const finalKmPrice = Math.round((routeData.charterPrice * multiplier) / 100) * 100;
+        animatePriceCounter(finalKmPrice);
         priceUnit.textContent = '/ km (Khứ hồi giảm 70%)';
         return;
       }
 
       if (currentServiceMode === 'charter') {
-        animatePriceCounter(routeData.charter);
-        priceUnit.textContent = routeData.unit;
+        const finalPrice = Math.round((routeData.charterPrice * multiplier) / 1000) * 1000;
+        animatePriceCounter(finalPrice);
+        priceUnit.textContent = routeData.charterUnit || '/ chuyến trọn gói';
       } else {
-        if (routeData.shared > 0) {
-          animatePriceCounter(routeData.shared);
-          priceUnit.textContent = routeData.sharedUnit;
+        if (routeData.sharedPrice > 0) {
+          const finalPrice = Math.round((routeData.sharedPrice * multiplier) / 1000) * 1000;
+          animatePriceCounter(finalPrice);
+          priceUnit.textContent = routeData.sharedUnit || '/ ghế tiện chuyến';
         } else {
           animatePriceCounter(0, 'Liên Hệ Zalo');
           priceUnit.textContent = '/ hỗ trợ ghép chuyến';
@@ -1854,7 +2104,7 @@
       e.preventDefault();
 
       const routeKey = routeSelect.value;
-      const routeData = PRICING_MATRIX[routeKey] || PRICING_MATRIX.CUSTOM;
+      const routeData = getRouteById(routeKey);
       const pickupAddress = document.getElementById('pickupAddress').value.trim();
       const pickupTime = document.getElementById('pickupTime').value;
       const paxCount = document.getElementById('paxCount').value;
@@ -1996,10 +2246,26 @@
       }
     });
 
-    // Khởi tạo trạng thái ban đầu
-    document.addEventListener('DOMContentLoaded', () => {
+    // Hàm khởi tạo toàn bộ giao diện và dữ liệu động
+    function initializeApp() {
+      loadDriverConfig();
+      applyDynamicImages();
+      renderDynamicRouteSelect();
+      renderDynamicPopularRoutes();
       initializeDefaultTime();
       updatePrice();
+    }
+
+    // Lắng nghe thay đổi từ Admin trong trường hợp mở 2 tab cùng lúc
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'DRIVER_CONFIG') {
+        initializeApp();
+      }
+    });
+
+    // Khởi tạo trạng thái ban đầu khi DOM sẵn sàng
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeApp();
     });
   </script>
 </body>

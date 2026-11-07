@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bảng Điều Khiển Tài Xế | Lê Tuấn Driver</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            platinum: '#F8F9FA',
+            cockpitDark: '#0B1120',
+            cockpitCard: '#151F32',
+            cockpitBorder: '#23324D',
+            goldSand: '#9E7326',
+            goldLight: '#B8860B',
+            goldShine: '#D4AF37',
+            goldAccent: '#F3D692',
+            emeraldLive: '#10B981'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0B1120;
+      color: #F8F9FA;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    input, textarea, select {
+      user-select: text;
+    }
+
+    /* Ambient Cockpit Mesh Glow */
+    .bg-cockpit-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 100% 30%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+        #0B1120;
+    }
+
+    /* Gold Text Gradient */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #F3D692 0%, #D4AF37 50%, #B8860B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Shimmer Gold Button */
+    .btn-gold-shimmer {
+      background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #B8860B 100%);
+      position: relative;
+      overflow: hidden;
+      color: #0B1120;
+      font-weight: 700;
+      transition: all 0.25s ease;
+    }
+
+    .btn-gold-shimmer:active {
+      transform: scale(0.97);
+    }
+
+    /* Shaking animation for incorrect PIN */
+    @keyframes shakePin {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-12px); }
+      40%, 80% { transform: translateX(12px); }
+    }
+
+    .shake-error {
+      animation: shakePin 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    /* Custom Switch Toggle styling */
+    .toggle-checkbox:checked {
+      right: 0;
+      border-color: #D4AF37;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+      background-color: #10B981;
+    }
+  </style>
+</head>
+
+<body class="bg-cockpit-glow min-h-screen text-slate-100 flex flex-col justify-between selection:bg-goldSand selection:text-white">
+
+  <!-- ====================================================
+       1. MÀN HÌNH BẢO MẬT: BÀN PHÍM MÃ PIN 4 SỐ (KEYPAD)
+       ==================================================== -->
+  <div id="pinLockscreen" class="fixed inset-0 z-50 bg-[#0B1120] flex flex-col justify-between p-6 transition-all duration-500">
+    <!-- Top Branding -->
+    <div class="text-center pt-6">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#B8860B] to-[#D4AF37] p-0.5 shadow-lg shadow-goldSand/20 mb-3">
+        <div class="w-full h-full bg-[#0B1120] rounded-[14px] flex items-center justify-center">
+          <svg class="w-8 h-8 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+      </div>
+      <h1 class="text-xl font-bold font-display text-white tracking-wide">KHOANG QUẢN TRỊ TÀI XẾ</h1>
+      <p class="text-xs text-slate-400 mt-1">Lê Tuấn Driver • Executive Platinum</p>
+    </div>
+
+    <!-- PIN Indicators & Status -->
+    <div class="my-auto py-4 text-center">
+      <p id="pinPromptText" class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-6">
+        Nhập mã PIN 4 số để tiếp tục
+      </p>
+
+      <!-- 4 PIN Dots -->
+      <div id="pinDotsContainer" class="flex justify-center items-center space-x-5 transition-transform duration-200">
+        <div class="pin-dot w-4 h-4 rounded-full border-2 border-slate-600 transition-all duration-200"></div>
+        <div class="pin-dot w-4 h-4 rounded-full border-2 border-slate-600 transition-all duration-200"></div>
+        <div class="pin-dot w-4 h-4 rounded-full border-2 border-slate-600 transition-all duration-200"></div>
+        <div class="pin-dot w-4 h-4 rounded-full border-2 border-slate-600 transition-all duration-200"></div>
+      </div>
+
+      <p id="pinErrorMessage" class="text-rose-400 text-xs font-semibold mt-5 opacity-0 transition-opacity">
+        Mã PIN không đúng. Vui lòng thử lại!
+      </p>
+    </div>
+
+    <!-- Numeric Keypad (Optimized for Mobile Thumb Touch) -->
+    <div class="max-w-xs mx-auto w-full pb-6">
+      <div class="grid grid-cols-3 gap-3.5 text-center">
+        <!-- Row 1 -->
+        <button type="button" onclick="handleKeypadInput('1')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">1</button>
+        <button type="button" onclick="handleKeypadInput('2')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">2</button>
+        <button type="button" onclick="handleKeypadInput('3')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">3</button>
+
+        <!-- Row 2 -->
+        <button type="button" onclick="handleKeypadInput('4')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">4</button>
+        <button type="button" onclick="handleKeypadInput('5')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">5</button>
+        <button type="button" onclick="handleKeypadInput('6')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">6</button>
+
+        <!-- Row 3 -->
+        <button type="button" onclick="handleKeypadInput('7')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">7</button>
+        <button type="button" onclick="handleKeypadInput('8')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">8</button>
+        <button type="button" onclick="handleKeypadInput('9')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">9</button>
+
+        <!-- Row 4 -->
+        <button type="button" onclick="clearPin()"
+          class="h-16 rounded-2xl bg-slate-900/50 hover:bg-slate-800 active:scale-95 border border-cockpitBorder/50 text-xs font-bold uppercase tracking-wider text-slate-400 transition">C</button>
+        <button type="button" onclick="handleKeypadInput('0')"
+          class="h-16 rounded-2xl bg-cockpitCard/90 hover:bg-slate-800 active:scale-95 border border-cockpitBorder text-2xl font-bold font-display text-white transition shadow-sm">0</button>
+        <button type="button" onclick="backspacePin()"
+          class="h-16 rounded-2xl bg-slate-900/50 hover:bg-slate-800 active:scale-95 border border-cockpitBorder/50 flex items-center justify-center text-slate-400 transition">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414-6.414a2 2 0 011.414-.586H19a2 2 0 012 2v10a2 2 0 01-2 2h-8.172a2 2 0 01-1.414-.586L3 12z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Quick Hint for testing -->
+      <div class="mt-4 text-center">
+        <button type="button" onclick="quickFillDefaultPin()" class="text-[11px] text-slate-500 hover:text-goldAccent transition">
+          Mã PIN mặc định: <span class="font-mono text-goldSand font-bold">1990</span> (Chạm để điền nhanh)
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ====================================================
+       2. KHUNG ĐIỀU KHIỂN CHÍNH (DASHBOARD CONTAINER)
+       ==================================================== -->
+  <div id="mainDashboard" class="flex-1 flex flex-col pb-28 opacity-0 pointer-events-none transition-opacity duration-300">
+
+    <!-- TOP APP BAR -->
+    <header class="sticky top-0 z-40 bg-cockpitDark/90 backdrop-blur-md border-b border-cockpitBorder px-4 py-3">
+      <div class="max-w-2xl mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#B8860B] to-[#D4AF37] p-0.5 shadow-sm">
+            <img id="navAvatarPreview" src="assets/images/avatar.jpg" alt="Lê Tuấn"
+              class="w-full h-full object-cover rounded-[10px]" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80'">
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-tight">Lê Tuấn Driver</h2>
+            <div class="flex items-center space-x-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-[10px] text-emerald-400 font-semibold tracking-wider uppercase">Trực Tuyến</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <!-- Link to client site -->
+          <a href="index.html" target="_blank"
+            class="px-2.5 py-1.5 rounded-lg bg-cockpitCard border border-cockpitBorder text-slate-300 hover:text-white text-xs font-semibold flex items-center space-x-1 transition">
+            <span>Web Khách</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+
+          <!-- Lock Button -->
+          <button type="button" onclick="lockDashboard()" title="Khóa màn hình"
+            class="p-2 rounded-lg bg-cockpitCard border border-cockpitBorder text-slate-400 hover:text-rose-400 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN BODY -->
+    <main class="max-w-2xl mx-auto w-full px-4 pt-5 space-y-6 flex-1">
+
+      <!-- ==========================================
+           CARD 1: CÔNG TẮC TỔNG - PHỤ THU LỄ/TẾT (+20%)
+           ========================================== -->
+      <div class="rounded-2xl bg-gradient-to-br from-cockpitCard to-[#1E293B] border border-cockpitBorder p-4 shadow-lg relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-goldSand/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="flex items-center justify-between">
+          <div class="pr-3">
+            <div class="flex items-center space-x-2">
+              <span class="text-xs uppercase font-extrabold tracking-wider text-goldAccent flex items-center">
+                <svg class="w-4 h-4 mr-1 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                Chính Sách Giá Đặc Biệt
+              </span>
+            </div>
+            <h3 class="text-base font-bold text-white mt-1">Phụ Thu Ngày Lễ / Tết (+20%)</h3>
+            <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">
+              Tự động cộng 20% vào giá cước tất cả các tuyến và hiển thị huy hiệu báo Lễ/Tết trên web khách.
+            </p>
+          </div>
+
+          <!-- Switch Toggle Button -->
+          <label class="relative inline-flex items-center cursor-pointer select-none flex-shrink-0">
+            <input type="checkbox" id="holidayToggle" class="sr-only peer" onchange="handleHolidayToggleChange()">
+            <div class="w-13 h-7 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-[#B8860B] peer-checked:to-[#D4AF37]"></div>
+          </label>
+        </div>
+
+        <div id="holidayBannerIndicator" class="mt-3 pt-3 border-t border-cockpitBorder/60 flex items-center justify-between text-xs font-semibold text-slate-400">
+          <span>Trạng thái phụ thu:</span>
+          <span id="holidayStatusText" class="text-slate-400">Đang TẮT (Giá niêm yết chuẩn)</span>
+        </div>
+      </div>
+
+
+      <!-- ==========================================
+           CARD 2: QUẢN LÝ TUYẾN ĐƯỜNG & GIÁ CƯỚC
+           ========================================== -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center">
+              <svg class="w-4 h-4 mr-1.5 text-goldAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              Quản Lý Tuyến & Giá Cước
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Bật/tắt tuyến và chỉnh sửa mức giá hiển thị trên website</p>
+          </div>
+
+          <!-- Add New Route Button -->
+          <button type="button" onclick="openAddRouteModal()"
+            class="px-3 py-1.5 rounded-xl bg-goldSand/20 border border-goldSand/40 hover:bg-goldSand/30 text-goldAccent text-xs font-bold flex items-center space-x-1 transition active:scale-95">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Thêm Tuyến</span>
+          </button>
+        </div>
+
+        <!-- Route List Container -->
+        <div id="routeListContainer" class="space-y-3">
+          <!-- Dynamic Route Cards injected via JS -->
+        </div>
+      </div>
+
+
+      <!-- ==========================================
+           CARD 3: QUẢN LÝ HÌNH ẢNH TRƯNG BÀY
+           ========================================== -->
+      <div class="rounded-2xl bg-cockpitCard border border-cockpitBorder p-4 shadow-md space-y-4">
+        <div>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center">
+            <svg class="w-4 h-4 mr-1.5 text-goldAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Bộ Sưu Tập Hình Ảnh
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Cập nhật ảnh đại diện và khoang lái hiển thị trực tiếp trên web khách</p>
+        </div>
+
+        <!-- 4 Image Slots Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+
+          <!-- 1. Avatar Tài Xế -->
+          <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-200">1. Ảnh Đại Diện Tài Xế</label>
+              <button type="button" onclick="resetSingleImage('avatar')" class="text-[10px] text-slate-500 hover:text-goldAccent">Khôi phục</button>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-900 border border-slate-700 flex-shrink-0">
+                <img id="preview_avatar" src="assets/images/avatar.jpg" alt="Avatar Preview" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1 space-y-1.5">
+                <input type="text" id="url_avatar" placeholder="Dán link ảnh online..."
+                  class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none"
+                  oninput="handleImageUrlInput('avatar', this.value)">
+                <label class="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold cursor-pointer transition">
+                  <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  Chọn ảnh từ máy
+                  <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload('avatar', this)">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Ngoại Thất Xe Sang -->
+          <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-200">2. Ngoại Thất Xe Sang</label>
+              <button type="button" onclick="resetSingleImage('exterior')" class="text-[10px] text-slate-500 hover:text-goldAccent">Khôi phục</button>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-900 border border-slate-700 flex-shrink-0">
+                <img id="preview_exterior" src="assets/images/car-exterior.jpg" alt="Exterior Preview" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1 space-y-1.5">
+                <input type="text" id="url_exterior" placeholder="Dán link ảnh online..."
+                  class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none"
+                  oninput="handleImageUrlInput('exterior', this.value)">
+                <label class="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold cursor-pointer transition">
+                  <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  Chọn ảnh từ máy
+                  <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload('exterior', this)">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Nội Thất Ghế Da -->
+          <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-200">3. Khoang Lái & Ghế Da</label>
+              <button type="button" onclick="resetSingleImage('interior')" class="text-[10px] text-slate-500 hover:text-goldAccent">Khôi phục</button>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-900 border border-slate-700 flex-shrink-0">
+                <img id="preview_interior" src="assets/images/car-interior.jpg" alt="Interior Preview" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1 space-y-1.5">
+                <input type="text" id="url_interior" placeholder="Dán link ảnh online..."
+                  class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none"
+                  oninput="handleImageUrlInput('interior', this.value)">
+                <label class="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold cursor-pointer transition">
+                  <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  Chọn ảnh từ máy
+                  <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload('interior', this)">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Tiện Ích Thương Gia -->
+          <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-200">4. Tiện Ích Khăn Nước / Sạc</label>
+              <button type="button" onclick="resetSingleImage('amenities')" class="text-[10px] text-slate-500 hover:text-goldAccent">Khôi phục</button>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-900 border border-slate-700 flex-shrink-0">
+                <img id="preview_amenities" src="assets/images/car-amenities.jpg" alt="Amenities Preview" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1 space-y-1.5">
+                <input type="text" id="url_amenities" placeholder="Dán link ảnh online..."
+                  class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none"
+                  oninput="handleImageUrlInput('amenities', this.value)">
+                <label class="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold cursor-pointer transition">
+                  <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  Chọn ảnh từ máy
+                  <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload('amenities', this)">
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ==========================================
+           CARD 4: CÀI ĐẶT BẢO MẬT & ĐỒNG BỘ
+           ========================================== -->
+      <div class="rounded-2xl bg-cockpitCard border border-cockpitBorder p-4 shadow-md space-y-4">
+        <div>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center">
+            <svg class="w-4 h-4 mr-1.5 text-goldAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Hệ Thống & Bộ Nhớ
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Quản lý mã PIN bảo mật và đồng bộ máy chủ</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Change PIN form -->
+          <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2">
+            <span class="text-xs font-bold text-slate-200">Đổi Mã PIN Mới (4 Số)</span>
+            <div class="flex items-center space-x-2">
+              <input type="password" id="newPinInput" maxlength="4" pattern="[0-9]*" inputmode="numeric" placeholder="Mã PIN 4 số"
+                class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-3 py-1.5 text-xs text-center font-mono font-bold tracking-widest text-goldAccent focus:border-goldSand focus:outline-none">
+              <button type="button" onclick="updatePin()"
+                class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 whitespace-nowrap transition">
+                Cập Nhật
+              </button>
+            </div>
+            <p id="pinChangeFeedback" class="text-[10px] text-emerald-400 hidden">✓ Đã đổi mã PIN thành công!</p>
+          </div>
+
+          <!-- Cloud Sync Status -->
+          <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-200">Đồng Bộ Đám Mây</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-semibold">Firebase Ready</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-tight">
+              Dữ liệu đang lưu tại <code class="text-goldSand font-mono">localStorage['DRIVER_CONFIG']</code>.
+            </p>
+            <div class="pt-1 flex items-center space-x-2">
+              <button type="button" onclick="resetToDefaultData()" class="text-[11px] text-rose-400 hover:underline">
+                Khôi phục dữ liệu gốc
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ==========================================
+         FLOATING BOTTOM ACTION BAR (MOBILE FIRST)
+         ========================================== -->
+    <div class="fixed bottom-0 inset-x-0 z-40 bg-cockpitDark/95 backdrop-blur-md border-t border-cockpitBorder p-3.5 shadow-2xl">
+      <div class="max-w-2xl mx-auto flex items-center space-x-3">
+        <a href="index.html" target="_blank"
+          class="flex-1 py-3 px-4 rounded-xl bg-cockpitCard hover:bg-slate-800 border border-cockpitBorder text-center text-xs font-bold text-slate-300 transition flex items-center justify-center space-x-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          <span>Xem Web Khách</span>
+        </a>
+
+        <button type="button" onclick="saveConfiguration()"
+          class="flex-[2] py-3 px-4 rounded-xl btn-gold-shimmer text-slate-950 text-xs font-extrabold uppercase tracking-wider shadow-lg shadow-goldSand/30 flex items-center justify-center space-x-2 transition">
+          <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>Lưu Cấu Hình</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       MODAL: THÊM / CHỈNH SỬA TUYẾN MỚI
+       ========================================== -->
+  <div id="routeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-cockpitCard border border-cockpitBorder rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-cockpitBorder pb-3">
+        <h4 id="routeModalTitle" class="text-base font-bold text-white font-display">Thêm Tuyến Chuyến Mới</h4>
+        <button type="button" onclick="closeRouteModal()" class="text-slate-400 hover:text-white p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <form id="routeForm" onsubmit="handleRouteFormSubmit(event)" class="space-y-3.5">
+        <input type="hidden" id="modalRouteId">
+
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Tên Tuyến Xe <span class="text-goldAccent">*</span></label>
+          <input type="text" id="modalRouteName" required placeholder="VD: Hà Nội ⇄ Sapa (Lào Cai)"
+            class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Giá Bao Xe (đ) <span class="text-goldAccent">*</span></label>
+            <input type="number" id="modalCharterPrice" required min="0" step="5000" placeholder="VD: 1500000"
+              class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs font-mono font-bold text-goldAccent placeholder-slate-500 focus:border-goldSand focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Giá Ghép Xe (đ)</label>
+            <input type="number" id="modalSharedPrice" min="0" step="5000" placeholder="VD: 350000"
+              class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Mô Tả Ngắn / Thời Gian Tuyến</label>
+          <input type="text" id="modalDescription" placeholder="VD: Đi cao tốc chỉ 3h30p, đón trả tận sảnh khách sạn"
+            class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Huy Hiệu (Badge)</label>
+            <input type="text" id="modalBadge" placeholder="VD: Tuyến Hot, Cao Tốc..."
+              class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Loại Tuyến Sân Bay?</label>
+            <select id="modalIsAirport"
+              class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white focus:border-goldSand focus:outline-none">
+              <option value="false">Tuyến thường</option>
+              <option value="true">Sân Bay (Hiện ô mã bay)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-3 flex space-x-2">
+          <button type="button" onclick="closeRouteModal()"
+            class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 transition">
+            Hủy Bỏ
+          </button>
+          <button type="submit"
+            class="flex-1 py-2.5 rounded-xl btn-gold-shimmer text-xs font-extrabold uppercase tracking-wider text-slate-950 transition">
+            Lưu Tuyến
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       TOAST BADGE THÔNG BÁO THÀNH CÔNG
+       ========================================== -->
+  <div id="toastNotification"
+    class="fixed top-5 inset-x-0 z-50 flex justify-center pointer-events-none transition-all duration-300 -translate-y-20 opacity-0">
+    <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-2.5 border border-emerald-400/40">
+      <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div>
+        <p class="text-xs font-extrabold tracking-wide uppercase">Cập Nhật Thành Công</p>
+        <p class="text-[11px] text-emerald-100">Dữ liệu đã được lưu vào hệ thống an toàn.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ====================================================
+       JAVASCRIPT LOGIC & DATA SYNCHRONIZATION
+       ==================================================== -->
+  <script>
+    /**
+     * CẤU TRÚC DỮ LIỆU MẶC ĐỊNH CHO TÀI XẾ (DEFAULT_DRIVER_CONFIG)
+     */
+    const DEFAULT_DRIVER_CONFIG = {
+      pin: '1990',
+      holidaySurcharge: false,
+      surchargePercent: 20,
+      routes: [
+        {
+          id: 'HN_NB',
+          name: 'Hà Nội ⇄ Sân Bay Nội Bài',
+          charterPrice: 250000,
+          sharedPrice: 150000,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Đón tiễn 2 chiều mọi quận huyện Hà Nội lên sảnh T1, T2 Nội Bài.',
+          badge: 'Tuyến Hot',
+          category: 'Sân Bay Quốc Tế',
+          features: ['Miễn phí 60 phút chờ máy bay delay', 'Đón đúng giờ, hỗ trợ xách vali'],
+          isActive: true,
+          isAirport: true
+        },
+        {
+          id: 'HN_HL',
+          name: 'Hà Nội ⇄ TP. Hạ Long (Quảng Ninh)',
+          charterPrice: 1200000,
+          sharedPrice: 350000,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Tuyến cao tốc Hải Phòng - Hạ Long chỉ 1h45p êm ru tới Bãi Cháy/Hòn Gai.',
+          badge: 'Cao Tốc 5B',
+          category: 'Cao Tốc 5B Mới',
+          features: ['Đã bao gồm vé cao tốc 5B', 'Đưa đón tận khách sạn, resort'],
+          isActive: true,
+          isAirport: false
+        },
+        {
+          id: 'HN_NBINH',
+          name: 'Hà Nội ⇄ Tràng An / Ninh Bình',
+          charterPrice: 950000,
+          sharedPrice: 200000,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Tràng An, Bái Đính, Tam Cốc hoặc TP. Ninh Bình chỉ 1h15p di chuyển.',
+          badge: 'Du Lịch',
+          category: 'Du Lịch & Công Tác',
+          features: ['Tuyến cao tốc Pháp Vân - Cầu Giẽ', 'Phục vụ chờ theo ngày giá ưu đãi'],
+          isActive: true,
+          isAirport: false
+        },
+        {
+          id: 'HN_HP',
+          name: 'Hà Nội ⇄ TP. Hải Phòng (Cao Tốc 5B)',
+          charterPrice: 1050000,
+          sharedPrice: 250000,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Tuyến cao tốc Hà Nội - Hải Phòng êm ru, giao nhận tận nơi nội thành.',
+          badge: 'Cao Tốc',
+          category: 'Thành Phố Cảng',
+          features: ['Đã bao gồm phí cầu đường', 'Giao nhận tận nơi nội thành Hải Phòng'],
+          isActive: true,
+          isAirport: false
+        },
+        {
+          id: 'INTER_PROV',
+          name: 'Liên Tỉnh Theo Km (8.500đ - 10.000đ/km)',
+          charterPrice: 8500,
+          sharedPrice: 0,
+          charterUnit: 'đ / km (tùy cự ly)',
+          sharedUnit: 'Liên hệ tài xế',
+          description: 'Hải Phòng, Thái Bình, Nam Định, Phú Thọ, Vĩnh Phúc, Bắc Ninh, v.v.',
+          badge: 'Tiết Kiệm',
+          category: 'Lộ Trình Tự Do',
+          features: ['Giảm tới 70% chiều về', 'Xe riêng sạch thơm, không tính giờ chờ'],
+          isActive: true,
+          isAirport: false
+        },
+        {
+          id: 'CUSTOM',
+          name: 'Tuyến Theo Yêu Cầu Riêng (Báo giá trực tiếp)',
+          charterPrice: 0,
+          sharedPrice: 0,
+          charterUnit: 'Báo giá trực tiếp',
+          sharedUnit: 'Báo giá trực tiếp',
+          description: 'Lộ trình thiết kế riêng biệt theo nhu cầu cá nhân hoặc đoàn công tác.',
+          badge: 'Theo Yêu Cầu',
+          category: 'Lộ Trình Cá Nhân',
+          features: ['Hỗ trợ báo giá nhanh 24/7', 'Tư vấn lộ trình tối ưu nhất'],
+          isActive: true,
+          isAirport: false
+        }
+      ],
+      images: {
+        avatar: 'assets/images/avatar.jpg',
+        exterior: 'assets/images/car-exterior.jpg',
+        interior: 'assets/images/car-interior.jpg',
+        amenities: 'assets/images/car-amenities.jpg'
+      },
+      lastUpdated: new Date().toISOString()
+    };
+
+    // Global in-memory configuration state
+    let currentConfig = null;
+    let enteredPin = '';
+
+    /**
+     * KHỞI TẠO DỮ LIỆU & KIỂM TRA PHIÊN
+     */
+    function loadConfig() {
+      try {
+        const raw = localStorage.getItem('DRIVER_CONFIG');
+        if (raw) {
+          currentConfig = JSON.parse(raw);
+          // Đảm bảo các thuộc tính bắt buộc luôn tồn tại
+          if (!currentConfig.routes) currentConfig.routes = DEFAULT_DRIVER_CONFIG.routes;
+          if (!currentConfig.images) currentConfig.images = DEFAULT_DRIVER_CONFIG.images;
+          if (!currentConfig.pin) currentConfig.pin = '1990';
+        } else {
+          currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+          localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
+        }
+      } catch (e) {
+        console.error('Lỗi nạp config:', e);
+        currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+      }
+    }
+
+    /**
+     * XỬ LÝ BÀN PHÍM PIN BẢO MẬT
+     */
+    function handleKeypadInput(num) {
+      if (enteredPin.length < 4) {
+        enteredPin += num;
+        updatePinDots();
+        if (enteredPin.length === 4) {
+          setTimeout(verifyPin, 150);
+        }
+      }
+    }
+
+    function clearPin() {
+      enteredPin = '';
+      updatePinDots();
+      hidePinError();
+    }
+
+    function backspacePin() {
+      if (enteredPin.length > 0) {
+        enteredPin = enteredPin.slice(0, -1);
+        updatePinDots();
+        hidePinError();
+      }
+    }
+
+    function updatePinDots() {
+      const dots = document.querySelectorAll('.pin-dot');
+      dots.forEach((dot, index) => {
+        if (index < enteredPin.length) {
+          dot.className = 'pin-dot w-4 h-4 rounded-full bg-goldShine border-2 border-goldShine shadow-md shadow-goldSand/50 scale-110 transition-all duration-200';
+        } else {
+          dot.className = 'pin-dot w-4 h-4 rounded-full border-2 border-slate-600 transition-all duration-200';
+        }
+      });
+    }
+
+    function verifyPin() {
+      const validPin = (currentConfig && currentConfig.pin) ? currentConfig.pin : '1990';
+      if (enteredPin === validPin) {
+        // Đúng mã PIN: Mở khóa Dashboard
+        sessionStorage.setItem('DRIVER_UNLOCKED', 'true');
+        unlockDashboardUI();
+      } else {
+        // Sai mã PIN: Rung lắc và báo đỏ
+        showPinError();
+        const container = document.getElementById('pinDotsContainer');
+        container.classList.add('shake-error');
+        const dots = document.querySelectorAll('.pin-dot');
+        dots.forEach(d => {
+          d.className = 'pin-dot w-4 h-4 rounded-full bg-rose-500 border-2 border-rose-500 scale-110';
+        });
+
+        setTimeout(() => {
+          container.classList.remove('shake-error');
+          clearPin();
+        }, 600);
+      }
+    }
+
+    function showPinError() {
+      const err = document.getElementById('pinErrorMessage');
+      if (err) err.classList.remove('opacity-0');
+    }
+
+    function hidePinError() {
+      const err = document.getElementById('pinErrorMessage');
+      if (err) err.classList.add('opacity-0');
+    }
+
+    function quickFillDefaultPin() {
+      enteredPin = (currentConfig && currentConfig.pin) ? currentConfig.pin : '1990';
+      updatePinDots();
+      setTimeout(verifyPin, 150);
+    }
+
+    function unlockDashboardUI() {
+      const lockscreen = document.getElementById('pinLockscreen');
+      const dashboard = document.getElementById('mainDashboard');
+
+      lockscreen.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        lockscreen.classList.add('hidden');
+        dashboard.classList.remove('opacity-0', 'pointer-events-none');
+        renderDashboardData();
+      }, 350);
+    }
+
+    function lockDashboard() {
+      sessionStorage.removeItem('DRIVER_UNLOCKED');
+      const lockscreen = document.getElementById('pinLockscreen');
+      const dashboard = document.getElementById('mainDashboard');
+
+      dashboard.classList.add('opacity-0', 'pointer-events-none');
+      lockscreen.classList.remove('hidden');
+      setTimeout(() => {
+        lockscreen.classList.remove('opacity-0', 'pointer-events-none');
+        clearPin();
+      }, 50);
+    }
+
+    /**
+     * RENDER DỮ LIỆU LÊN DASHBOARD
+     */
+    function renderDashboardData() {
+      if (!currentConfig) return;
+
+      // 1. Công tắc Lễ/Tết
+      const holidayToggle = document.getElementById('holidayToggle');
+      const holidayStatusText = document.getElementById('holidayStatusText');
+      holidayToggle.checked = !!currentConfig.holidaySurcharge;
+      updateHolidayStatusUI(currentConfig.holidaySurcharge);
+
+      // 2. Danh sách tuyến đường
+      renderRouteList();
+
+      // 3. Hình ảnh trưng bày
+      renderImagesUI();
+
+      // 4. Avatar trên Header Bar
+      const navAvatar = document.getElementById('navAvatarPreview');
+      if (navAvatar && currentConfig.images && currentConfig.images.avatar) {
+        navAvatar.src = currentConfig.images.avatar;
+      }
+    }
+
+    function updateHolidayStatusUI(isActive) {
+      const text = document.getElementById('holidayStatusText');
+      if (isActive) {
+        text.innerHTML = '<span class="text-goldAccent font-bold">✓ ĐANG BẬT (+20% tất cả các chuyến)</span>';
+      } else {
+        text.innerHTML = '<span class="text-slate-400">Đang TẮT (Giá niêm yết chuẩn)</span>';
+      }
+    }
+
+    function handleHolidayToggleChange() {
+      const toggle = document.getElementById('holidayToggle');
+      currentConfig.holidaySurcharge = toggle.checked;
+      updateHolidayStatusUI(toggle.checked);
+      // Tự động lưu và phát thông báo nhẹ
+      saveConfiguration(false);
+    }
+
+    /**
+     * RENDER DANH SÁCH TUYẾN ĐƯỜNG
+     */
+    function renderRouteList() {
+      const container = document.getElementById('routeListContainer');
+      container.innerHTML = '';
+
+      if (!currentConfig.routes || currentConfig.routes.length === 0) {
+        container.innerHTML = `
+          <div class="p-6 text-center text-slate-500 rounded-2xl bg-cockpitCard border border-cockpitBorder">
+            Chưa có tuyến đường nào. Hãy bấm "Thêm Tuyến" để khởi tạo.
+          </div>`;
+        return;
+      }
+
+      currentConfig.routes.forEach((route, index) => {
+        const card = document.createElement('div');
+        card.className = `rounded-2xl p-4 border transition-all duration-200 ${
+          route.isActive
+            ? 'bg-cockpitCard border-cockpitBorder'
+            : 'bg-cockpitCard/50 border-slate-800/80 opacity-70'
+        }`;
+
+        const isCustomOrKm = route.id === 'CUSTOM' || route.id === 'INTER_PROV';
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between">
+            <div class="flex-1 pr-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full ${
+                  route.isAirport ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-slate-800 text-goldAccent'
+                }">
+                  ${route.badge || (route.isAirport ? 'Sân Bay' : 'Tuyến Cố Định')}
+                </span>
+                ${
+                  !route.isActive
+                    ? '<span class="text-[10px] text-rose-400 font-bold uppercase tracking-wider bg-rose-950/60 px-2 py-0.5 rounded-full border border-rose-900">Tạm Ngưng</span>'
+                    : ''
+                }
+              </div>
+              <h4 class="text-sm font-bold text-white mt-1.5 font-display">${route.name}</h4>
+              <p class="text-xs text-slate-400 mt-0.5 line-clamp-1">${route.description || 'Chuyến đi an toàn, sang trọng'}</p>
+            </div>
+
+            <!-- Switch Bật/Tắt tuyến -->
+            <label class="relative inline-flex items-center cursor-pointer select-none flex-shrink-0 pt-1">
+              <input type="checkbox" class="sr-only peer" ${route.isActive ? 'checked' : ''} onchange="toggleRouteStatus(${index})">
+              <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+            </label>
+          </div>
+
+          <!-- Price Edit Row -->
+          <div class="mt-3 pt-3 border-t border-cockpitBorder/80 grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] font-semibold text-slate-400 mb-1">Giá Bao Xe:</label>
+              <div class="relative flex items-center">
+                <input type="number" value="${route.charterPrice}" min="0" step="5000"
+                  class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1 text-xs font-mono font-bold text-goldAccent focus:border-goldSand focus:outline-none"
+                  onchange="updateRoutePrice(${index}, 'charterPrice', this.value)">
+                <span class="absolute right-2 text-[10px] text-slate-500 pointer-events-none">đ</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-semibold text-slate-400 mb-1">Giá Ghép Xe:</label>
+              <div class="relative flex items-center">
+                <input type="number" value="${route.sharedPrice}" min="0" step="5000"
+                  class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1 text-xs font-mono font-bold text-slate-200 focus:border-goldSand focus:outline-none"
+                  onchange="updateRoutePrice(${index}, 'sharedPrice', this.value)">
+                <span class="absolute right-2 text-[10px] text-slate-500 pointer-events-none">đ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions: Edit details & Delete -->
+          <div class="mt-2.5 pt-2 border-t border-cockpitBorder/40 flex items-center justify-between text-xs">
+            <span class="text-[11px] text-slate-500">
+              Mã: <code class="font-mono text-slate-400">${route.id}</code>
+            </span>
+            <div class="flex items-center space-x-2">
+              <button type="button" onclick="openEditRouteModal(${index})"
+                class="text-[11px] text-slate-300 hover:text-goldAccent font-semibold px-2 py-0.5 rounded hover:bg-slate-800 transition">
+                Sửa chi tiết
+              </button>
+              <button type="button" onclick="deleteRoute(${index})"
+                class="text-[11px] text-rose-400 hover:text-rose-300 font-semibold px-2 py-0.5 rounded hover:bg-rose-950/40 transition">
+                Xóa
+              </button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function toggleRouteStatus(index) {
+      currentConfig.routes[index].isActive = !currentConfig.routes[index].isActive;
+      renderRouteList();
+      saveConfiguration(false);
+    }
+
+    function updateRoutePrice(index, field, val) {
+      currentConfig.routes[index][field] = parseInt(val, 10) || 0;
+      saveConfiguration(false);
+    }
+
+    function deleteRoute(index) {
+      const route = currentConfig.routes[index];
+      if (confirm(`Bạn có chắc chắn muốn xóa tuyến "${route.name}"?`)) {
+        currentConfig.routes.splice(index, 1);
+        renderRouteList();
+        saveConfiguration(true);
+      }
+    }
+
+    /**
+     * MODAL THÊM / SỬA TUYẾN
+     */
+    function openAddRouteModal() {
+      document.getElementById('routeModalTitle').textContent = 'Thêm Tuyến Chuyến Mới';
+      document.getElementById('modalRouteId').value = '';
+      document.getElementById('modalRouteName').value = '';
+      document.getElementById('modalCharterPrice').value = '';
+      document.getElementById('modalSharedPrice').value = '';
+      document.getElementById('modalDescription').value = '';
+      document.getElementById('modalBadge').value = '';
+      document.getElementById('modalIsAirport').value = 'false';
+      document.getElementById('routeModal').classList.remove('hidden');
+    }
+
+    function openEditRouteModal(index) {
+      const r = currentConfig.routes[index];
+      document.getElementById('routeModalTitle').textContent = 'Chỉnh Sửa Tuyến: ' + r.name;
+      document.getElementById('modalRouteId').value = r.id;
+      document.getElementById('modalRouteName').value = r.name;
+      document.getElementById('modalCharterPrice').value = r.charterPrice;
+      document.getElementById('modalSharedPrice').value = r.sharedPrice;
+      document.getElementById('modalDescription').value = r.description || '';
+      document.getElementById('modalBadge').value = r.badge || '';
+      document.getElementById('modalIsAirport').value = r.isAirport ? 'true' : 'false';
+      document.getElementById('routeModal').classList.remove('hidden');
+    }
+
+    function closeRouteModal() {
+      document.getElementById('routeModal').classList.add('hidden');
+    }
+
+    function handleRouteFormSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('modalRouteId').value;
+      const name = document.getElementById('modalRouteName').value.trim();
+      const charterPrice = parseInt(document.getElementById('modalCharterPrice').value, 10) || 0;
+      const sharedPrice = parseInt(document.getElementById('modalSharedPrice').value, 10) || 0;
+      const description = document.getElementById('modalDescription').value.trim();
+      const badge = document.getElementById('modalBadge').value.trim();
+      const isAirport = document.getElementById('modalIsAirport').value === 'true';
+
+      if (id) {
+        // Edit existing
+        const idx = currentConfig.routes.findIndex(r => r.id === id);
+        if (idx !== -1) {
+          currentConfig.routes[idx] = {
+            ...currentConfig.routes[idx],
+            name,
+            charterPrice,
+            sharedPrice,
+            description,
+            badge,
+            isAirport
+          };
+        }
+      } else {
+        // Add new
+        const newId = 'ROUTE_' + Date.now();
+        currentConfig.routes.push({
+          id: newId,
+          name,
+          charterPrice,
+          sharedPrice,
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: description || 'Dịch vụ xe riêng đón tiễn chuyên nghiệp',
+          badge: badge || 'Tuyến Mới',
+          category: isAirport ? 'Sân Bay Quốc Tế' : 'Liên Tỉnh',
+          features: ['Đón đúng giờ cam kết', 'Xe sang không mùi'],
+          isActive: true,
+          isAirport
+        });
+      }
+
+      closeRouteModal();
+      renderRouteList();
+      saveConfiguration(true);
+    }
+
+    /**
+     * QUẢN LÝ HÌNH ẢNH (PREVIEW, URL, FILE UPLOAD)
+     */
+    function renderImagesUI() {
+      if (!currentConfig.images) return;
+      const keys = ['avatar', 'exterior', 'interior', 'amenities'];
+      keys.forEach(k => {
+        const val = currentConfig.images[k] || '';
+        const preview = document.getElementById('preview_' + k);
+        const input = document.getElementById('url_' + k);
+        if (preview && val) preview.src = val;
+        if (input && val && !val.startsWith('data:image')) input.value = val;
+      });
+    }
+
+    function handleImageUrlInput(slot, val) {
+      if (val && val.trim().length > 5) {
+        currentConfig.images[slot] = val.trim();
+        const preview = document.getElementById('preview_' + slot);
+        if (preview) preview.src = val.trim();
+      }
+    }
+
+    function handleFileUpload(slot, input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        // Giới hạn ảnh không quá 3MB để lưu vừa localStorage
+        if (file.size > 3.5 * 1024 * 1024) {
+          alert('Vui lòng chọn ảnh dung lượng dưới 3.5MB để tối ưu bộ nhớ.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Data = e.target.result;
+          currentConfig.images[slot] = base64Data;
+          const preview = document.getElementById('preview_' + slot);
+          if (preview) preview.src = base64Data;
+          const urlInput = document.getElementById('url_' + slot);
+          if (urlInput) urlInput.value = '';
+          showToast('Đã tải ảnh lên thành công!');
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function resetSingleImage(slot) {
+      if (DEFAULT_DRIVER_CONFIG.images && DEFAULT_DRIVER_CONFIG.images[slot]) {
+        currentConfig.images[slot] = DEFAULT_DRIVER_CONFIG.images[slot];
+        const preview = document.getElementById('preview_' + slot);
+        if (preview) preview.src = DEFAULT_DRIVER_CONFIG.images[slot];
+        const urlInput = document.getElementById('url_' + slot);
+        if (urlInput) urlInput.value = DEFAULT_DRIVER_CONFIG.images[slot];
+        showToast('Đã khôi phục ảnh mặc định');
+      }
+    }
+
+    /**
+     * ĐỔI MÃ PIN
+     */
+    function updatePin() {
+      const pinInput = document.getElementById('newPinInput');
+      const val = pinInput.value.trim();
+      if (!/^\d{4}$/.test(val)) {
+        alert('Mã PIN phải gồm đúng 4 chữ số (0-9).');
+        pinInput.focus();
+        return;
+      }
+      currentConfig.pin = val;
+      pinInput.value = '';
+      const feedback = document.getElementById('pinChangeFeedback');
+      feedback.classList.remove('hidden');
+      setTimeout(() => feedback.classList.add('hidden'), 3500);
+      saveConfiguration(true);
+    }
+
+    /**
+     * KHÔI PHỤC DỮ LIỆU GỐC
+     */
+    function resetToDefaultData() {
+      if (confirm('Khôi phục toàn bộ tuyến và hình ảnh về thiết lập gốc của hệ thống?')) {
+        currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+        saveConfiguration(true);
+        renderDashboardData();
+      }
+    }
+
+    /**
+     * LƯU CẤU HÌNH (LOCALSTORAGE & FIREBASE PLACEHOLDER)
+     */
+    function saveConfiguration(showNotification = true) {
+      try {
+        currentConfig.lastUpdated = new Date().toISOString();
+        localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
+
+        // Gọi đồng bộ ngầm Firebase Firestore nếu đã cấu hình
+        FirestoreDriverSync.saveConfigToCloud(currentConfig);
+
+        if (showNotification) {
+          showToast('Đã cập nhật cấu hình thành công!');
+        }
+      } catch (err) {
+        console.error('Lỗi lưu cấu hình:', err);
+        alert('Không thể lưu cấu hình. Bộ nhớ có thể bị đầy do ảnh quá lớn.');
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      if (toast) {
+        toast.classList.remove('-translate-y-20', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+          toast.classList.add('-translate-y-20', 'opacity-0');
+          toast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3200);
+      }
+    }
+
+    /**
+     * ==========================================================
+     * FIREBASE FIRESTORE INTEGRATION PLACEHOLDER
+     * Sẵn sàng kết nối cơ sở dữ liệu thời gian thực khi chạy thực tế
+     * ==========================================================
+     */
+    const FirestoreDriverSync = {
+      isInitialized: false,
+
+      // Khởi tạo Firebase SDK (Thay config thực tế vào đây)
+      initFirebase(firebaseConfig) {
+        console.log('[FirestoreSync] Khởi tạo kết nối Firebase...', firebaseConfig);
+        this.isInitialized = true;
+      },
+
+      // Tải cấu hình từ Firestore
+      async fetchConfigFromCloud() {
+        if (!this.isInitialized) {
+          console.log('[FirestoreSync] Chưa kích hoạt Firebase. Đang sử dụng localStorage.');
+          return null;
+        }
+        try {
+          // Placeholder code:
+          // const doc = await firebase.firestore().collection('drivers').doc('le_tuan').get();
+          // return doc.data();
+          return null;
+        } catch (e) {
+          console.warn('[FirestoreSync] Lỗi tải từ cloud:', e);
+          return null;
+        }
+      },
+
+      // Đồng bộ cấu hình lên Firestore
+      async saveConfigToCloud(configData) {
+        if (!this.isInitialized) {
+          // Firebase chưa bật, lưu hoàn tất trong localStorage
+          return true;
+        }
+        try {
+          // Placeholder code:
+          // await firebase.firestore().collection('drivers').doc('le_tuan').set(configData, { merge: true });
+          console.log('[FirestoreSync] Đã đồng bộ lên Cloud Firestore thành công.');
+          return true;
+        } catch (e) {
+          console.warn('[FirestoreSync] Lỗi đồng bộ Cloud:', e);
+          return false;
+        }
+      }
+    };
+
+    /**
+     * KHI TẢI TRANG
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      loadConfig();
+
+      // Kiểm tra nếu phiên trước đã mở khóa trong cùng tab
+      if (sessionStorage.getItem('DRIVER_UNLOCKED') === 'true') {
+        unlockDashboardUI();
+      }
+    });
+  </script>
+</body>
+
+</html>
