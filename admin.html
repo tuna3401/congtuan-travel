@@ -279,10 +279,10 @@
               </svg>
               Hồ Sơ Tài Xế & Liên Hệ
             </h3>
-            <p class="text-xs text-slate-400 mt-0.5">Thông tin cá nhân, hotline và phương tiện đồng bộ ra website</p>
+            <p class="text-xs text-slate-400 mt-0.5">Thông tin cá nhân, hotline và liên hệ đồng bộ thời gian thực ra website</p>
           </div>
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-goldSand/20 text-goldAccent border border-goldSand/40 font-semibold">
-            Đồng bộ Web
+            Đồng bộ Firestore
           </span>
         </div>
 
@@ -292,78 +292,48 @@
             <label class="block text-xs font-bold text-slate-300 mb-1">
               Họ Tên Tài Xế <span class="text-goldAccent">*</span>
             </label>
-            <input type="text" id="prof_driverName" placeholder="VD: Lê Tuấn"
+            <input type="text" id="prof_driverName" placeholder="VD: Nguyễn Văn Hải"
               class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none"
-              oninput="handleProfileInput('driverName', this.value)">
-          </div>
-
-          <!-- Khẩu hiệu / Tagline -->
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1">
-              Khẩu Hiệu / Tagline
-            </label>
-            <input type="text" id="prof_tagline" placeholder="VD: Chuyên cơ mặt đất cá nhân"
-              class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none"
-              oninput="handleProfileInput('tagline', this.value)">
+              oninput="handleProfileInput('name', this.value)">
           </div>
 
           <!-- Số Hotline hiển thị -->
           <div>
             <label class="block text-xs font-bold text-slate-300 mb-1">
-              Hotline Hiển Thị (Gọi trực tiếp) <span class="text-goldAccent">*</span>
+              Số Điện Thoại Hotline (Gọi trực tiếp) <span class="text-goldAccent">*</span>
             </label>
-            <input type="text" id="prof_hotlineDisplay" placeholder="VD: 0337.545.188"
+            <input type="text" id="prof_hotline" placeholder="VD: 0912345678"
               class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs font-mono font-bold text-goldAccent placeholder-slate-500 focus:border-goldSand focus:outline-none"
-              oninput="handleHotlineInput(this.value)">
+              oninput="handleProfileInput('hotline', this.value)">
           </div>
 
           <!-- Số Zalo -->
           <div>
             <label class="block text-xs font-bold text-slate-300 mb-1">
-              Số Điện Thoại Zalo <span class="text-goldAccent">*</span>
+              Số Zalo Tiếp Nhận Cuốc <span class="text-goldAccent">*</span>
             </label>
-            <input type="text" id="prof_zaloPhone" placeholder="VD: 0337545188"
+            <input type="text" id="prof_zaloNumber" placeholder="VD: 0912345678"
               class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs font-mono font-bold text-[#0068FF] placeholder-slate-500 focus:border-goldSand focus:outline-none"
-              oninput="handleProfileInput('zaloPhone', this.value)">
+              oninput="handleProfileInput('zalo_number', this.value)">
           </div>
 
-          <!-- Dòng xe & Đời xe -->
+          <!-- Lời giới thiệu / Bio text -->
           <div>
             <label class="block text-xs font-bold text-slate-300 mb-1">
-              Dòng Xe & Đời Xe
+              Lời Giới Thiệu / Khẩu Hiệu
             </label>
-            <input type="text" id="prof_carModel" placeholder="VD: Mazda CX-5 2024"
+            <input type="text" id="prof_bioText" placeholder="VD: Lái xe an toàn, đón trả tận nơi, phục vụ chu đáo 24/7."
               class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none"
-              oninput="handleProfileInput('carModel', this.value)">
-          </div>
-
-          <!-- Biển số xe / Tình trạng -->
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1">
-              Biển Số Xe / Tình Trạng
-            </label>
-            <input type="text" id="prof_carPlate" placeholder="VD: 30K - Xe chính chủ không mào"
-              class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none"
-              oninput="handleProfileInput('carPlate', this.value)">
-          </div>
-
-          <!-- Khu vực hoạt động chính -->
-          <div class="sm:col-span-2">
-            <label class="block text-xs font-bold text-slate-300 mb-1">
-              Khu Vực Hoạt Động Chính / Trụ Sở
-            </label>
-            <input type="text" id="prof_operatingArea" placeholder="VD: Cầu Giấy, Nam Từ Liêm & Sân bay Quốc tế Nội Bài, Hà Nội"
-              class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none"
-              oninput="handleProfileInput('operatingArea', this.value)">
+              oninput="handleProfileInput('bio_text', this.value)">
           </div>
         </div>
       </div>
 
       <!-- ==========================================
-           CARD 1: CÔNG TẮC TỔNG - PHỤ THU LỄ/TẾT (+20%)
+           CARD 1: CÔNG TẮC & MỨC TIỀN - PHỤ THU LỄ/TẾT
            ========================================== -->
       <div
-        class="rounded-2xl bg-gradient-to-br from-cockpitCard to-[#1E293B] border border-cockpitBorder p-4 shadow-lg relative overflow-hidden">
+        class="rounded-2xl bg-gradient-to-br from-cockpitCard to-[#1E293B] border border-cockpitBorder p-4 shadow-lg relative overflow-hidden space-y-3.5">
         <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-goldSand/10 rounded-full blur-2xl pointer-events-none">
         </div>
 
@@ -378,9 +348,9 @@
                 Chính Sách Giá Đặc Biệt
               </span>
             </div>
-            <h3 class="text-base font-bold text-white mt-1">Phụ Thu Ngày Lễ / Tết (+20%)</h3>
+            <h3 class="text-base font-bold text-white mt-1">Phụ Thu Ngày Lễ / Tết</h3>
             <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">
-              Tự động cộng 20% vào giá cước tất cả các tuyến và hiển thị huy hiệu báo Lễ/Tết trên web khách.
+              Bật công tắc để tự động cộng mức tiền phụ thu vào tất cả các cuốc và hiện thông báo trên web khách.
             </p>
           </div>
 
@@ -393,8 +363,32 @@
           </label>
         </div>
 
+        <!-- Mức tiền phụ thu & Ghi chú -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-cockpitBorder/60">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">
+              Mức Tiền Phụ Thu (đ) <span class="text-goldAccent">*</span>
+            </label>
+            <div class="relative">
+              <input type="number" id="holidayAmountInput" min="0" step="1000" placeholder="VD: 50000"
+                class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs font-mono font-bold text-goldAccent placeholder-slate-500 focus:border-goldSand focus:outline-none"
+                oninput="handleHolidayAmountInput(this.value)">
+              <span id="holidayAmountPreview" class="text-[10px] text-goldSand/90 font-mono block mt-0.5">50.000 đ</span>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">
+              Ghi Chú Hiển Thị Đến Khách
+            </label>
+            <input type="text" id="holidayNoteInput" placeholder="VD: Phụ thu cao điểm Lễ / Tết"
+              class="w-full bg-slate-900 border border-cockpitBorder rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-goldSand focus:outline-none"
+              oninput="handleHolidayNoteInput(this.value)">
+          </div>
+        </div>
+
         <div id="holidayBannerIndicator"
-          class="mt-3 pt-3 border-t border-cockpitBorder/60 flex items-center justify-between text-xs font-semibold text-slate-400">
+          class="pt-2 border-t border-cockpitBorder/40 flex items-center justify-between text-xs font-semibold text-slate-400">
           <span>Trạng thái phụ thu:</span>
           <span id="holidayStatusText" class="text-slate-400">Đang TẮT (Giá niêm yết chuẩn)</span>
         </div>
@@ -456,7 +450,7 @@
           <!-- 1. Avatar Tài Xế -->
           <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-slate-200">1. Ảnh Đại Diện Tài Xế</label>
+              <label class="text-xs font-bold text-slate-200">1. Ảnh Đại Diện Tài Xế (Avatar)</label>
               <button type="button" onclick="resetSingleImage('avatar')"
                 class="text-[10px] text-slate-500 hover:text-goldAccent">Khôi phục</button>
             </div>
@@ -466,7 +460,7 @@
                   class="w-full h-full object-cover">
               </div>
               <div class="flex-1 space-y-1.5">
-                <input type="text" id="url_avatar" placeholder="Dán link ảnh online..."
+                <input type="text" id="url_avatar" placeholder="Dán link ảnh đại diện..."
                   class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none"
                   oninput="handleImageUrlInput('avatar', this.value)">
                 <label
@@ -482,22 +476,22 @@
             </div>
           </div>
 
-          <!-- 2. Ngoại Thất Xe Sang -->
+          <!-- 2. Ảnh Thực Tế Xe 5 Chỗ -->
           <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-slate-200">2. Ngoại Thất Xe Sang</label>
-              <button type="button" onclick="resetSingleImage('exterior')"
+              <label class="text-xs font-bold text-slate-200">2. Ảnh Thực Tế Xe 5 Chỗ (Mazda CX-5)</label>
+              <button type="button" onclick="resetSingleImage('car5')"
                 class="text-[10px] text-slate-500 hover:text-goldAccent">Khôi phục</button>
             </div>
             <div class="flex items-center space-x-3">
               <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-900 border border-slate-700 flex-shrink-0">
-                <img id="preview_exterior" src="assets/images/car-exterior.jpg" alt="Exterior Preview"
+                <img id="preview_car5" src="assets/images/car-exterior.jpg" alt="Car 5 Preview"
                   class="w-full h-full object-cover">
               </div>
               <div class="flex-1 space-y-1.5">
-                <input type="text" id="url_exterior" placeholder="Dán link ảnh online..."
+                <input type="text" id="url_car5" placeholder="Dán link ảnh xe 5 chỗ..."
                   class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none"
-                  oninput="handleImageUrlInput('exterior', this.value)">
+                  oninput="handleImageUrlInput('car5', this.value)">
                 <label
                   class="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold cursor-pointer transition">
                   <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -505,28 +499,28 @@
                       d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
                   Chọn ảnh từ máy
-                  <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload('exterior', this)">
+                  <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload('car5', this)">
                 </label>
               </div>
             </div>
           </div>
 
-          <!-- 3. Nội Thất Ghế Da -->
+          <!-- 3. Ảnh Thực Tế Xe 7 Chỗ -->
           <div class="p-3 rounded-xl bg-cockpitDark/60 border border-cockpitBorder space-y-2">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-slate-200">3. Khoang Lái & Ghế Da</label>
-              <button type="button" onclick="resetSingleImage('interior')"
+              <label class="text-xs font-bold text-slate-200">3. Ảnh Thực Tế Xe 7 Chỗ (Carnival VIP)</label>
+              <button type="button" onclick="resetSingleImage('car7')"
                 class="text-[10px] text-slate-500 hover:text-goldAccent">Khôi phục</button>
             </div>
             <div class="flex items-center space-x-3">
               <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-900 border border-slate-700 flex-shrink-0">
-                <img id="preview_interior" src="assets/images/car-interior.jpg" alt="Interior Preview"
+                <img id="preview_car7" src="assets/images/car-interior.jpg" alt="Car 7 Preview"
                   class="w-full h-full object-cover">
               </div>
               <div class="flex-1 space-y-1.5">
-                <input type="text" id="url_interior" placeholder="Dán link ảnh online..."
+                <input type="text" id="url_car7" placeholder="Dán link ảnh xe 7 chỗ..."
                   class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none"
-                  oninput="handleImageUrlInput('interior', this.value)">
+                  oninput="handleImageUrlInput('car7', this.value)">
                 <label
                   class="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold cursor-pointer transition">
                   <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -534,7 +528,7 @@
                       d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
                   Chọn ảnh từ máy
-                  <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload('interior', this)">
+                  <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload('car7', this)">
                 </label>
               </div>
             </div>
@@ -553,7 +547,7 @@
                   class="w-full h-full object-cover">
               </div>
               <div class="flex-1 space-y-1.5">
-                <input type="text" id="url_amenities" placeholder="Dán link ảnh online..."
+                <input type="text" id="url_amenities" placeholder="Dán link ảnh tiện ích..."
                   class="w-full bg-slate-900 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-goldSand focus:outline-none"
                   oninput="handleImageUrlInput('amenities', this.value)">
                 <label
@@ -996,29 +990,30 @@
     }
 
     /**
-     * CẤU TRÚC DỮ LIỆU MẶC ĐỊNH CHO TÀI XẾ (DEFAULT_DRIVER_CONFIG)
+     * CẤU TRÚC DỮ LIỆU ĐỒNG BỘ FIRESTORE (document: settings/driver_config)
      */
     const DEFAULT_DRIVER_CONFIG = {
-      pin: '1990',
-      holidaySurcharge: false,
-      surchargePercent: 20,
-      profile: {
-        driverName: 'Lê Tuấn',
-        brandName: 'LÊ TUẤN DRIVER',
-        tagline: 'Chuyên cơ mặt đất cá nhân',
-        hotlineDisplay: '0337.545.188',
-        hotlineTel: '0337545188',
-        zaloPhone: '0337545188',
-        carModel: 'Mazda CX-5 2024 & Sedan Hạng Sang',
-        carPlate: '30K - Xe riêng chính chủ không mào',
-        operatingArea: 'Cầu Giấy, Nam Từ Liêm & Sân bay Quốc tế Nội Bài, Hà Nội'
+      admin_pin: "1990",
+      driver_info: {
+        name: "Lê Tuấn",
+        hotline: "0337545188",
+        zalo_number: "0337545188",
+        avatar_url: "assets/images/avatar.jpg",
+        car_images: {
+          car5: "assets/images/car-exterior.jpg",
+          car7: "assets/images/car-interior.jpg"
+        },
+        bio_text: "Lái xe an toàn, đón trả tận nơi, phục vụ chu đáo 24/7."
       },
-      telegram: {
-        enabled: false,
-        botToken: '',
-        botUsername: '',
-        chatId: '',
-        pairedName: ''
+      telegram_config: {
+        bot_token: "",
+        chat_id: "",
+        is_active: false
+      },
+      holiday_surcharge: {
+        is_enabled: false,
+        amount: 50000,
+        note: "Phụ thu lễ/Tết"
       },
       routes: [
         {
@@ -1164,9 +1159,11 @@
       ],
       images: {
         avatar: 'assets/images/avatar.jpg',
+        car5: 'assets/images/car-exterior.jpg',
+        car7: 'assets/images/car-interior.jpg',
+        amenities: 'assets/images/car-amenities.jpg',
         exterior: 'assets/images/car-exterior.jpg',
-        interior: 'assets/images/car-interior.jpg',
-        amenities: 'assets/images/car-amenities.jpg'
+        interior: 'assets/images/car-interior.jpg'
       },
       lastUpdated: new Date().toISOString()
     };
@@ -1251,6 +1248,91 @@
     }
 
     /**
+     * CHUẨN HÓA TOÀN BỘ CẤU HÌNH CONFIG THEO SCHEMA MỚI & TƯƠNG THÍCH NGƯỢC
+     */
+    function normalizeConfig(incoming) {
+      if (!incoming) return JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+
+      const admin_pin = incoming.admin_pin || incoming.pin || '1990';
+
+      const dInfo = incoming.driver_info || {};
+      const prof = incoming.profile || {};
+      const imgs = incoming.images || {};
+
+      const driver_info = {
+        name: dInfo.name || prof.driverName || DEFAULT_DRIVER_CONFIG.driver_info.name,
+        hotline: dInfo.hotline || prof.hotlineDisplay || prof.hotlineTel || DEFAULT_DRIVER_CONFIG.driver_info.hotline,
+        zalo_number: dInfo.zalo_number || prof.zaloPhone || prof.hotlineTel || DEFAULT_DRIVER_CONFIG.driver_info.zalo_number,
+        avatar_url: dInfo.avatar_url || imgs.avatar || DEFAULT_DRIVER_CONFIG.driver_info.avatar_url,
+        car_images: {
+          car5: dInfo.car_images?.car5 || imgs.car5 || imgs.exterior || DEFAULT_DRIVER_CONFIG.driver_info.car_images.car5,
+          car7: dInfo.car_images?.car7 || imgs.car7 || imgs.interior || DEFAULT_DRIVER_CONFIG.driver_info.car_images.car7
+        },
+        bio_text: dInfo.bio_text || prof.bio_text || prof.tagline || DEFAULT_DRIVER_CONFIG.driver_info.bio_text
+      };
+
+      const tg = incoming.telegram_config || incoming.telegram || {};
+      const telegram_config = {
+        bot_token: tg.bot_token || tg.botToken || '',
+        chat_id: tg.chat_id || tg.chatId || '',
+        is_active: typeof tg.is_active !== 'undefined' ? !!tg.is_active : (typeof tg.enabled !== 'undefined' ? !!tg.enabled : false)
+      };
+
+      const hol = incoming.holiday_surcharge || {};
+      const isHolidayOld = typeof incoming.holidaySurcharge !== 'undefined' ? !!incoming.holidaySurcharge : false;
+      const holiday_surcharge = {
+        is_enabled: typeof hol.is_enabled !== 'undefined' ? !!hol.is_enabled : isHolidayOld,
+        amount: typeof hol.amount !== 'undefined' ? Number(hol.amount) : 50000,
+        note: hol.note || 'Phụ thu lễ/Tết'
+      };
+
+      const rawRoutes = Array.isArray(incoming.routes) && incoming.routes.length > 0 ? incoming.routes : DEFAULT_DRIVER_CONFIG.routes;
+      const routes = rawRoutes.map(normalizeRoute);
+
+      const normalizedImages = {
+        avatar: driver_info.avatar_url,
+        car5: driver_info.car_images.car5,
+        car7: driver_info.car_images.car7,
+        amenities: imgs.amenities || 'assets/images/car-amenities.jpg',
+        exterior: driver_info.car_images.car5,
+        interior: driver_info.car_images.car7
+      };
+
+      return {
+        admin_pin,
+        driver_info,
+        telegram_config,
+        holiday_surcharge,
+        routes,
+        images: normalizedImages,
+        lastUpdated: incoming.lastUpdated || new Date().toISOString(),
+
+        // Backward compatibility
+        pin: admin_pin,
+        holidaySurcharge: holiday_surcharge.is_enabled,
+        surchargePercent: 20,
+        profile: {
+          driverName: driver_info.name,
+          brandName: (driver_info.name + ' DRIVER').toUpperCase(),
+          tagline: driver_info.bio_text,
+          hotlineDisplay: driver_info.hotline,
+          hotlineTel: driver_info.hotline.replace(/[^\d+]/g, ''),
+          zaloPhone: driver_info.zalo_number.replace(/[^\d+]/g, ''),
+          carModel: 'Mazda CX-5 2024 & Carnival VIP',
+          carPlate: '30K - Xe riêng chính chủ không mào',
+          operatingArea: 'Cầu Giấy, Nam Từ Liêm & Sân bay Quốc tế Nội Bài, Hà Nội'
+        },
+        telegram: {
+          enabled: telegram_config.is_active,
+          botToken: telegram_config.bot_token,
+          botUsername: tg.botUsername || '',
+          chatId: telegram_config.chat_id,
+          pairedName: tg.pairedName || ''
+        }
+      };
+    }
+
+    /**
      * TỰ ĐỘNG FORMAT PREVIEW TIỀN TỆ KHI NHẬP VÀO FORM
      */
     function updatePricePreview(inputId, previewId) {
@@ -1268,26 +1350,15 @@
       try {
         const raw = localStorage.getItem('DRIVER_CONFIG');
         if (raw) {
-          currentConfig = JSON.parse(raw);
-          // Đảm bảo các thuộc tính bắt buộc luôn tồn tại
-          if (!currentConfig.profile) currentConfig.profile = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG.profile));
-          if (!currentConfig.telegram) currentConfig.telegram = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG.telegram));
-          if (!currentConfig.routes || !currentConfig.routes.length) {
-            currentConfig.routes = DEFAULT_DRIVER_CONFIG.routes;
-          } else {
-            currentConfig.routes = currentConfig.routes.map(normalizeRoute);
-          }
-          if (!currentConfig.images) currentConfig.images = DEFAULT_DRIVER_CONFIG.images;
-          if (!currentConfig.pin) currentConfig.pin = '1990';
+          const parsed = JSON.parse(raw);
+          currentConfig = normalizeConfig(parsed);
         } else {
-          currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
-          currentConfig.routes = currentConfig.routes.map(normalizeRoute);
+          currentConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
           localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
         }
       } catch (e) {
         console.error('Lỗi nạp config:', e);
-        currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
-        currentConfig.routes = currentConfig.routes.map(normalizeRoute);
+        currentConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
       }
     }
 
@@ -1330,7 +1401,7 @@
     }
 
     function verifyPin() {
-      const validPin = (currentConfig && currentConfig.pin) ? currentConfig.pin : '1990';
+      const validPin = (currentConfig && (currentConfig.admin_pin || currentConfig.pin)) ? (currentConfig.admin_pin || currentConfig.pin) : '1990';
       if (enteredPin === validPin) {
         // Đúng mã PIN: Mở khóa Dashboard
         sessionStorage.setItem('DRIVER_UNLOCKED', 'true');
@@ -1363,7 +1434,7 @@
     }
 
     function quickFillDefaultPin() {
-      enteredPin = (currentConfig && currentConfig.pin) ? currentConfig.pin : '1990';
+      enteredPin = (currentConfig && (currentConfig.admin_pin || currentConfig.pin)) ? (currentConfig.admin_pin || currentConfig.pin) : '1990';
       updatePinDots();
       setTimeout(verifyPin, 150);
     }
@@ -1403,22 +1474,19 @@
       // 0. Hồ sơ tài xế & Liên hệ
       renderProfileUI();
 
-      // 1. Công tắc Lễ/Tết
-      const holidayToggle = document.getElementById('holidayToggle');
-      const holidayStatusText = document.getElementById('holidayStatusText');
-      holidayToggle.checked = !!currentConfig.holidaySurcharge;
-      updateHolidayStatusUI(currentConfig.holidaySurcharge);
+      // 1. Công tắc & Phụ thu Lễ/Tết
+      renderHolidayUI();
 
       // 2. Danh sách tuyến đường
       renderRouteList();
 
-      // 3. Hình ảnh trưng bày
+      // 3. Quản lý hình ảnh
       renderImagesUI();
 
       // 4. Avatar trên Header Bar
       const navAvatar = document.getElementById('navAvatarPreview');
-      if (navAvatar && currentConfig.images && currentConfig.images.avatar) {
-        navAvatar.src = currentConfig.images.avatar;
+      if (navAvatar && currentConfig.driver_info && currentConfig.driver_info.avatar_url) {
+        navAvatar.src = currentConfig.driver_info.avatar_url;
       }
 
       // 5. Kết nối Telegram 1-Chạm
@@ -1429,42 +1497,106 @@
      * QUẢN LÝ HỒ SƠ TÀI XẾ & LIÊN HỆ
      */
     function renderProfileUI() {
-      if (!currentConfig || !currentConfig.profile) return;
-      const p = currentConfig.profile;
-      const fields = ['driverName', 'tagline', 'hotlineDisplay', 'zaloPhone', 'carModel', 'carPlate', 'operatingArea'];
-      fields.forEach(f => {
-        const el = document.getElementById('prof_' + f);
-        if (el) el.value = p[f] || '';
-      });
+      if (!currentConfig || !currentConfig.driver_info) return;
+      const d = currentConfig.driver_info;
+      
+      const elName = document.getElementById('prof_driverName');
+      const elHotline = document.getElementById('prof_hotline');
+      const elZalo = document.getElementById('prof_zaloNumber');
+      const elBio = document.getElementById('prof_bioText');
+
+      if (elName) elName.value = d.name || '';
+      if (elHotline) elHotline.value = d.hotline || '';
+      if (elZalo) elZalo.value = d.zalo_number || '';
+      if (elBio) elBio.value = d.bio_text || '';
 
       // Cập nhật tên tài xế trên top bar
       const topName = document.querySelector('header h2');
-      if (topName && p.driverName) {
-        topName.textContent = p.driverName + ' Driver';
+      if (topName && d.name) {
+        topName.textContent = d.name + ' Driver';
       }
     }
 
     function handleProfileInput(field, val) {
-      if (!currentConfig.profile) currentConfig.profile = {};
-      currentConfig.profile[field] = val;
-      if (field === 'driverName') {
+      if (!currentConfig.driver_info) currentConfig.driver_info = {};
+      currentConfig.driver_info[field] = val;
+
+      // Đồng bộ profile backward compat
+      if (field === 'name') {
+        currentConfig.profile.driverName = val;
+        currentConfig.profile.brandName = (val.trim() || 'Tài xế') + ' DRIVER';
         const topName = document.querySelector('header h2');
         if (topName) topName.textContent = (val.trim() || 'Tài xế') + ' Driver';
+      } else if (field === 'hotline') {
+        currentConfig.profile.hotlineDisplay = val;
+        currentConfig.profile.hotlineTel = val.replace(/[^\d+]/g, '');
+      } else if (field === 'zalo_number') {
+        currentConfig.profile.zaloPhone = val.replace(/[^\d+]/g, '');
+      } else if (field === 'bio_text') {
+        currentConfig.profile.tagline = val;
       }
     }
 
-    function handleHotlineInput(val) {
-      if (!currentConfig.profile) currentConfig.profile = {};
-      currentConfig.profile.hotlineDisplay = val;
-      currentConfig.profile.hotlineTel = val.replace(/[^\d+]/g, '');
+    /**
+     * QUẢN LÝ CÔNG TẮC & MỨC TIỀN PHỤ THU LỄ/TẾT
+     */
+    function renderHolidayUI() {
+      if (!currentConfig || !currentConfig.holiday_surcharge) return;
+      const h = currentConfig.holiday_surcharge;
+
+      const toggle = document.getElementById('holidayToggle');
+      const amtInput = document.getElementById('holidayAmountInput');
+      const amtPrev = document.getElementById('holidayAmountPreview');
+      const noteInput = document.getElementById('holidayNoteInput');
+
+      if (toggle) toggle.checked = !!h.is_enabled;
+      if (amtInput) amtInput.value = h.amount || 0;
+      if (amtPrev) amtPrev.textContent = (Number(h.amount) || 0).toLocaleString('vi-VN') + ' đ';
+      if (noteInput) noteInput.value = h.note || '';
+
+      updateHolidayStatusUI(h.is_enabled, h.amount);
+    }
+
+    function updateHolidayStatusUI(isActive, amount) {
+      const text = document.getElementById('holidayStatusText');
+      if (!text) return;
+      const amt = (typeof amount !== 'undefined') ? amount : (currentConfig?.holiday_surcharge?.amount || 50000);
+      if (isActive) {
+        text.innerHTML = `<span class="text-goldAccent font-bold">✓ ĐANG BẬT (+${Number(amt).toLocaleString('vi-VN')} đ tất cả các chuyến)</span>`;
+      } else {
+        text.innerHTML = '<span class="text-slate-400">Đang TẮT (Giá niêm yết chuẩn)</span>';
+      }
+    }
+
+    function handleHolidayToggleChange() {
+      const toggle = document.getElementById('holidayToggle');
+      if (!currentConfig.holiday_surcharge) currentConfig.holiday_surcharge = { is_enabled: false, amount: 50000, note: "Phụ thu lễ/Tết" };
+      currentConfig.holiday_surcharge.is_enabled = toggle.checked;
+      currentConfig.holidaySurcharge = toggle.checked;
+      updateHolidayStatusUI(toggle.checked, currentConfig.holiday_surcharge.amount);
+      saveConfiguration(false);
+    }
+
+    function handleHolidayAmountInput(val) {
+      const amt = parseInt(val, 10) || 0;
+      if (!currentConfig.holiday_surcharge) currentConfig.holiday_surcharge = { is_enabled: false, amount: 50000, note: "Phụ thu lễ/Tết" };
+      currentConfig.holiday_surcharge.amount = amt;
+      const prev = document.getElementById('holidayAmountPreview');
+      if (prev) prev.textContent = amt.toLocaleString('vi-VN') + ' đ';
+      updateHolidayStatusUI(currentConfig.holiday_surcharge.is_enabled, amt);
+    }
+
+    function handleHolidayNoteInput(val) {
+      if (!currentConfig.holiday_surcharge) currentConfig.holiday_surcharge = { is_enabled: false, amount: 50000, note: "Phụ thu lễ/Tết" };
+      currentConfig.holiday_surcharge.note = val;
     }
 
     /**
      * KẾT NỐI TELEGRAM 1-CHẠM (1-CLICK PAIRING)
      */
     function renderTelegramUI() {
-      if (!currentConfig || !currentConfig.telegram) return;
-      const tg = currentConfig.telegram;
+      if (!currentConfig || !currentConfig.telegram_config) return;
+      const tg = currentConfig.telegram_config;
 
       const tokenInput = document.getElementById('tg_botToken');
       const usernameInput = document.getElementById('tg_botUsername');
@@ -1474,17 +1606,17 @@
       const statusDot = document.getElementById('tgStatusDot');
       const statusText = document.getElementById('tgStatusText');
 
-      if (tokenInput) tokenInput.value = tg.botToken || '';
-      if (usernameInput) usernameInput.value = (tg.botUsername || '').replace(/^@/, '');
-      if (chatIdInput) chatIdInput.value = tg.chatId || '';
+      if (tokenInput) tokenInput.value = tg.bot_token || '';
+      if (usernameInput) usernameInput.value = (currentConfig.telegram?.botUsername || '').replace(/^@/, '');
+      if (chatIdInput) chatIdInput.value = tg.chat_id || '';
 
-      const isConnected = !!(tg.chatId && tg.botToken);
+      const isConnected = !!(tg.chat_id && tg.bot_token);
       if (testBtn) testBtn.disabled = !isConnected;
 
       if (isConnected) {
         if (statusBadge) statusBadge.className = 'flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-800 text-[10px] font-bold text-emerald-400';
         if (statusDot) statusDot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
-        if (statusText) statusText.textContent = `Đã kết nối (${tg.pairedName ? tg.pairedName + ' - ' : ''}ID: ${tg.chatId})`;
+        if (statusText) statusText.textContent = `Đã kết nối (ID: ${tg.chat_id})`;
       } else {
         if (statusBadge) statusBadge.className = 'flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-[10px] font-bold text-slate-400';
         if (statusDot) statusDot.className = 'w-2 h-2 rounded-full bg-slate-500';
@@ -1493,15 +1625,20 @@
     }
 
     function handleTelegramInput(field, val) {
+      if (!currentConfig.telegram_config) currentConfig.telegram_config = { bot_token: '', chat_id: '', is_active: false };
       if (!currentConfig.telegram) currentConfig.telegram = {};
-      if (field === 'botUsername') {
-        val = val.trim().replace(/^@/, '');
-      } else {
-        val = val.trim();
-      }
-      currentConfig.telegram[field] = val;
-      if (field === 'chatId') {
-        currentConfig.telegram.enabled = !!(val && currentConfig.telegram.botToken);
+
+      if (field === 'botToken') {
+        currentConfig.telegram_config.bot_token = val.trim();
+        currentConfig.telegram.botToken = val.trim();
+      } else if (field === 'botUsername') {
+        const cleaned = val.trim().replace(/^@/, '');
+        currentConfig.telegram.botUsername = cleaned;
+      } else if (field === 'chatId') {
+        currentConfig.telegram_config.chat_id = val.trim();
+        currentConfig.telegram.chatId = val.trim();
+        currentConfig.telegram_config.is_active = !!(val.trim() && currentConfig.telegram_config.bot_token);
+        currentConfig.telegram.enabled = currentConfig.telegram_config.is_active;
       }
       renderTelegramUI();
     }
@@ -1517,6 +1654,7 @@
         return;
       }
 
+      if (!currentConfig.telegram) currentConfig.telegram = {};
       currentConfig.telegram.botUsername = botUsername;
 
       // Mở link trực tiếp tới Bot với tham số start=connect
@@ -1531,7 +1669,7 @@
 
     async function autoPairTelegramChatId() {
       const tokenInput = document.getElementById('tg_botToken');
-      const botToken = (tokenInput ? tokenInput.value.trim() : '') || currentConfig.telegram?.botToken || '';
+      const botToken = (tokenInput ? tokenInput.value.trim() : '') || currentConfig.telegram_config?.bot_token || '';
 
       if (!botToken) {
         alert('Vui lòng nhập Telegram Bot Token trước khi bấm đồng bộ.');
@@ -1539,6 +1677,7 @@
         return;
       }
 
+      currentConfig.telegram_config.bot_token = botToken;
       currentConfig.telegram.botToken = botToken;
 
       const btnPair = document.getElementById('btnAutoPairTg');
@@ -1589,6 +1728,8 @@
         const chatId = foundChat.id.toString();
         const pairedName = foundChat.first_name || foundChat.title || foundChat.username || 'Tài xế';
 
+        currentConfig.telegram_config.chat_id = chatId;
+        currentConfig.telegram_config.is_active = true;
         currentConfig.telegram.chatId = chatId;
         currentConfig.telegram.pairedName = pairedName;
         currentConfig.telegram.enabled = true;
@@ -1603,11 +1744,11 @@
         // Gửi tin nhắn chào mừng và xác nhận ngay lập tức vào Telegram
         showTelegramFeedback('info', `✅ Đã tìm thấy Chat ID: <b>${chatId}</b> (${pairedName}). Đang gửi tin nhắn xác nhận...`);
 
-        const driverName = currentConfig.profile?.driverName || 'Lê Tuấn Driver';
+        const driverName = currentConfig.driver_info?.name || 'Lê Tuấn Driver';
         const confirmText = `🔔 *KẾT NỐI THÀNH CÔNG!*\n\n` +
           `Xin chào *${driverName}*,\n` +
           `Website của bạn đã kết nối thành công với tài khoản Telegram này.\n` +
-          `Từ giờ, bất kỳ khi nào có khách đặt xe trên website, thông báo chi tiết (Tên, SĐT, Điểm đón, Giờ đón, Giá cước) sẽ được gửi tự động tức thì vào đây!\n\n` +
+          `Từ giờ, bất kỳ khi nào có khách đặt xe trên website, thông báo chi tiết (Tên, SĐT, Lộ trình, Loại xe, Điểm đón, Giờ đón, Giá cước) sẽ được gửi tự động tức thì vào đây!\n\n` +
           `_Thời gian kết nối: ${new Date().toLocaleString('vi-VN')}_`;
 
         try {
@@ -1647,8 +1788,8 @@
     }
 
     async function sendTestTelegramMessage() {
-      const tg = currentConfig.telegram;
-      if (!tg || !tg.botToken || !tg.chatId) {
+      const tg = currentConfig.telegram_config;
+      if (!tg || !tg.bot_token || !tg.chat_id) {
         alert('Chưa có đủ Bot Token và Chat ID để gửi thử.');
         return;
       }
@@ -1656,7 +1797,7 @@
       const btnTest = document.getElementById('btnTestTg');
       if (btnTest) btnTest.disabled = true;
 
-      const driverName = currentConfig.profile?.driverName || 'Lê Tuấn Driver';
+      const driverName = currentConfig.driver_info?.name || 'Lê Tuấn Driver';
       const text = `🔔 *THÔNG BÁO TEST HỆ THỐNG*\n\n` +
         `Xin chào *${driverName}*,\n` +
         `Đây là tin nhắn kiểm tra đường truyền thông báo nhận cuốc.\n` +
@@ -1664,11 +1805,11 @@
         `⏰ _Gửi lúc: ${new Date().toLocaleString('vi-VN')}_`;
 
       try {
-        const res = await fetch(`https://api.telegram.org/bot${tg.botToken}/sendMessage`, {
+        const res = await fetch(`https://api.telegram.org/bot${tg.bot_token}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            chat_id: tg.chatId,
+            chat_id: tg.chat_id,
             text,
             parse_mode: 'Markdown'
           })
@@ -1702,23 +1843,6 @@
         fb.className = 'text-xs pt-1 p-2.5 rounded-lg bg-slate-900 border border-cockpitBorder text-slate-300';
       }
       fb.innerHTML = htmlContent;
-    }
-
-    function updateHolidayStatusUI(isActive) {
-      const text = document.getElementById('holidayStatusText');
-      if (isActive) {
-        text.innerHTML = '<span class="text-goldAccent font-bold">✓ ĐANG BẬT (+20% tất cả các chuyến)</span>';
-      } else {
-        text.innerHTML = '<span class="text-slate-400">Đang TẮT (Giá niêm yết chuẩn)</span>';
-      }
-    }
-
-    function handleHolidayToggleChange() {
-      const toggle = document.getElementById('holidayToggle');
-      currentConfig.holidaySurcharge = toggle.checked;
-      updateHolidayStatusUI(toggle.checked);
-      // Tự động lưu và phát thông báo nhẹ
-      saveConfiguration(false);
     }
 
     /**
@@ -1991,10 +2115,18 @@
      * QUẢN LÝ HÌNH ẢNH (PREVIEW, URL, FILE UPLOAD)
      */
     function renderImagesUI() {
-      if (!currentConfig.images) return;
-      const keys = ['avatar', 'exterior', 'interior', 'amenities'];
-      keys.forEach(k => {
-        const val = currentConfig.images[k] || '';
+      if (!currentConfig) return;
+      const imgs = currentConfig.images || {};
+      const dInfo = currentConfig.driver_info || {};
+
+      const map = {
+        avatar: dInfo.avatar_url || imgs.avatar || '',
+        car5: dInfo.car_images?.car5 || imgs.car5 || imgs.exterior || '',
+        car7: dInfo.car_images?.car7 || imgs.car7 || imgs.interior || '',
+        amenities: imgs.amenities || ''
+      };
+
+      Object.entries(map).forEach(([k, val]) => {
         const preview = document.getElementById('preview_' + k);
         const input = document.getElementById('url_' + k);
         if (preview && val) preview.src = val;
@@ -2003,17 +2135,35 @@
     }
 
     function handleImageUrlInput(slot, val) {
-      if (val && val.trim().length > 5) {
-        currentConfig.images[slot] = val.trim();
-        const preview = document.getElementById('preview_' + slot);
-        if (preview) preview.src = val.trim();
+      if (!currentConfig.images) currentConfig.images = {};
+      if (!currentConfig.driver_info) currentConfig.driver_info = {};
+      if (!currentConfig.driver_info.car_images) currentConfig.driver_info.car_images = {};
+
+      const trimmed = val ? val.trim() : '';
+      currentConfig.images[slot] = trimmed;
+
+      if (slot === 'avatar') {
+        currentConfig.driver_info.avatar_url = trimmed;
+        const navAvatar = document.getElementById('navAvatarPreview');
+        if (navAvatar && trimmed) navAvatar.src = trimmed;
+      } else if (slot === 'car5') {
+        currentConfig.driver_info.car_images.car5 = trimmed;
+        currentConfig.images.exterior = trimmed;
+      } else if (slot === 'car7') {
+        currentConfig.driver_info.car_images.car7 = trimmed;
+        currentConfig.images.interior = trimmed;
+      } else if (slot === 'amenities') {
+        currentConfig.images.amenities = trimmed;
       }
+
+      const preview = document.getElementById('preview_' + slot);
+      if (preview && trimmed) preview.src = trimmed;
     }
 
     function handleFileUpload(slot, input) {
       if (input.files && input.files[0]) {
         const file = input.files[0];
-        // Giới hạn ảnh không quá 3MB để lưu vừa localStorage
+        // Giới hạn ảnh không quá 3.5MB để tối ưu lưu trữ
         if (file.size > 3.5 * 1024 * 1024) {
           alert('Vui lòng chọn ảnh dung lượng dưới 3.5MB để tối ưu bộ nhớ.');
           return;
@@ -2021,9 +2171,7 @@
         const reader = new FileReader();
         reader.onload = function (e) {
           const base64Data = e.target.result;
-          currentConfig.images[slot] = base64Data;
-          const preview = document.getElementById('preview_' + slot);
-          if (preview) preview.src = base64Data;
+          handleImageUrlInput(slot, base64Data);
           const urlInput = document.getElementById('url_' + slot);
           if (urlInput) urlInput.value = '';
           showToast('Đã tải ảnh lên thành công!');
@@ -2033,18 +2181,23 @@
     }
 
     function resetSingleImage(slot) {
-      if (DEFAULT_DRIVER_CONFIG.images && DEFAULT_DRIVER_CONFIG.images[slot]) {
-        currentConfig.images[slot] = DEFAULT_DRIVER_CONFIG.images[slot];
-        const preview = document.getElementById('preview_' + slot);
-        if (preview) preview.src = DEFAULT_DRIVER_CONFIG.images[slot];
+      const def = DEFAULT_DRIVER_CONFIG;
+      let defaultVal = '';
+      if (slot === 'avatar') defaultVal = def.driver_info.avatar_url;
+      else if (slot === 'car5') defaultVal = def.driver_info.car_images.car5;
+      else if (slot === 'car7') defaultVal = def.driver_info.car_images.car7;
+      else if (slot === 'amenities') defaultVal = def.images.amenities;
+
+      if (defaultVal) {
+        handleImageUrlInput(slot, defaultVal);
         const urlInput = document.getElementById('url_' + slot);
-        if (urlInput) urlInput.value = DEFAULT_DRIVER_CONFIG.images[slot];
+        if (urlInput) urlInput.value = defaultVal;
         showToast('Đã khôi phục ảnh mặc định');
       }
     }
 
     /**
-     * ĐỔI MÃ PIN
+     * ĐỔI MÃ PIN BẢO MẬT
      */
     function updatePin() {
       const pinInput = document.getElementById('newPinInput');
@@ -2054,37 +2207,13 @@
         pinInput.focus();
         return;
       }
+      currentConfig.admin_pin = val;
       currentConfig.pin = val;
       pinInput.value = '';
       const feedback = document.getElementById('pinChangeFeedback');
       feedback.classList.remove('hidden');
       setTimeout(() => feedback.classList.add('hidden'), 3500);
       saveConfiguration(true);
-    }
-
-    /**
-     * TRỢ THỦ HỢP NHẤT DỮ LIỆU CẤU HÌNH (MERGE CONFIG)
-     */
-    function mergeConfig(incoming) {
-      if (!incoming) return;
-      if (incoming.pin) currentConfig.pin = incoming.pin;
-      if (typeof incoming.holidaySurcharge !== 'undefined') currentConfig.holidaySurcharge = incoming.holidaySurcharge;
-      if (typeof incoming.surchargePercent !== 'undefined') currentConfig.surchargePercent = incoming.surchargePercent;
-      if (incoming.profile) {
-        currentConfig.profile = { ...(currentConfig.profile || DEFAULT_DRIVER_CONFIG.profile), ...incoming.profile };
-      }
-      if (incoming.telegram) {
-        currentConfig.telegram = { ...(currentConfig.telegram || DEFAULT_DRIVER_CONFIG.telegram), ...incoming.telegram };
-      }
-      if (Array.isArray(incoming.routes) && incoming.routes.length > 0) {
-        currentConfig.routes = incoming.routes.map(normalizeRoute);
-      }
-      if (incoming.images) {
-        currentConfig.images = { ...(currentConfig.images || DEFAULT_DRIVER_CONFIG.images), ...incoming.images };
-      }
-      if (incoming.lastUpdated) {
-        currentConfig.lastUpdated = incoming.lastUpdated;
-      }
     }
 
     /**
@@ -2125,7 +2254,7 @@
         if (docSnap.exists) {
           const cloudData = docSnap.data();
           if (cloudData) {
-            mergeConfig(cloudData);
+            currentConfig = normalizeConfig(cloudData);
             localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
             renderDashboardData();
             updateCloudStatus('online', 'Cloud Active (Đã đồng bộ)');
@@ -2149,7 +2278,7 @@
      */
     async function resetToDefaultData() {
       if (confirm('Khôi phục toàn bộ tuyến và hình ảnh về thiết lập gốc của hệ thống?')) {
-        currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+        currentConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
         renderDashboardData();
         await saveConfiguration(true);
       }
@@ -2166,7 +2295,23 @@
         if (db) {
           updateCloudStatus('syncing', 'Đang lưu Cloud...');
           try {
-            await db.collection('settings').doc('driver_config').set(currentConfig, { merge: true });
+            const payload = {
+              admin_pin: currentConfig.admin_pin || currentConfig.pin || "1990",
+              driver_info: currentConfig.driver_info,
+              telegram_config: currentConfig.telegram_config,
+              holiday_surcharge: currentConfig.holiday_surcharge,
+              routes: currentConfig.routes,
+              images: currentConfig.images,
+              lastUpdated: currentConfig.lastUpdated,
+              // Tương thích ngược với các trường cũ
+              pin: currentConfig.admin_pin || currentConfig.pin || "1990",
+              holidaySurcharge: currentConfig.holiday_surcharge?.is_enabled || false,
+              surchargePercent: 20,
+              profile: currentConfig.profile,
+              telegram: currentConfig.telegram
+            };
+
+            await db.collection('settings').doc('driver_config').set(payload, { merge: true });
             const nowTime = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             updateCloudStatus('online', `Cloud Active (Lưu lúc ${nowTime})`);
             console.log('[Firestore] Đã lưu cấu hình lên settings/driver_config thành công.');
@@ -2207,7 +2352,7 @@
         if (docSnap.exists) {
           const cloudData = docSnap.data();
           if (cloudData) {
-            mergeConfig(cloudData);
+            currentConfig = normalizeConfig(cloudData);
             localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
             if (sessionStorage.getItem('DRIVER_UNLOCKED') === 'true') {
               renderDashboardData();
