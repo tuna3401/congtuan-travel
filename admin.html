@@ -1045,6 +1045,26 @@
       },
       routes: [
         {
+          id: 'HN_NA',
+          name: 'Hà Nội ⇄ Nghệ An',
+          charter: {
+            car5: 2500000,
+            car7: 2900000
+          },
+          shared: {
+            car5: { seat_1p: 700000, seat_2p: 1300000, seat_middle_row: 1700000, extra_luggage_fee: 100000 },
+            car7: { seat_1p: 800000, seat_2p: 1500000, seat_middle_row: 1900000, extra_luggage_fee: 100000 }
+          },
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Cao tốc Diễn Châu - Bãi Vọt êm ru, đón trả tận nơi TP. Vinh, Cửa Lò, Diễn Châu, Nghi Lộc...',
+          badge: 'Tuyến Hot',
+          category: 'Cao Tốc Bắc Nam',
+          features: ['Đã bao gồm vé toàn tuyến cao tốc', 'Đón trả tận nơi, miễn phí nước suối khăn lạnh'],
+          isActive: true,
+          isAirport: false
+        },
+        {
           id: 'HN_NB',
           name: 'Hà Nội ⇄ Sân Bay Nội Bài',
           charter: {
@@ -1274,6 +1294,101 @@
     }
 
     /**
+     * CHUẨN HÓA DỮ LIỆU ĐỒNG BỘ FIRESTORE (settings/driver_config)
+     */
+    function normalizeConfig(incoming) {
+      if (!incoming) return JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
+
+      const admin_pin = incoming.admin_pin || incoming.pin || '1990';
+
+      const dInfo = incoming.driver_info || {};
+      const prof = incoming.profile || {};
+      const imgs = incoming.images || {};
+
+      const driver_info = {
+        name: dInfo.name || prof.driverName || DEFAULT_DRIVER_CONFIG.driver_info.name,
+        hotline: dInfo.hotline || prof.hotlineDisplay || prof.hotlineTel || DEFAULT_DRIVER_CONFIG.driver_info.hotline,
+        zalo_number: dInfo.zalo_number || prof.zaloPhone || prof.hotlineTel || DEFAULT_DRIVER_CONFIG.driver_info.zalo_number,
+        avatar_url: dInfo.avatar_url || imgs.avatar || DEFAULT_DRIVER_CONFIG.driver_info.avatar_url,
+        car_images: {
+          car5: dInfo.car_images?.car5 || imgs.car5 || imgs.exterior || DEFAULT_DRIVER_CONFIG.driver_info.car_images.car5,
+          car7: dInfo.car_images?.car7 || imgs.car7 || imgs.interior || DEFAULT_DRIVER_CONFIG.driver_info.car_images.car7
+        },
+        bio_text: dInfo.bio_text || prof.bio_text || prof.tagline || DEFAULT_DRIVER_CONFIG.driver_info.bio_text
+      };
+
+      const tg = incoming.telegram_config || incoming.telegram || {};
+      const telegram_config = {
+        bot_token: tg.bot_token || tg.botToken || '',
+        chat_id: tg.chat_id || tg.chatId || '',
+        is_active: typeof tg.is_active !== 'undefined' ? !!tg.is_active : (typeof tg.enabled !== 'undefined' ? !!tg.enabled : false)
+      };
+
+      const hol = incoming.holiday_surcharge || {};
+      const isHolidayOld = typeof incoming.holidaySurcharge !== 'undefined' ? !!incoming.holidaySurcharge : false;
+      const holiday_surcharge = {
+        is_enabled: typeof hol.is_enabled !== 'undefined' ? !!hol.is_enabled : isHolidayOld,
+        amount: typeof hol.amount !== 'undefined' ? Number(hol.amount) : 50000,
+        note: hol.note || 'Phụ thu lễ/Tết'
+      };
+
+      let rawRoutes = Array.isArray(incoming.routes) && incoming.routes.length > 0 ? incoming.routes : DEFAULT_DRIVER_CONFIG.routes;
+      // Đảm bảo tuyến Hà Nội ⇄ Nghệ An luôn có mặt và nằm ở vị trí đầu tiên (index 0)
+      if (!rawRoutes.some(r => r.id === 'HN_NA')) {
+        rawRoutes = [DEFAULT_DRIVER_CONFIG.routes[0], ...rawRoutes];
+      } else {
+        const naIdx = rawRoutes.findIndex(r => r.id === 'HN_NA');
+        if (naIdx > 0) {
+          const [naRoute] = rawRoutes.splice(naIdx, 1);
+          rawRoutes.unshift(naRoute);
+        }
+      }
+      const routes = rawRoutes.map(normalizeRoute);
+
+      const normalizedImages = {
+        avatar: driver_info.avatar_url,
+        car5: driver_info.car_images.car5,
+        car7: driver_info.car_images.car7,
+        amenities: imgs.amenities || 'assets/images/car-amenities.jpg',
+        exterior: driver_info.car_images.car5,
+        interior: driver_info.car_images.car7
+      };
+
+      return {
+        admin_pin,
+        driver_info,
+        telegram_config,
+        holiday_surcharge,
+        routes,
+        images: normalizedImages,
+        lastUpdated: incoming.lastUpdated || new Date().toISOString(),
+
+        // Backward compatibility
+        pin: admin_pin,
+        holidaySurcharge: holiday_surcharge.is_enabled,
+        surchargePercent: 20,
+        profile: {
+          driverName: driver_info.name,
+          brandName: (driver_info.name + ' DRIVER').toUpperCase(),
+          tagline: driver_info.bio_text,
+          hotlineDisplay: driver_info.hotline,
+          hotlineTel: driver_info.hotline.replace(/[^\d+]/g, ''),
+          zaloPhone: driver_info.zalo_number.replace(/[^\d+]/g, ''),
+          carModel: 'Mazda CX-5 2024 & Carnival VIP',
+          carPlate: '30K - Xe riêng chính chủ không mào',
+          operatingArea: 'Cầu Giấy, Nam Từ Liêm & Sân bay Quốc tế Nội Bài, Hà Nội'
+        },
+        telegram: {
+          enabled: telegram_config.is_active,
+          botToken: telegram_config.bot_token,
+          botUsername: tg.botUsername || '',
+          chatId: telegram_config.chat_id,
+          pairedName: tg.pairedName || ''
+        }
+      };
+    }
+
+    /**
      * TỰ ĐỘNG FORMAT PREVIEW TIỀN TỆ KHI NHẬP VÀO FORM
      */
     function updatePricePreview(inputId, previewId) {
@@ -1291,26 +1406,15 @@
       try {
         const raw = localStorage.getItem('DRIVER_CONFIG');
         if (raw) {
-          currentConfig = JSON.parse(raw);
-          // Đảm bảo các thuộc tính bắt buộc luôn tồn tại
-          if (!currentConfig.profile) currentConfig.profile = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG.profile));
-          if (!currentConfig.telegram) currentConfig.telegram = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG.telegram));
-          if (!currentConfig.routes || !currentConfig.routes.length) {
-            currentConfig.routes = DEFAULT_DRIVER_CONFIG.routes;
-          } else {
-            currentConfig.routes = currentConfig.routes.map(normalizeRoute);
-          }
-          if (!currentConfig.images) currentConfig.images = DEFAULT_DRIVER_CONFIG.images;
-          if (!currentConfig.pin) currentConfig.pin = '1990';
+          const parsed = JSON.parse(raw);
+          currentConfig = normalizeConfig(parsed);
         } else {
-          currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
-          currentConfig.routes = currentConfig.routes.map(normalizeRoute);
+          currentConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
           localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
         }
       } catch (e) {
         console.error('Lỗi nạp config:', e);
-        currentConfig = JSON.parse(JSON.stringify(DEFAULT_DRIVER_CONFIG));
-        currentConfig.routes = currentConfig.routes.map(normalizeRoute);
+        currentConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
       }
     }
 
