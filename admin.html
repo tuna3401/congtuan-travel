@@ -852,47 +852,81 @@
         <div class="p-3.5 rounded-xl bg-cockpitDark/90 border border-emerald-900/40 space-y-3">
           <div class="flex items-center space-x-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <h5 class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-display">2. Bảng Giá Xe Ghép (Theo Ghế & Vali)</h5>
+            <h5 class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-display">2. Bảng Giá Xe Ghép (Linh Hoạt Theo Khách / Ghế & Vali)</h5>
           </div>
 
           <!-- Nhóm Ghép Xe 5 Chỗ -->
-          <div class="p-2.5 rounded-lg bg-slate-900/80 border border-cockpitBorder/70 space-y-2">
-            <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider block">Ghép Xe 5 Chỗ (Sedan / CUV):</span>
-            <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 rounded-lg bg-slate-900/80 border border-cockpitBorder/70 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-goldAccent uppercase tracking-wider block">Ghép Xe 5 Chỗ (Sedan / CUV):</span>
+              <span class="text-[10px] text-slate-400">Đơn vị: VNĐ</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5">
               <div>
-                <label class="block text-[10px] text-slate-400 mb-1">Kèm 1 Vali (đ):</label>
-                <input type="number" id="modalSharedCar5Lug1" min="0" step="1000" placeholder="VD: 600000"
-                  oninput="updatePricePreview('modalSharedCar5Lug1', 'preview_modalSharedCar5Lug1')"
+                <label class="block text-[10px] text-slate-400 mb-1">Đi 1 Người (Ghế chuẩn):</label>
+                <input type="number" id="modalSharedCar5_1p" min="0" step="1000" placeholder="VD: 600000"
+                  oninput="updatePricePreview('modalSharedCar5_1p', 'preview_modalSharedCar5_1p')"
                   class="w-full bg-slate-950 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-slate-200 placeholder-slate-600 focus:border-goldSand focus:outline-none">
-                <span id="preview_modalSharedCar5Lug1" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
+                <span id="preview_modalSharedCar5_1p" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
               </div>
               <div>
-                <label class="block text-[10px] text-slate-400 mb-1">Kèm 2 Vali (đ):</label>
-                <input type="number" id="modalSharedCar5Lug2" min="0" step="1000" placeholder="VD: 700000"
-                  oninput="updatePricePreview('modalSharedCar5Lug2', 'preview_modalSharedCar5Lug2')"
+                <label class="block text-[10px] text-slate-400 mb-1">Đi 2 Người (Cạnh nhau):</label>
+                <input type="number" id="modalSharedCar5_2p" min="0" step="1000" placeholder="VD: 1100000"
+                  oninput="updatePricePreview('modalSharedCar5_2p', 'preview_modalSharedCar5_2p')"
                   class="w-full bg-slate-950 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-slate-200 placeholder-slate-600 focus:border-goldSand focus:outline-none">
-                <span id="preview_modalSharedCar5Lug2" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
+                <span id="preview_modalSharedCar5_2p" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">Bao Hàng Ghế Giữa:</label>
+                <input type="number" id="modalSharedCar5_middle" min="0" step="1000" placeholder="VD: 1400000"
+                  oninput="updatePricePreview('modalSharedCar5_middle', 'preview_modalSharedCar5_middle')"
+                  class="w-full bg-slate-950 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-slate-200 placeholder-slate-600 focus:border-goldSand focus:outline-none">
+                <span id="preview_modalSharedCar5_middle" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">Phụ Thu Từ 2 Vali:</label>
+                <input type="number" id="modalSharedCar5_extraLug" min="0" step="1000" placeholder="VD: 100000"
+                  oninput="updatePricePreview('modalSharedCar5_extraLug', 'preview_modalSharedCar5_extraLug')"
+                  class="w-full bg-slate-950 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-slate-200 placeholder-slate-600 focus:border-goldSand focus:outline-none">
+                <span id="preview_modalSharedCar5_extraLug" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
               </div>
             </div>
           </div>
 
           <!-- Nhóm Ghép Xe 7 Chỗ -->
-          <div class="p-2.5 rounded-lg bg-slate-900/80 border border-cockpitBorder/70 space-y-2">
-            <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider block">Ghép Xe 7 Chỗ (MPV / SUV):</span>
-            <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 rounded-lg bg-slate-900/80 border border-cockpitBorder/70 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">Ghép Xe 7 Chỗ (MPV / SUV):</span>
+              <span class="text-[10px] text-slate-400">Đơn vị: VNĐ</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5">
               <div>
-                <label class="block text-[10px] text-slate-400 mb-1">Kèm 1 Vali (đ):</label>
-                <input type="number" id="modalSharedCar7Lug1" min="0" step="1000" placeholder="VD: 700000"
-                  oninput="updatePricePreview('modalSharedCar7Lug1', 'preview_modalSharedCar7Lug1')"
+                <label class="block text-[10px] text-slate-400 mb-1">Đi 1 Người (Ghế chuẩn):</label>
+                <input type="number" id="modalSharedCar7_1p" min="0" step="1000" placeholder="VD: 700000"
+                  oninput="updatePricePreview('modalSharedCar7_1p', 'preview_modalSharedCar7_1p')"
                   class="w-full bg-slate-950 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-slate-200 placeholder-slate-600 focus:border-goldSand focus:outline-none">
-                <span id="preview_modalSharedCar7Lug1" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
+                <span id="preview_modalSharedCar7_1p" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
               </div>
               <div>
-                <label class="block text-[10px] text-slate-400 mb-1">Kèm 2 Vali (đ):</label>
-                <input type="number" id="modalSharedCar7Lug2" min="0" step="1000" placeholder="VD: 800000"
-                  oninput="updatePricePreview('modalSharedCar7Lug2', 'preview_modalSharedCar7Lug2')"
+                <label class="block text-[10px] text-slate-400 mb-1">Đi 2 Người (Cạnh nhau):</label>
+                <input type="number" id="modalSharedCar7_2p" min="0" step="1000" placeholder="VD: 1300000"
+                  oninput="updatePricePreview('modalSharedCar7_2p', 'preview_modalSharedCar7_2p')"
                   class="w-full bg-slate-950 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-slate-200 placeholder-slate-600 focus:border-goldSand focus:outline-none">
-                <span id="preview_modalSharedCar7Lug2" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
+                <span id="preview_modalSharedCar7_2p" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">Bao Hàng Ghế Giữa:</label>
+                <input type="number" id="modalSharedCar7_middle" min="0" step="1000" placeholder="VD: 1600000"
+                  oninput="updatePricePreview('modalSharedCar7_middle', 'preview_modalSharedCar7_middle')"
+                  class="w-full bg-slate-950 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-slate-200 placeholder-slate-600 focus:border-goldSand focus:outline-none">
+                <span id="preview_modalSharedCar7_middle" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">Phụ Thu Từ 2 Vali:</label>
+                <input type="number" id="modalSharedCar7_extraLug" min="0" step="1000" placeholder="VD: 100000"
+                  oninput="updatePricePreview('modalSharedCar7_extraLug', 'preview_modalSharedCar7_extraLug')"
+                  class="w-full bg-slate-950 border border-cockpitBorder rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold text-slate-200 placeholder-slate-600 focus:border-goldSand focus:outline-none">
+                <span id="preview_modalSharedCar7_extraLug" class="text-[10px] text-slate-400 font-mono block mt-0.5">0 đ</span>
               </div>
             </div>
           </div>
@@ -995,8 +1029,8 @@
             car7: 350000
           },
           shared: {
-            car5: { luggage1: 150000, luggage2: 180000 },
-            car7: { luggage1: 180000, luggage2: 220000 }
+            car5: { seat_1p: 150000, seat_2p: 280000, seat_middle_row: 350000, extra_luggage_fee: 50000 },
+            car7: { seat_1p: 180000, seat_2p: 340000, seat_middle_row: 420000, extra_luggage_fee: 50000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1015,8 +1049,8 @@
             car7: 2000000
           },
           shared: {
-            car5: { luggage1: 600000, luggage2: 700000 },
-            car7: { luggage1: 700000, luggage2: 800000 }
+            car5: { seat_1p: 600000, seat_2p: 1100000, seat_middle_row: 1400000, extra_luggage_fee: 100000 },
+            car7: { seat_1p: 700000, seat_2p: 1300000, seat_middle_row: 1600000, extra_luggage_fee: 100000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1035,8 +1069,8 @@
             car7: 1500000
           },
           shared: {
-            car5: { luggage1: 350000, luggage2: 400000 },
-            car7: { luggage1: 400000, luggage2: 460000 }
+            car5: { seat_1p: 350000, seat_2p: 650000, seat_middle_row: 850000, extra_luggage_fee: 50000 },
+            car7: { seat_1p: 400000, seat_2p: 750000, seat_middle_row: 1000000, extra_luggage_fee: 50000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1055,8 +1089,8 @@
             car7: 1200000
           },
           shared: {
-            car5: { luggage1: 200000, luggage2: 250000 },
-            car7: { luggage1: 250000, luggage2: 300000 }
+            car5: { seat_1p: 200000, seat_2p: 380000, seat_middle_row: 500000, extra_luggage_fee: 50000 },
+            car7: { seat_1p: 250000, seat_2p: 480000, seat_middle_row: 600000, extra_luggage_fee: 50000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1075,8 +1109,8 @@
             car7: 1350000
           },
           shared: {
-            car5: { luggage1: 250000, luggage2: 300000 },
-            car7: { luggage1: 300000, luggage2: 360000 }
+            car5: { seat_1p: 250000, seat_2p: 480000, seat_middle_row: 650000, extra_luggage_fee: 50000 },
+            car7: { seat_1p: 300000, seat_2p: 580000, seat_middle_row: 750000, extra_luggage_fee: 50000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1095,8 +1129,8 @@
             car7: 11000
           },
           shared: {
-            car5: { luggage1: 0, luggage2: 0 },
-            car7: { luggage1: 0, luggage2: 0 }
+            car5: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 },
+            car7: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 }
           },
           charterUnit: 'đ / km (tùy cự ly)',
           sharedUnit: 'Liên hệ tài xế',
@@ -1115,8 +1149,8 @@
             car7: 0
           },
           shared: {
-            car5: { luggage1: 0, luggage2: 0 },
-            car7: { luggage1: 0, luggage2: 0 }
+            car5: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 },
+            car7: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 }
           },
           charterUnit: 'Báo giá trực tiếp',
           sharedUnit: 'Báo giá trực tiếp',
@@ -1142,7 +1176,7 @@
     let enteredPin = '';
 
     /**
-     * CHUẨN HÓA DỮ LIỆU TUYẾN XE (TIERED PRICING: 5 CHỖ / 7 CHỖ / VALI)
+     * CHUẨN HÓA DỮ LIỆU TUYẾN XE (TIERED PRICING: 5 CHỖ / 7 CHỖ / SỐ NGƯỜI & VALI)
      */
     function normalizeRoute(r) {
       if (!r) return null;
@@ -1162,35 +1196,56 @@
         };
       }
 
-      // Khối xe ghép: car5, car7 (mỗi loại có luggage1, luggage2)
+      // Khối xe ghép: car5, car7 (seat_1p, seat_2p, seat_middle_row, extra_luggage_fee)
       if (!normalized.shared || typeof normalized.shared !== 'object' || !normalized.shared.car5) {
         const oldShared = Number(r.sharedPrice) || 0;
         normalized.shared = {
           car5: {
-            luggage1: oldShared,
-            luggage2: oldShared > 10000 ? Math.round((oldShared * 1.15) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.15) : 0)
+            seat_1p: oldShared,
+            seat_2p: oldShared > 10000 ? Math.round((oldShared * 1.85) / 10000) * 10000 : 0,
+            seat_middle_row: oldShared > 10000 ? Math.round((oldShared * 2.3) / 10000) * 10000 : 0,
+            extra_luggage_fee: oldShared > 0 ? 50000 : 0
           },
           car7: {
-            luggage1: oldShared > 10000 ? Math.round((oldShared * 1.2) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.2) : 0),
-            luggage2: oldShared > 10000 ? Math.round((oldShared * 1.35) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.35) : 0)
+            seat_1p: oldShared > 10000 ? Math.round((oldShared * 1.2) / 10000) * 10000 : 0,
+            seat_2p: oldShared > 10000 ? Math.round((oldShared * 2.2) / 10000) * 10000 : 0,
+            seat_middle_row: oldShared > 10000 ? Math.round((oldShared * 2.7) / 10000) * 10000 : 0,
+            extra_luggage_fee: oldShared > 0 ? 50000 : 0
           }
         };
       } else {
+        const c5 = normalized.shared.car5;
+        const c7 = normalized.shared.car7 || {};
+
+        const c5_1p = (typeof c5.seat_1p !== 'undefined') ? Number(c5.seat_1p) : (Number(c5.luggage1) || 0);
+        const c5_2p = (typeof c5.seat_2p !== 'undefined') ? Number(c5.seat_2p) : (c5_1p > 10000 ? Math.round((c5_1p * 1.85) / 10000) * 10000 : 0);
+        const c5_mid = (typeof c5.seat_middle_row !== 'undefined') ? Number(c5.seat_middle_row) : (c5_1p > 10000 ? Math.round((c5_1p * 2.3) / 10000) * 10000 : 0);
+        const c5_lugFee = (typeof c5.extra_luggage_fee !== 'undefined') ? Number(c5.extra_luggage_fee) : ((Number(c5.luggage2) > c5_1p) ? (Number(c5.luggage2) - c5_1p) : (c5_1p > 0 ? 50000 : 0));
+
+        const c7_1p = (typeof c7.seat_1p !== 'undefined') ? Number(c7.seat_1p) : (Number(c7.luggage1) || (c5_1p > 10000 ? Math.round((c5_1p * 1.2) / 10000) * 10000 : 0));
+        const c7_2p = (typeof c7.seat_2p !== 'undefined') ? Number(c7.seat_2p) : (c7_1p > 10000 ? Math.round((c7_1p * 1.85) / 10000) * 10000 : 0);
+        const c7_mid = (typeof c7.seat_middle_row !== 'undefined') ? Number(c7.seat_middle_row) : (c7_1p > 10000 ? Math.round((c7_1p * 2.3) / 10000) * 10000 : 0);
+        const c7_lugFee = (typeof c7.extra_luggage_fee !== 'undefined') ? Number(c7.extra_luggage_fee) : ((Number(c7.luggage2) > c7_1p) ? (Number(c7.luggage2) - c7_1p) : (c7_1p > 0 ? 50000 : 0));
+
         normalized.shared = {
           car5: {
-            luggage1: Number(normalized.shared.car5?.luggage1) || 0,
-            luggage2: Number(normalized.shared.car5?.luggage2) || 0
+            seat_1p: c5_1p,
+            seat_2p: c5_2p,
+            seat_middle_row: c5_mid,
+            extra_luggage_fee: c5_lugFee
           },
           car7: {
-            luggage1: Number(normalized.shared.car7?.luggage1) || 0,
-            luggage2: Number(normalized.shared.car7?.luggage2) || 0
+            seat_1p: c7_1p,
+            seat_2p: c7_2p,
+            seat_middle_row: c7_mid,
+            extra_luggage_fee: c7_lugFee
           }
         };
       }
 
       // Tương thích ngược
       normalized.charterPrice = normalized.charter.car5;
-      normalized.sharedPrice = normalized.shared.car5.luggage1;
+      normalized.sharedPrice = normalized.shared.car5.seat_1p;
 
       return normalized;
     }
@@ -1701,21 +1756,25 @@
           charterDisplay = 'Báo giá trực tiếp theo yêu cầu';
           sharedDisplay = 'Báo giá trực tiếp theo yêu cầu';
         } else if (isKm) {
-          charterDisplay = `5 chỗ: <span class="text-goldAccent font-bold">${route.charter.car5.toLocaleString('vi-VN')} đ/km</span> • 7 chỗ: <span class="text-goldAccent font-bold">${route.charter.car7.toLocaleString('vi-VN')} đ/km</span>`;
-          sharedDisplay = 'Theo thỏa thuận lộ trình thực tế';
+          charterDisplay = `5 chỗ: <span class="text-goldAccent font-bold font-mono">${route.charter.car5.toLocaleString('vi-VN')} đ/km</span> &bull; 7 chỗ: <span class="text-goldAccent font-bold font-mono">${route.charter.car7.toLocaleString('vi-VN')} đ/km</span>`;
+          sharedDisplay = 'Thỏa thuận theo lộ trình di chuyển thực tế';
         } else {
           charterDisplay = `5 chỗ: <span class="text-goldAccent font-bold font-mono">${route.charter.car5.toLocaleString('vi-VN')} đ</span> &bull; 7 chỗ: <span class="text-goldAccent font-bold font-mono">${route.charter.car7.toLocaleString('vi-VN')} đ</span>`;
           sharedDisplay = `
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] pt-1">
-              <div class="p-2 rounded-lg bg-slate-900/90 border border-cockpitBorder/60">
-                <span class="text-goldAccent font-bold block mb-0.5">Xe 5 Chỗ:</span>
-                <span class="text-slate-300">1 vali: <strong class="text-white font-mono">${route.shared.car5.luggage1.toLocaleString('vi-VN')} đ</strong></span><br>
-                <span class="text-slate-300">2 vali: <strong class="text-white font-mono">${route.shared.car5.luggage2.toLocaleString('vi-VN')} đ</strong></span>
+              <div class="p-2.5 rounded-lg bg-slate-900/90 border border-cockpitBorder/60 space-y-1">
+                <span class="text-goldAccent font-bold block mb-1">Xe 5 Chỗ:</span>
+                <div class="flex justify-between text-slate-300"><span>1 người:</span><strong class="text-white font-mono">${route.shared.car5.seat_1p.toLocaleString('vi-VN')} đ</strong></div>
+                <div class="flex justify-between text-slate-300"><span>2 người:</span><strong class="text-white font-mono">${route.shared.car5.seat_2p.toLocaleString('vi-VN')} đ</strong></div>
+                <div class="flex justify-between text-slate-300"><span>Bao hàng giữa:</span><strong class="text-white font-mono">${route.shared.car5.seat_middle_row.toLocaleString('vi-VN')} đ</strong></div>
+                <div class="flex justify-between text-slate-400 text-[10px]"><span>Phụ thu 2+ vali:</span><strong class="text-amber-400 font-mono">+${route.shared.car5.extra_luggage_fee.toLocaleString('vi-VN')} đ</strong></div>
               </div>
-              <div class="p-2 rounded-lg bg-slate-900/90 border border-cockpitBorder/60">
-                <span class="text-emerald-400 font-bold block mb-0.5">Xe 7 Chỗ:</span>
-                <span class="text-slate-300">1 vali: <strong class="text-white font-mono">${route.shared.car7.luggage1.toLocaleString('vi-VN')} đ</strong></span><br>
-                <span class="text-slate-300">2 vali: <strong class="text-white font-mono">${route.shared.car7.luggage2.toLocaleString('vi-VN')} đ</strong></span>
+              <div class="p-2.5 rounded-lg bg-slate-900/90 border border-cockpitBorder/60 space-y-1">
+                <span class="text-emerald-400 font-bold block mb-1">Xe 7 Chỗ:</span>
+                <div class="flex justify-between text-slate-300"><span>1 người:</span><strong class="text-white font-mono">${route.shared.car7.seat_1p.toLocaleString('vi-VN')} đ</strong></div>
+                <div class="flex justify-between text-slate-300"><span>2 người:</span><strong class="text-white font-mono">${route.shared.car7.seat_2p.toLocaleString('vi-VN')} đ</strong></div>
+                <div class="flex justify-between text-slate-300"><span>Bao hàng giữa:</span><strong class="text-white font-mono">${route.shared.car7.seat_middle_row.toLocaleString('vi-VN')} đ</strong></div>
+                <div class="flex justify-between text-slate-400 text-[10px]"><span>Phụ thu 2+ vali:</span><strong class="text-amber-400 font-mono">+${route.shared.car7.extra_luggage_fee.toLocaleString('vi-VN')} đ</strong></div>
               </div>
             </div>`;
         }
@@ -1805,14 +1864,15 @@
       document.getElementById('modalBadge').value = '';
       document.getElementById('modalIsAirport').value = 'false';
 
-      document.getElementById('modalCharterCar5').value = '';
-      document.getElementById('modalCharterCar7').value = '';
-      document.getElementById('modalSharedCar5Lug1').value = '';
-      document.getElementById('modalSharedCar5Lug2').value = '';
-      document.getElementById('modalSharedCar7Lug1').value = '';
-      document.getElementById('modalSharedCar7Lug2').value = '';
+      const fieldIds = [
+        'modalCharterCar5', 'modalCharterCar7',
+        'modalSharedCar5_1p', 'modalSharedCar5_2p', 'modalSharedCar5_middle', 'modalSharedCar5_extraLug',
+        'modalSharedCar7_1p', 'modalSharedCar7_2p', 'modalSharedCar7_middle', 'modalSharedCar7_extraLug'
+      ];
 
-      ['modalCharterCar5', 'modalCharterCar7', 'modalSharedCar5Lug1', 'modalSharedCar5Lug2', 'modalSharedCar7Lug1', 'modalSharedCar7Lug2'].forEach(id => {
+      fieldIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
         updatePricePreview(id, 'preview_' + id);
       });
 
@@ -1828,14 +1888,29 @@
       document.getElementById('modalBadge').value = r.badge || '';
       document.getElementById('modalIsAirport').value = r.isAirport ? 'true' : 'false';
 
+      // Bao xe
       document.getElementById('modalCharterCar5').value = r.charter.car5 || '';
       document.getElementById('modalCharterCar7').value = r.charter.car7 || '';
-      document.getElementById('modalSharedCar5Lug1').value = r.shared.car5.luggage1 || '';
-      document.getElementById('modalSharedCar5Lug2').value = r.shared.car5.luggage2 || '';
-      document.getElementById('modalSharedCar7Lug1').value = r.shared.car7.luggage1 || '';
-      document.getElementById('modalSharedCar7Lug2').value = r.shared.car7.luggage2 || '';
 
-      ['modalCharterCar5', 'modalCharterCar7', 'modalSharedCar5Lug1', 'modalSharedCar5Lug2', 'modalSharedCar7Lug1', 'modalSharedCar7Lug2'].forEach(id => {
+      // Ghép xe 5 chỗ
+      document.getElementById('modalSharedCar5_1p').value = r.shared.car5.seat_1p || '';
+      document.getElementById('modalSharedCar5_2p').value = r.shared.car5.seat_2p || '';
+      document.getElementById('modalSharedCar5_middle').value = r.shared.car5.seat_middle_row || '';
+      document.getElementById('modalSharedCar5_extraLug').value = r.shared.car5.extra_luggage_fee || '';
+
+      // Ghép xe 7 chỗ
+      document.getElementById('modalSharedCar7_1p').value = r.shared.car7.seat_1p || '';
+      document.getElementById('modalSharedCar7_2p').value = r.shared.car7.seat_2p || '';
+      document.getElementById('modalSharedCar7_middle').value = r.shared.car7.seat_middle_row || '';
+      document.getElementById('modalSharedCar7_extraLug').value = r.shared.car7.extra_luggage_fee || '';
+
+      const fieldIds = [
+        'modalCharterCar5', 'modalCharterCar7',
+        'modalSharedCar5_1p', 'modalSharedCar5_2p', 'modalSharedCar5_middle', 'modalSharedCar5_extraLug',
+        'modalSharedCar7_1p', 'modalSharedCar7_2p', 'modalSharedCar7_middle', 'modalSharedCar7_extraLug'
+      ];
+
+      fieldIds.forEach(id => {
         updatePricePreview(id, 'preview_' + id);
       });
 
@@ -1861,12 +1936,16 @@
 
       const shared = {
         car5: {
-          luggage1: parseInt(document.getElementById('modalSharedCar5Lug1').value, 10) || 0,
-          luggage2: parseInt(document.getElementById('modalSharedCar5Lug2').value, 10) || 0
+          seat_1p: parseInt(document.getElementById('modalSharedCar5_1p').value, 10) || 0,
+          seat_2p: parseInt(document.getElementById('modalSharedCar5_2p').value, 10) || 0,
+          seat_middle_row: parseInt(document.getElementById('modalSharedCar5_middle').value, 10) || 0,
+          extra_luggage_fee: parseInt(document.getElementById('modalSharedCar5_extraLug').value, 10) || 0
         },
         car7: {
-          luggage1: parseInt(document.getElementById('modalSharedCar7Lug1').value, 10) || 0,
-          luggage2: parseInt(document.getElementById('modalSharedCar7Lug2').value, 10) || 0
+          seat_1p: parseInt(document.getElementById('modalSharedCar7_1p').value, 10) || 0,
+          seat_2p: parseInt(document.getElementById('modalSharedCar7_2p').value, 10) || 0,
+          seat_middle_row: parseInt(document.getElementById('modalSharedCar7_middle').value, 10) || 0,
+          extra_luggage_fee: parseInt(document.getElementById('modalSharedCar7_extraLug').value, 10) || 0
         }
       };
 
@@ -1904,9 +1983,6 @@
       }
 
       closeRouteModal();
-      renderRouteList();
-      saveConfiguration(true);
-    }
       renderRouteList();
       saveConfiguration(true);
     }

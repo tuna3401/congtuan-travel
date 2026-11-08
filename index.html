@@ -583,37 +583,52 @@
                   </div>
                 </div>
 
-                <!-- KHỐI ĐẶC THÙ XE GHÉP: CHỌN SỐ GHẾ & SỐ VALI HÀNH LÝ -->
-                <div id="sharedConfigBox" class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/90 space-y-3 hidden">
+                <!-- KHỐI ĐẶC THÙ XE GHÉP: CHỌN SỐ KHÁCH/BAO HÀNG GHẾ & PHỤ THU VALI -->
+                <div id="sharedConfigBox" class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/90 space-y-3.5 hidden">
+                  <!-- Gói ghế / Số người -->
                   <div>
                     <div class="flex items-center justify-between mb-1.5">
-                      <label class="text-xs font-bold text-slate-800">Số Lượng Ghế Đi Ghép <span class="text-[#9E7326]">*</span></label>
-                      <span class="text-[10px] text-[#9E7326] font-bold" id="sharedPaxBadge">1 Khách</span>
+                      <label class="text-xs font-bold text-slate-800">Chọn Gói Số Người / Vị Trí Ghế <span class="text-[#9E7326]">*</span></label>
+                      <span class="text-[10px] text-[#9E7326] font-bold" id="sharedSeatPackageBadge">1 Người</span>
                     </div>
-                    <div class="grid grid-cols-4 gap-1.5">
-                      <button type="button" class="btn-shared-pax py-2 rounded-xl text-xs font-bold bg-white text-[#9E7326] shadow-sm border border-amber-300" onclick="setSharedPax(1)">1 Khách</button>
-                      <button type="button" class="btn-shared-pax py-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white" onclick="setSharedPax(2)">2 Khách</button>
-                      <button type="button" class="btn-shared-pax py-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white" onclick="setSharedPax(3)">3 Khách</button>
-                      <button type="button" class="btn-shared-pax py-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white" onclick="setSharedPax(4)">4 Khách</button>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5" id="seatPackageButtonGroup">
+                      <button type="button" id="btnSeat1p" onclick="setSharedSeatPackage('seat_1p')"
+                        class="btn-seat-pkg py-2 px-2 rounded-xl text-xs font-bold bg-white text-[#9E7326] shadow-sm border border-amber-300 text-center transition">
+                        <span class="block">👤 1 Người</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Ghế tiêu chuẩn</span>
+                      </button>
+                      <button type="button" id="btnSeat2p" onclick="setSharedSeatPackage('seat_2p')"
+                        class="btn-seat-pkg py-2 px-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white text-center transition">
+                        <span class="block">👥 2 Người</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Ngồi cạnh nhau</span>
+                      </button>
+                      <button type="button" id="btnSeatMiddle" onclick="setSharedSeatPackage('seat_middle_row')"
+                        class="btn-seat-pkg py-2 px-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white text-center transition">
+                        <span class="block">👑 Bao Hàng Giữa</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Riêng tư, tối đa 2 người</span>
+                      </button>
                     </div>
                   </div>
 
+                  <!-- Gói hành lý vali -->
                   <div>
                     <div class="flex items-center justify-between mb-1.5">
-                      <label class="text-xs font-bold text-slate-800">Hành Lý Của Mỗi Khách <span class="text-[#9E7326]">*</span></label>
-                      <span class="text-[10px] text-slate-500">Kèm cốp xe</span>
+                      <label class="text-xs font-bold text-slate-800">Quy Cách Hành Lý Vali <span class="text-[#9E7326]">*</span></label>
+                      <span class="text-[10px] text-emerald-700 font-bold" id="luggageChoiceBadge">1 Vali Miễn Phí</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-2">
-                      <button type="button" id="btnLuggage1" onclick="setSharedLuggage('luggage1')"
-                        class="py-2 px-2.5 rounded-xl text-xs font-bold flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm border border-amber-300">
+                    <div class="grid grid-cols-2 gap-2" id="luggageButtonGroup">
+                      <button type="button" id="btnLugStandard" onclick="setLuggageChoice('standard')"
+                        class="py-2 px-2.5 rounded-xl text-xs font-bold flex flex-col items-center justify-center bg-white text-[#9E7326] shadow-sm border border-amber-300 transition">
                         <span>🧳 1 Vali Tiêu Chuẩn</span>
+                        <span class="text-[10px] text-emerald-600 font-normal">Miễn phí kèm theo</span>
                       </button>
-                      <button type="button" id="btnLuggage2" onclick="setSharedLuggage('luggage2')"
-                        class="py-2 px-2.5 rounded-xl text-xs font-medium flex items-center justify-center space-x-1.5 bg-white/70 text-slate-700 hover:bg-white">
-                        <span>🧳🧳 2 Vali / Đồ Nhiều</span>
+                      <button type="button" id="btnLugExtra" onclick="setLuggageChoice('extra')"
+                        class="py-2 px-2.5 rounded-xl text-xs font-medium flex flex-col items-center justify-center bg-white/70 text-slate-700 hover:bg-white transition">
+                        <span>🧳🧳 2 Vali Trở Lên</span>
+                        <span class="text-[10px] text-amber-700 font-normal" id="extraLuggageFeeBadge">+ Phụ thu hành lý</span>
                       </button>
                     </div>
-                    <p class="text-[10px] text-slate-500 mt-1">Đơn vị cước tính: (Số khách) &times; (Đơn giá loại xe &amp; mức hành lý).</p>
+                    <p class="text-[10px] text-slate-500 mt-1">Cốp xe rộng rãi, hỗ trợ xách xếp hành lý cẩn thận tận xe.</p>
                   </div>
                 </div>
 
@@ -1709,12 +1724,12 @@
       }
     };
 
-    // State quản lý hình thức & loại xe (charter = Bao xe, shared = Ghép xe)
-    let currentServiceMode = 'charter'; // 'charter' | 'shared'
-    let currentCarType = 'car5';         // 'car5' | 'car7'
-    let sharedPaxCount = 1;              // 1, 2, 3, 4 ghế
-    let sharedLuggageType = 'luggage1';  // 'luggage1' | 'luggage2'
-    let pricingCarType = 'car5';         // Tab hiển thị bảng giá: 'car5' | 'car7'
+    // State quản lý hình thức, loại xe, gói ghế & hành lý
+    let currentServiceMode = 'charter';       // 'charter' | 'shared'
+    let currentCarType = 'car5';               // 'car5' | 'car7'
+    let selectedSeatPackage = 'seat_1p';       // 'seat_1p' | 'seat_2p' | 'seat_middle_row'
+    let selectedLuggageChoice = 'standard';    // 'standard' (1 vali) | 'extra' (2+ vali)
+    let pricingCarType = 'car5';               // Tab hiển thị bảng giá: 'car5' | 'car7'
 
     /**
      * DỮ LIỆU CẤU HÌNH MẶC ĐỊNH (DEFAULT_DRIVER_CONFIG)
@@ -1751,8 +1766,8 @@
             car7: 350000
           },
           shared: {
-            car5: { luggage1: 150000, luggage2: 180000 },
-            car7: { luggage1: 180000, luggage2: 220000 }
+            car5: { seat_1p: 150000, seat_2p: 280000, seat_middle_row: 350000, extra_luggage_fee: 50000 },
+            car7: { seat_1p: 180000, seat_2p: 340000, seat_middle_row: 420000, extra_luggage_fee: 50000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1771,8 +1786,8 @@
             car7: 2000000
           },
           shared: {
-            car5: { luggage1: 600000, luggage2: 700000 },
-            car7: { luggage1: 700000, luggage2: 800000 }
+            car5: { seat_1p: 600000, seat_2p: 1100000, seat_middle_row: 1400000, extra_luggage_fee: 100000 },
+            car7: { seat_1p: 700000, seat_2p: 1300000, seat_middle_row: 1600000, extra_luggage_fee: 100000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1791,8 +1806,8 @@
             car7: 1500000
           },
           shared: {
-            car5: { luggage1: 350000, luggage2: 400000 },
-            car7: { luggage1: 400000, luggage2: 460000 }
+            car5: { seat_1p: 350000, seat_2p: 650000, seat_middle_row: 850000, extra_luggage_fee: 50000 },
+            car7: { seat_1p: 400000, seat_2p: 750000, seat_middle_row: 1000000, extra_luggage_fee: 50000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1811,8 +1826,8 @@
             car7: 1200000
           },
           shared: {
-            car5: { luggage1: 200000, luggage2: 250000 },
-            car7: { luggage1: 250000, luggage2: 300000 }
+            car5: { seat_1p: 200000, seat_2p: 380000, seat_middle_row: 500000, extra_luggage_fee: 50000 },
+            car7: { seat_1p: 250000, seat_2p: 480000, seat_middle_row: 600000, extra_luggage_fee: 50000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1831,8 +1846,8 @@
             car7: 1350000
           },
           shared: {
-            car5: { luggage1: 250000, luggage2: 300000 },
-            car7: { luggage1: 300000, luggage2: 360000 }
+            car5: { seat_1p: 250000, seat_2p: 480000, seat_middle_row: 650000, extra_luggage_fee: 50000 },
+            car7: { seat_1p: 300000, seat_2p: 580000, seat_middle_row: 750000, extra_luggage_fee: 50000 }
           },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
@@ -1851,8 +1866,8 @@
             car7: 11000
           },
           shared: {
-            car5: { luggage1: 0, luggage2: 0 },
-            car7: { luggage1: 0, luggage2: 0 }
+            car5: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 },
+            car7: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 }
           },
           charterUnit: 'đ / km (tùy cự ly)',
           sharedUnit: 'Liên hệ tài xế',
@@ -1871,8 +1886,8 @@
             car7: 0
           },
           shared: {
-            car5: { luggage1: 0, luggage2: 0 },
-            car7: { luggage1: 0, luggage2: 0 }
+            car5: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 },
+            car7: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 }
           },
           charterUnit: 'Báo giá trực tiếp',
           sharedUnit: 'Báo giá trực tiếp',
@@ -1896,7 +1911,7 @@
     let driverConfig = null;
 
     /**
-     * CHUẨN HÓA DỮ LIỆU TUYẾN XE (TIERED PRICING: 5 CHỖ / 7 CHỖ / VALI)
+     * CHUẨN HÓA DỮ LIỆU TUYẾN XE (TIERED PRICING: 5 CHỖ / 7 CHỖ / SỐ NGƯỜI & VALI)
      */
     function normalizeRoute(r) {
       if (!r) return null;
@@ -1916,35 +1931,56 @@
         };
       }
 
-      // Khối xe ghép
+      // Khối xe ghép: car5, car7 (seat_1p, seat_2p, seat_middle_row, extra_luggage_fee)
       if (!normalized.shared || typeof normalized.shared !== 'object' || !normalized.shared.car5) {
         const oldShared = Number(r.sharedPrice) || 0;
         normalized.shared = {
           car5: {
-            luggage1: oldShared,
-            luggage2: oldShared > 10000 ? Math.round((oldShared * 1.15) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.15) : 0)
+            seat_1p: oldShared,
+            seat_2p: oldShared > 10000 ? Math.round((oldShared * 1.85) / 10000) * 10000 : 0,
+            seat_middle_row: oldShared > 10000 ? Math.round((oldShared * 2.3) / 10000) * 10000 : 0,
+            extra_luggage_fee: oldShared > 0 ? 50000 : 0
           },
           car7: {
-            luggage1: oldShared > 10000 ? Math.round((oldShared * 1.2) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.2) : 0),
-            luggage2: oldShared > 10000 ? Math.round((oldShared * 1.35) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.35) : 0)
+            seat_1p: oldShared > 10000 ? Math.round((oldShared * 1.2) / 10000) * 10000 : 0,
+            seat_2p: oldShared > 10000 ? Math.round((oldShared * 2.2) / 10000) * 10000 : 0,
+            seat_middle_row: oldShared > 10000 ? Math.round((oldShared * 2.7) / 10000) * 10000 : 0,
+            extra_luggage_fee: oldShared > 0 ? 50000 : 0
           }
         };
       } else {
+        const c5 = normalized.shared.car5;
+        const c7 = normalized.shared.car7 || {};
+
+        const c5_1p = (typeof c5.seat_1p !== 'undefined') ? Number(c5.seat_1p) : (Number(c5.luggage1) || 0);
+        const c5_2p = (typeof c5.seat_2p !== 'undefined') ? Number(c5.seat_2p) : (c5_1p > 10000 ? Math.round((c5_1p * 1.85) / 10000) * 10000 : 0);
+        const c5_mid = (typeof c5.seat_middle_row !== 'undefined') ? Number(c5.seat_middle_row) : (c5_1p > 10000 ? Math.round((c5_1p * 2.3) / 10000) * 10000 : 0);
+        const c5_lugFee = (typeof c5.extra_luggage_fee !== 'undefined') ? Number(c5.extra_luggage_fee) : ((Number(c5.luggage2) > c5_1p) ? (Number(c5.luggage2) - c5_1p) : (c5_1p > 0 ? 50000 : 0));
+
+        const c7_1p = (typeof c7.seat_1p !== 'undefined') ? Number(c7.seat_1p) : (Number(c7.luggage1) || (c5_1p > 10000 ? Math.round((c5_1p * 1.2) / 10000) * 10000 : 0));
+        const c7_2p = (typeof c7.seat_2p !== 'undefined') ? Number(c7.seat_2p) : (c7_1p > 10000 ? Math.round((c7_1p * 1.85) / 10000) * 10000 : 0);
+        const c7_mid = (typeof c7.seat_middle_row !== 'undefined') ? Number(c7.seat_middle_row) : (c7_1p > 10000 ? Math.round((c7_1p * 2.3) / 10000) * 10000 : 0);
+        const c7_lugFee = (typeof c7.extra_luggage_fee !== 'undefined') ? Number(c7.extra_luggage_fee) : ((Number(c7.luggage2) > c7_1p) ? (Number(c7.luggage2) - c7_1p) : (c7_1p > 0 ? 50000 : 0));
+
         normalized.shared = {
           car5: {
-            luggage1: Number(normalized.shared.car5?.luggage1) || 0,
-            luggage2: Number(normalized.shared.car5?.luggage2) || 0
+            seat_1p: c5_1p,
+            seat_2p: c5_2p,
+            seat_middle_row: c5_mid,
+            extra_luggage_fee: c5_lugFee
           },
           car7: {
-            luggage1: Number(normalized.shared.car7?.luggage1) || 0,
-            luggage2: Number(normalized.shared.car7?.luggage2) || 0
+            seat_1p: c7_1p,
+            seat_2p: c7_2p,
+            seat_middle_row: c7_mid,
+            extra_luggage_fee: c7_lugFee
           }
         };
       }
 
       // Tương thích ngược
       normalized.charterPrice = normalized.charter.car5;
-      normalized.sharedPrice = normalized.shared.car5.luggage1;
+      normalized.sharedPrice = normalized.shared.car5.seat_1p;
 
       return normalized;
     }
@@ -2153,16 +2189,43 @@
           charterText = 'Báo giá trực tiếp';
         }
 
-        let sharedLug1Text = 'Báo giá trực tiếp';
-        let sharedLug2Text = 'Báo giá trực tiếp';
+        let sharedDetailsHtml = '';
         if (route.id === 'INTER_PROV') {
-          sharedLug1Text = 'Liên hệ tài xế';
-          sharedLug2Text = 'Liên hệ tài xế';
-        } else if (route.shared[pricingCarType]?.luggage1 > 0) {
-          const p1 = Math.round((route.shared[pricingCarType].luggage1 * multiplier) / 1000) * 1000;
-          sharedLug1Text = `${p1.toLocaleString('vi-VN')} đ`;
-          const p2 = Math.round((route.shared[pricingCarType].luggage2 * multiplier) / 1000) * 1000;
-          sharedLug2Text = `${p2.toLocaleString('vi-VN')} đ`;
+          sharedDetailsHtml = `
+            <div class="text-xs text-slate-500 italic py-1">
+              • Giá ghép thỏa thuận theo lộ trình thực tế
+            </div>`;
+        } else if (route.shared[pricingCarType]?.seat_1p > 0) {
+          const s = route.shared[pricingCarType];
+          const p1 = Math.round((s.seat_1p * multiplier) / 1000) * 1000;
+          const p2 = Math.round((s.seat_2p * multiplier) / 1000) * 1000;
+          const pMid = Math.round((s.seat_middle_row * multiplier) / 1000) * 1000;
+          const pLug = Math.round((s.extra_luggage_fee * multiplier) / 1000) * 1000;
+
+          sharedDetailsHtml = `
+            <div class="space-y-1.5 pt-1 text-xs">
+              <div class="flex items-center justify-between text-slate-700">
+                <span>• Ghép 1 người (1 vali):</span>
+                <span class="font-bold text-[#0F172A] font-mono">${p1.toLocaleString('vi-VN')} đ</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-700">
+                <span>• Ghép 2 người (cạnh nhau):</span>
+                <span class="font-bold text-[#0F172A] font-mono">${p2.toLocaleString('vi-VN')} đ</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-700">
+                <span>• Bao trọn hàng giữa:</span>
+                <span class="font-bold text-[#9E7326] font-mono">${pMid.toLocaleString('vi-VN')} đ</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-500 pt-0.5">
+                <span>• Phụ thu từ 2 vali:</span>
+                <span class="font-semibold text-amber-700 font-mono">+${pLug.toLocaleString('vi-VN')} đ</span>
+              </div>
+            </div>`;
+        } else {
+          sharedDetailsHtml = `
+            <div class="text-xs text-slate-500 italic py-1">
+              • Liên hệ báo giá theo yêu cầu
+            </div>`;
         }
 
         const card = document.createElement('div');
@@ -2199,16 +2262,9 @@
                 <span class="text-[#9E7326] font-bold">Bao trọn xe (${carLabel}):</span>
                 <span class="font-bold font-display tracking-tight text-[#9E7326] text-base sm:text-lg">${charterText}</span>
               </div>
-              <div class="pt-2 border-t border-slate-100 space-y-1">
-                <div class="text-[11px] font-semibold text-slate-700">Đi ghép tiện chuyến / 1 ghế:</div>
-                <div class="flex items-center justify-between text-xs text-slate-600 pl-2">
-                  <span>• Kèm 1 vali tiêu chuẩn:</span>
-                  <span class="font-bold text-[#0F172A] font-display">${sharedLug1Text}</span>
-                </div>
-                <div class="flex items-center justify-between text-xs text-slate-600 pl-2">
-                  <span>• Kèm 2 vali / đồ nhiều:</span>
-                  <span class="font-bold text-[#0F172A] font-display">${sharedLug2Text}</span>
-                </div>
+              <div class="pt-2 border-t border-slate-100">
+                <div class="text-[11px] font-bold text-emerald-700 mb-1">Đi ghép tiện chuyến:</div>
+                ${sharedDetailsHtml}
               </div>
             </div>
 
@@ -2275,34 +2331,58 @@
       updatePrice();
     }
 
-    // Chọn số lượng khách đi ghép
-    function setSharedPax(count) {
-      sharedPaxCount = parseInt(count, 10) || 1;
-      const badge = document.getElementById('sharedPaxBadge');
-      if (badge) badge.textContent = `${sharedPaxCount} Khách`;
-      const btns = document.querySelectorAll('.btn-shared-pax');
-      btns.forEach((btn, idx) => {
-        if (idx + 1 === sharedPaxCount) {
-          btn.className = 'btn-shared-pax py-2 rounded-xl text-xs font-bold bg-white text-[#9E7326] shadow-sm border border-amber-300';
+    // Chọn gói vị trí / số người đi ghép
+    function setSharedSeatPackage(pkg) {
+      selectedSeatPackage = pkg;
+      const badge = document.getElementById('sharedSeatPackageBadge');
+      if (badge) {
+        if (pkg === 'seat_1p') badge.textContent = '1 Người (Ghế chuẩn)';
+        else if (pkg === 'seat_2p') badge.textContent = '2 Người (Cạnh nhau)';
+        else badge.textContent = 'Bao Trọn Hàng Giữa';
+      }
+
+      const map = {
+        'seat_1p': 'btnSeat1p',
+        'seat_2p': 'btnSeat2p',
+        'seat_middle_row': 'btnSeatMiddle'
+      };
+
+      Object.entries(map).forEach(([key, btnId]) => {
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        if (key === pkg) {
+          btn.className = 'btn-seat-pkg py-2 px-2 rounded-xl text-xs font-bold bg-white text-[#9E7326] shadow-sm border border-amber-300 text-center transition';
         } else {
-          btn.className = 'btn-shared-pax py-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white';
+          btn.className = 'btn-seat-pkg py-2 px-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white text-center transition';
         }
       });
+
       updatePrice();
     }
 
-    // Chọn số lượng vali cho mỗi khách
-    function setSharedLuggage(type) {
-      sharedLuggageType = type;
-      const btn1 = document.getElementById('btnLuggage1');
-      const btn2 = document.getElementById('btnLuggage2');
-      if (type === 'luggage1') {
-        if (btn1) btn1.className = 'py-2 px-2.5 rounded-xl text-xs font-bold flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm border border-amber-300';
-        if (btn2) btn2.className = 'py-2 px-2.5 rounded-xl text-xs font-medium flex items-center justify-center space-x-1.5 bg-white/70 text-slate-700 hover:bg-white';
+    // Chọn quy cách hành lý vali
+    function setLuggageChoice(choice) {
+      selectedLuggageChoice = choice;
+      const btnStd = document.getElementById('btnLugStandard');
+      const btnExt = document.getElementById('btnLugExtra');
+      const badge = document.getElementById('luggageChoiceBadge');
+
+      if (choice === 'standard') {
+        if (btnStd) btnStd.className = 'py-2 px-2.5 rounded-xl text-xs font-bold flex flex-col items-center justify-center bg-white text-[#9E7326] shadow-sm border border-amber-300 transition';
+        if (btnExt) btnExt.className = 'py-2 px-2.5 rounded-xl text-xs font-medium flex flex-col items-center justify-center bg-white/70 text-slate-700 hover:bg-white transition';
+        if (badge) {
+          badge.textContent = '1 Vali Miễn Phí';
+          badge.className = 'text-[10px] text-emerald-700 font-bold';
+        }
       } else {
-        if (btn2) btn2.className = 'py-2 px-2.5 rounded-xl text-xs font-bold flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm border border-amber-300';
-        if (btn1) btn1.className = 'py-2 px-2.5 rounded-xl text-xs font-medium flex items-center justify-center space-x-1.5 bg-white/70 text-slate-700 hover:bg-white';
+        if (btnExt) btnExt.className = 'py-2 px-2.5 rounded-xl text-xs font-bold flex flex-col items-center justify-center bg-white text-[#9E7326] shadow-sm border border-amber-300 transition';
+        if (btnStd) btnStd.className = 'py-2 px-2.5 rounded-xl text-xs font-medium flex flex-col items-center justify-center bg-white/70 text-slate-700 hover:bg-white transition';
+        if (badge) {
+          badge.textContent = 'Mang 2 Vali Trở Lên';
+          badge.className = 'text-[10px] text-amber-700 font-bold';
+        }
       }
+
       updatePrice();
     }
 
@@ -2404,6 +2484,18 @@
       const multiplier = isHoliday ? (1 + (driverConfig.surchargePercent || 20) / 100) : 1;
       const carLabel = currentCarType === 'car7' ? 'Xe 7 chỗ' : 'Xe 5 chỗ';
 
+      // Cập nhật số tiền phụ thu vali trên badge phụ thu hành lý
+      const extraLugFee = routeData.shared[currentCarType]?.extra_luggage_fee || 0;
+      const extraLugBadge = document.getElementById('extraLuggageFeeBadge');
+      if (extraLugBadge) {
+        if (extraLugFee > 0) {
+          const formattedFee = Math.round((extraLugFee * multiplier) / 1000) * 1000;
+          extraLugBadge.textContent = `+${formattedFee.toLocaleString('vi-VN')} đ phụ thu`;
+        } else {
+          extraLugBadge.textContent = '+ Phụ thu hành lý';
+        }
+      }
+
       // 1. Tuyến tự do hoặc báo giá riêng
       if (routeData.id === 'CUSTOM' || (routeData.charter.car5 === 0 && routeData.charter.car7 === 0)) {
         animatePriceCounter(0, 'Báo Giá Trực Tiếp');
@@ -2432,14 +2524,19 @@
           priceUnit.textContent = `/ chuyến trọn gói (${carLabel})`;
         }
       } else {
-        // 4. Ghép xe theo ghế & số vali
-        const sharedUnitBase = routeData.shared[currentCarType]?.[sharedLuggageType] || 0;
-        if (sharedUnitBase > 0) {
-          const unitPrice = Math.round((sharedUnitBase * multiplier) / 1000) * 1000;
-          const totalPrice = unitPrice * sharedPaxCount;
+        // 4. Ghép xe linh hoạt theo gói ghế / số người + phụ thu vali
+        const seatBasePrice = routeData.shared[currentCarType]?.[selectedSeatPackage] || 0;
+        if (seatBasePrice > 0) {
+          const lugFeeApplied = (selectedLuggageChoice === 'extra') ? extraLugFee : 0;
+          const totalPrice = Math.round(((seatBasePrice + lugFeeApplied) * multiplier) / 1000) * 1000;
           animatePriceCounter(totalPrice);
-          const lugLabel = sharedLuggageType === 'luggage2' ? '2 vali' : '1 vali';
-          priceUnit.textContent = `/ tổng cước (${sharedPaxCount} khách • ${lugLabel}/khách • ${carLabel})`;
+
+          let pkgLabel = '1 người';
+          if (selectedSeatPackage === 'seat_2p') pkgLabel = '2 người';
+          else if (selectedSeatPackage === 'seat_middle_row') pkgLabel = 'Bao hàng giữa';
+
+          const lugLabel = (selectedLuggageChoice === 'extra') ? '2+ vali' : '1 vali';
+          priceUnit.textContent = `/ trọn gói (${pkgLabel} • ${lugLabel} • ${carLabel})`;
         } else {
           animatePriceCounter(0, 'Liên Hệ Zalo');
           priceUnit.textContent = `/ hỗ trợ ghép chuyến (${carLabel})`;
@@ -2458,6 +2555,10 @@
       }
       setCarType(carType);
       setServiceMode(mode);
+      if (mode === 'shared') {
+        setSharedSeatPackage('seat_1p');
+        setLuggageChoice('standard');
+      }
 
       // Cuộn mượt về khung đặt xe
       const bookingBox = document.getElementById('bookingBox');
@@ -2585,11 +2686,15 @@
 
       if (currentServiceMode === 'charter') {
         modeText = 'Bao Toàn Xe (VIP)';
-        paxDetail = document.getElementById('paxCount')?.value || 'Bao xe';
+        paxDetail = document.getElementById('paxCount')?.value || 'Bao toàn xe';
       } else {
-        const lugText = sharedLuggageType === 'luggage2' ? '2 vali/khách' : '1 vali/khách';
-        modeText = `Đi Ghép Tiện Chuyến (${sharedPaxCount} khách - ${lugText})`;
-        paxDetail = `${sharedPaxCount} khách ghép (${lugText})`;
+        let pkgText = '1 Người (Ghế tiêu chuẩn)';
+        if (selectedSeatPackage === 'seat_2p') pkgText = '2 Người (Ngồi cạnh nhau)';
+        else if (selectedSeatPackage === 'seat_middle_row') pkgText = 'Bao trọn hàng ghế giữa (Tối đa 2 người)';
+
+        const lugText = (selectedLuggageChoice === 'extra') ? 'Mang 2 vali trở lên (+Phụ thu)' : '1 vali tiêu chuẩn (Miễn phí)';
+        modeText = `Đi Ghép Tiện Chuyến (${pkgText})`;
+        paxDetail = `${pkgText} • Hành lý: ${lugText}`;
       }
 
       const estimatedPriceText = priceDisplay.textContent + ' ' + priceUnit.textContent;
@@ -2634,8 +2739,10 @@
       if (currentServiceMode === 'charter') {
         zaloMessage += `• Khách & Hành lý: ${paxDetail}\n`;
       } else {
-        zaloMessage += `• Số khách ghép: ${sharedPaxCount} người\n` +
-          `• Hành lý: ${sharedLuggageType === 'luggage2' ? '2 vali/khách' : '1 vali/khách'}\n`;
+        const pkgText = (selectedSeatPackage === 'seat_middle_row') ? 'Bao trọn hàng ghế giữa' : (selectedSeatPackage === 'seat_2p' ? '2 người' : '1 người');
+        const lugText = (selectedLuggageChoice === 'extra') ? 'Từ 2 vali trở lên (+phụ thu)' : '1 vali tiêu chuẩn (miễn phí)';
+        zaloMessage += `• Gói ghế / Số khách: ${pkgText}\n` +
+          `• Quy cách hành lý: ${lugText}\n`;
       }
 
       if (flightNumber) {
