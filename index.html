@@ -503,9 +503,8 @@
               </div>
 
               <!-- TACTILE RECESSED SWITCH: BAO TOÀN XE VS ĐI GHÉP TIẾT KIỆM -->
-              <div class="mb-5">
-                <label class="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-2">Hình Thức Phục
-                  Vụ</label>
+              <div class="mb-3.5">
+                <label class="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1.5">1. Hình Thức Di Chuyển</label>
                 <div class="tactile-switch-track p-1 rounded-xl flex items-center cursor-pointer select-none relative"
                   id="switchContainer">
                   <button type="button" id="btnModeCharter"
@@ -525,7 +524,7 @@
                     <span>Đi Ghép Tiện Chuyến</span>
                   </button>
                 </div>
-                <div class="text-[11px] text-slate-500 mt-1.5 flex items-center space-x-1">
+                <div class="text-[11px] text-slate-500 mt-1 flex items-center space-x-1">
                   <svg class="w-3.5 h-3.5 text-[#9E7326]" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
@@ -535,34 +534,86 @@
                 </div>
               </div>
 
+              <!-- CHỌN LOẠI XE: 5 CHỖ VS 7 CHỖ -->
+              <div class="mb-4">
+                <label class="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-1.5">2. Chọn Loại Xe Phục Vụ <span class="text-[#9E7326]">*</span></label>
+                <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl" id="carTypeSwitchContainer">
+                  <button type="button" id="btnCar5" onclick="setCarType('car5')"
+                    class="py-2 px-2.5 rounded-lg text-xs font-bold transition-all duration-200 flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                    </svg>
+                    <span>Xe 5 Chỗ (Mazda CX-5)</span>
+                  </button>
+                  <button type="button" id="btnCar7" onclick="setCarType('car7')"
+                    class="py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center space-x-1.5 text-slate-600 hover:text-slate-900">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <span>Xe 7 Chỗ (Carnival / MPV)</span>
+                  </button>
+                </div>
+              </div>
+
               <!-- BOOKING FORM -->
               <form id="bookingForm" class="space-y-3.5" novalidate>
 
                 <!-- FIELD: TUYẾN ĐƯỜNG PHỔ BIẾN / ĐIỂM ĐẾN -->
                 <div>
                   <label for="routeSelect" class="block text-xs font-bold text-slate-700 mb-1">
-                    Lộ Trình / Điểm Đến <span class="text-[#9E7326]">*</span>
+                    3. Tuyến Đường / Lộ Trình <span class="text-[#9E7326]">*</span>
                   </label>
                   <div class="relative">
                     <select id="routeSelect"
                       class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3.5 py-2.5 text-sm appearance-none cursor-pointer pr-10 transition">
-                      <option value="HN_NB" data-charter="250000" data-shared="150000">Hà Nội ⇄ Sân Bay Nội Bài</option>
-                      <option value="HN_HL" data-charter="1200000" data-shared="350000">Hà Nội ⇄ TP. Hạ Long (Quảng
-                        Ninh)</option>
-                      <option value="HN_NBINH" data-charter="950000" data-shared="200000">Hà Nội ⇄ Tràng An / Ninh Bình
-                      </option>
-                      <option value="HN_HP" data-charter="1050000" data-shared="250000">Hà Nội ⇄ TP. Hải Phòng (Cao Tốc
-                        5B)</option>
-                      <option value="INTER_PROV" data-charter="8500" data-shared="0">Liên Tỉnh Theo Km (8.500đ -
-                        10.000đ/km)</option>
-                      <option value="CUSTOM" data-charter="0" data-shared="0">Tuyến Theo Yêu Cầu Riêng (Báo giá trực
-                        tiếp)</option>
+                      <option value="HN_NB">Hà Nội ⇄ Sân Bay Nội Bài</option>
+                      <option value="HN_TH">Hà Nội ⇄ TP. Thanh Hóa</option>
+                      <option value="HN_HL">Hà Nội ⇄ TP. Hạ Long (Quảng Ninh)</option>
+                      <option value="HN_NBINH">Hà Nội ⇄ Tràng An / Ninh Bình</option>
+                      <option value="HN_HP">Hà Nội ⇄ TP. Hải Phòng (Cao Tốc 5B)</option>
+                      <option value="INTER_PROV">Liên Tỉnh Theo Km (8.500đ - 11.000đ/km)</option>
+                      <option value="CUSTOM">Tuyến Theo Yêu Cầu Riêng (Báo giá trực tiếp)</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
+                  </div>
+                </div>
+
+                <!-- KHỐI ĐẶC THÙ XE GHÉP: CHỌN SỐ GHẾ & SỐ VALI HÀNH LÝ -->
+                <div id="sharedConfigBox" class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/90 space-y-3 hidden">
+                  <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <label class="text-xs font-bold text-slate-800">Số Lượng Ghế Đi Ghép <span class="text-[#9E7326]">*</span></label>
+                      <span class="text-[10px] text-[#9E7326] font-bold" id="sharedPaxBadge">1 Khách</span>
+                    </div>
+                    <div class="grid grid-cols-4 gap-1.5">
+                      <button type="button" class="btn-shared-pax py-2 rounded-xl text-xs font-bold bg-white text-[#9E7326] shadow-sm border border-amber-300" onclick="setSharedPax(1)">1 Khách</button>
+                      <button type="button" class="btn-shared-pax py-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white" onclick="setSharedPax(2)">2 Khách</button>
+                      <button type="button" class="btn-shared-pax py-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white" onclick="setSharedPax(3)">3 Khách</button>
+                      <button type="button" class="btn-shared-pax py-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white" onclick="setSharedPax(4)">4 Khách</button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <label class="text-xs font-bold text-slate-800">Hành Lý Của Mỗi Khách <span class="text-[#9E7326]">*</span></label>
+                      <span class="text-[10px] text-slate-500">Kèm cốp xe</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                      <button type="button" id="btnLuggage1" onclick="setSharedLuggage('luggage1')"
+                        class="py-2 px-2.5 rounded-xl text-xs font-bold flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm border border-amber-300">
+                        <span>🧳 1 Vali Tiêu Chuẩn</span>
+                      </button>
+                      <button type="button" id="btnLuggage2" onclick="setSharedLuggage('luggage2')"
+                        class="py-2 px-2.5 rounded-xl text-xs font-medium flex items-center justify-center space-x-1.5 bg-white/70 text-slate-700 hover:bg-white">
+                        <span>🧳🧳 2 Vali / Đồ Nhiều</span>
+                      </button>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mt-1">Đơn vị cước tính: (Số khách) &times; (Đơn giá loại xe &amp; mức hành lý).</p>
                   </div>
                 </div>
 
@@ -596,7 +647,7 @@
                     <input type="datetime-local" id="pickupTime"
                       class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3 py-2.5 text-xs transition">
                   </div>
-                  <div>
+                  <div id="charterPaxBox">
                     <label for="paxCount" class="block text-xs font-bold text-slate-700 mb-1">
                       Hành Khách & Hành Lý
                     </label>
@@ -604,7 +655,8 @@
                       class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3 py-2.5 text-xs appearance-none cursor-pointer transition">
                       <option value="1 khách - 1 vali">1 Khách (Gọn nhẹ)</option>
                       <option value="2-3 khách - 2 vali" selected>2 - 3 Khách (2 vali tiêu chuẩn)</option>
-                      <option value="4 khách - 4 vali lớn">4 Khách (4 vali lớn / Full cốp)</option>
+                      <option value="4-5 khách - 4 vali lớn">4 - 5 Khách (4 vali lớn / Full cốp)</option>
+                      <option value="6-7 khách - Full đồ">6 - 7 Khách (Xe 7 chỗ full đồ)</option>
                       <option value="Có gậy Golf / Hàng cồng kềnh">Có túi Gậy Golf / Đồ cồng kềnh</option>
                     </select>
                   </div>
@@ -940,14 +992,34 @@
     <section id="routes" class="py-16 sm:py-20 border-t border-slate-200 relative bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="text-center max-w-3xl mx-auto mb-10">
           <span class="text-[10px] uppercase tracking-widest text-[#9E7326] font-bold">Lộ Trình Cốt Lõi</span>
           <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] mt-2 font-display tracking-tight">Bảng Cước Niêm Yết
             Các Tuyến</h2>
           <p class="text-slate-600 text-sm sm:text-base mt-3">
-            Bảng giá minh bạch áp dụng cho cả hình thức Bao Toàn Xe và Đi Ghép Tiện Chuyến. Bấm chọn tuyến để cập nhật
-            form đặt xe ngay lập tức.
+            Bảng giá minh bạch áp dụng cho cả hình thức Bao Toàn Xe và Đi Ghép Tiện Chuyến. Chọn loại xe 5 chỗ hoặc 7 chỗ để tra cứu mức cước tương ứng.
           </p>
+        </div>
+
+        <!-- TABS CHUYỂN ĐỔI LOẠI XE: 5 CHỖ / 7 CHỖ -->
+        <div class="flex justify-center mb-8">
+          <div class="inline-flex p-1 bg-slate-100 rounded-2xl border border-slate-200">
+            <button type="button" id="tabPricingCar5" onclick="switchPricingCarType('car5')"
+              class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 flex items-center space-x-2 bg-white text-[#9E7326] shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+              </svg>
+              <span>Xe 5 Chỗ (Mazda CX-5 / Sedan)</span>
+            </button>
+            <button type="button" id="tabPricingCar7" onclick="switchPricingCarType('car7')"
+              class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center space-x-2 text-slate-600 hover:text-slate-900">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+              <span>Xe 7 Chỗ (Carnival / MPV)</span>
+            </button>
+          </div>
         </div>
 
         <div id="popularRoutesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1637,8 +1709,12 @@
       }
     };
 
-    // State quản lý hình thức (charter = Bao xe, shared = Ghép xe)
-    let currentServiceMode = 'charter';
+    // State quản lý hình thức & loại xe (charter = Bao xe, shared = Ghép xe)
+    let currentServiceMode = 'charter'; // 'charter' | 'shared'
+    let currentCarType = 'car5';         // 'car5' | 'car7'
+    let sharedPaxCount = 1;              // 1, 2, 3, 4 ghế
+    let sharedLuggageType = 'luggage1';  // 'luggage1' | 'luggage2'
+    let pricingCarType = 'car5';         // Tab hiển thị bảng giá: 'car5' | 'car7'
 
     /**
      * DỮ LIỆU CẤU HÌNH MẶC ĐỊNH (DEFAULT_DRIVER_CONFIG)
@@ -1670,8 +1746,14 @@
         {
           id: 'HN_NB',
           name: 'Hà Nội ⇄ Sân Bay Nội Bài',
-          charterPrice: 250000,
-          sharedPrice: 150000,
+          charter: {
+            car5: 250000,
+            car7: 350000
+          },
+          shared: {
+            car5: { luggage1: 150000, luggage2: 180000 },
+            car7: { luggage1: 180000, luggage2: 220000 }
+          },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
           description: 'Đón tiễn 2 chiều mọi quận huyện Hà Nội lên sảnh T1, T2 Nội Bài.',
@@ -1682,10 +1764,36 @@
           isAirport: true
         },
         {
+          id: 'HN_TH',
+          name: 'Hà Nội ⇄ TP. Thanh Hóa',
+          charter: {
+            car5: 1800000,
+            car7: 2000000
+          },
+          shared: {
+            car5: { luggage1: 600000, luggage2: 700000 },
+            car7: { luggage1: 700000, luggage2: 800000 }
+          },
+          charterUnit: '/ chuyến trọn gói',
+          sharedUnit: '/ ghế tiện chuyến',
+          description: 'Cao tốc Mai Sơn - QL45 êm ái, đón trả tận nơi nội thành TP. Thanh Hóa & Sầm Sơn.',
+          badge: 'Cao Tốc Bắc Nam',
+          category: 'Tuyến Trọng Điểm',
+          features: ['Đã bao gồm vé cao tốc', 'Nước suối khăn lạnh miễn phí'],
+          isActive: true,
+          isAirport: false
+        },
+        {
           id: 'HN_HL',
           name: 'Hà Nội ⇄ TP. Hạ Long (Quảng Ninh)',
-          charterPrice: 1200000,
-          sharedPrice: 350000,
+          charter: {
+            car5: 1200000,
+            car7: 1500000
+          },
+          shared: {
+            car5: { luggage1: 350000, luggage2: 400000 },
+            car7: { luggage1: 400000, luggage2: 460000 }
+          },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
           description: 'Tuyến cao tốc Hải Phòng - Hạ Long chỉ 1h45p êm ru tới Bãi Cháy/Hòn Gai.',
@@ -1698,8 +1806,14 @@
         {
           id: 'HN_NBINH',
           name: 'Hà Nội ⇄ Tràng An / Ninh Bình',
-          charterPrice: 950000,
-          sharedPrice: 200000,
+          charter: {
+            car5: 950000,
+            car7: 1200000
+          },
+          shared: {
+            car5: { luggage1: 200000, luggage2: 250000 },
+            car7: { luggage1: 250000, luggage2: 300000 }
+          },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
           description: 'Tràng An, Bái Đính, Tam Cốc hoặc TP. Ninh Bình chỉ 1h15p di chuyển.',
@@ -1712,8 +1826,14 @@
         {
           id: 'HN_HP',
           name: 'Hà Nội ⇄ TP. Hải Phòng (Cao Tốc 5B)',
-          charterPrice: 1050000,
-          sharedPrice: 250000,
+          charter: {
+            car5: 1050000,
+            car7: 1350000
+          },
+          shared: {
+            car5: { luggage1: 250000, luggage2: 300000 },
+            car7: { luggage1: 300000, luggage2: 360000 }
+          },
           charterUnit: '/ chuyến trọn gói',
           sharedUnit: '/ ghế tiện chuyến',
           description: 'Tuyến cao tốc Hà Nội - Hải Phòng êm ru, giao nhận tận nơi nội thành.',
@@ -1725,9 +1845,15 @@
         },
         {
           id: 'INTER_PROV',
-          name: 'Liên Tỉnh Theo Km (8.500đ - 10.000đ/km)',
-          charterPrice: 8500,
-          sharedPrice: 0,
+          name: 'Liên Tỉnh Theo Km (8.500đ - 11.000đ/km)',
+          charter: {
+            car5: 8500,
+            car7: 11000
+          },
+          shared: {
+            car5: { luggage1: 0, luggage2: 0 },
+            car7: { luggage1: 0, luggage2: 0 }
+          },
           charterUnit: 'đ / km (tùy cự ly)',
           sharedUnit: 'Liên hệ tài xế',
           description: 'Hải Phòng, Thái Bình, Nam Định, Phú Thọ, Vĩnh Phúc, Bắc Ninh, v.v.',
@@ -1740,8 +1866,14 @@
         {
           id: 'CUSTOM',
           name: 'Tuyến Theo Yêu Cầu Riêng (Báo giá trực tiếp)',
-          charterPrice: 0,
-          sharedPrice: 0,
+          charter: {
+            car5: 0,
+            car7: 0
+          },
+          shared: {
+            car5: { luggage1: 0, luggage2: 0 },
+            car7: { luggage1: 0, luggage2: 0 }
+          },
           charterUnit: 'Báo giá trực tiếp',
           sharedUnit: 'Báo giá trực tiếp',
           description: 'Lộ trình thiết kế riêng biệt theo nhu cầu cá nhân hoặc đoàn công tác.',
@@ -1763,6 +1895,60 @@
     // State cấu hình nạp từ localStorage
     let driverConfig = null;
 
+    /**
+     * CHUẨN HÓA DỮ LIỆU TUYẾN XE (TIERED PRICING: 5 CHỖ / 7 CHỖ / VALI)
+     */
+    function normalizeRoute(r) {
+      if (!r) return null;
+      const normalized = { ...r };
+
+      // Khối bao xe
+      if (!normalized.charter || typeof normalized.charter !== 'object') {
+        const oldCharter = Number(r.charterPrice) || 0;
+        normalized.charter = {
+          car5: oldCharter,
+          car7: oldCharter > 10000 ? Math.round((oldCharter * 1.25) / 10000) * 10000 : (oldCharter > 0 ? Math.round(oldCharter * 1.25) : 0)
+        };
+      } else {
+        normalized.charter = {
+          car5: Number(normalized.charter.car5) || 0,
+          car7: Number(normalized.charter.car7) || 0
+        };
+      }
+
+      // Khối xe ghép
+      if (!normalized.shared || typeof normalized.shared !== 'object' || !normalized.shared.car5) {
+        const oldShared = Number(r.sharedPrice) || 0;
+        normalized.shared = {
+          car5: {
+            luggage1: oldShared,
+            luggage2: oldShared > 10000 ? Math.round((oldShared * 1.15) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.15) : 0)
+          },
+          car7: {
+            luggage1: oldShared > 10000 ? Math.round((oldShared * 1.2) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.2) : 0),
+            luggage2: oldShared > 10000 ? Math.round((oldShared * 1.35) / 10000) * 10000 : (oldShared > 0 ? Math.round(oldShared * 1.35) : 0)
+          }
+        };
+      } else {
+        normalized.shared = {
+          car5: {
+            luggage1: Number(normalized.shared.car5?.luggage1) || 0,
+            luggage2: Number(normalized.shared.car5?.luggage2) || 0
+          },
+          car7: {
+            luggage1: Number(normalized.shared.car7?.luggage1) || 0,
+            luggage2: Number(normalized.shared.car7?.luggage2) || 0
+          }
+        };
+      }
+
+      // Tương thích ngược
+      normalized.charterPrice = normalized.charter.car5;
+      normalized.sharedPrice = normalized.shared.car5.luggage1;
+
+      return normalized;
+    }
+
     function loadDriverConfig() {
       try {
         const raw = localStorage.getItem('DRIVER_CONFIG');
@@ -1783,6 +1969,8 @@
       }
       if (!driverConfig.routes || !driverConfig.routes.length) {
         driverConfig.routes = DEFAULT_DRIVER_CONFIG.routes;
+      } else {
+        driverConfig.routes = driverConfig.routes.map(normalizeRoute);
       }
       if (!driverConfig.images) {
         driverConfig.images = DEFAULT_DRIVER_CONFIG.images;
@@ -1807,7 +1995,7 @@
         driverConfig.telegram = { ...(driverConfig.telegram || DEFAULT_DRIVER_CONFIG.telegram), ...incoming.telegram };
       }
       if (Array.isArray(incoming.routes) && incoming.routes.length > 0) {
-        driverConfig.routes = incoming.routes;
+        driverConfig.routes = incoming.routes.map(normalizeRoute);
       }
       if (incoming.images) {
         driverConfig.images = { ...(driverConfig.images || DEFAULT_DRIVER_CONFIG.images), ...incoming.images };
@@ -1949,24 +2137,32 @@
 
       container.innerHTML = '';
 
-      activeRoutes.forEach(route => {
+      activeRoutes.forEach(rawRoute => {
+        const route = normalizeRoute(rawRoute);
+        const carLabel = pricingCarType === 'car7' ? 'Xe 7 Chỗ' : 'Xe 5 Chỗ';
+
         let charterText = 'Liên hệ';
         if (route.id === 'INTER_PROV') {
-          const p = Math.round((route.charterPrice * multiplier) / 100) * 100;
+          const baseKm = route.charter[pricingCarType] || 8500;
+          const p = Math.round((baseKm * multiplier) / 100) * 100;
           charterText = `chỉ từ ${p.toLocaleString('vi-VN')} đ/km`;
-        } else if (route.charterPrice > 0) {
-          const p = Math.round((route.charterPrice * multiplier) / 1000) * 1000;
+        } else if (route.charter[pricingCarType] > 0) {
+          const p = Math.round((route.charter[pricingCarType] * multiplier) / 1000) * 1000;
           charterText = `chỉ từ ${p.toLocaleString('vi-VN')} đ`;
         } else {
           charterText = 'Báo giá trực tiếp';
         }
 
-        let sharedText = 'Báo giá trực tiếp';
+        let sharedLug1Text = 'Báo giá trực tiếp';
+        let sharedLug2Text = 'Báo giá trực tiếp';
         if (route.id === 'INTER_PROV') {
-          sharedText = '9.000 - 10.000 đ';
-        } else if (route.sharedPrice > 0) {
-          const p = Math.round((route.sharedPrice * multiplier) / 1000) * 1000;
-          sharedText = `từ ${p.toLocaleString('vi-VN')} đ`;
+          sharedLug1Text = 'Liên hệ tài xế';
+          sharedLug2Text = 'Liên hệ tài xế';
+        } else if (route.shared[pricingCarType]?.luggage1 > 0) {
+          const p1 = Math.round((route.shared[pricingCarType].luggage1 * multiplier) / 1000) * 1000;
+          sharedLug1Text = `${p1.toLocaleString('vi-VN')} đ`;
+          const p2 = Math.round((route.shared[pricingCarType].luggage2 * multiplier) / 1000) * 1000;
+          sharedLug2Text = `${p2.toLocaleString('vi-VN')} đ`;
         }
 
         const card = document.createElement('div');
@@ -1986,23 +2182,33 @@
         card.innerHTML = `
           ${badgeHtml}
           <div>
-            <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1 flex items-center">
-              <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-              </svg>
-              ${categoryText}
+            <div class="flex items-center justify-between mb-1">
+              <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest flex items-center">
+                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+                ${categoryText}
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">${carLabel}</span>
             </div>
             <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">${route.name}</h3>
             <p class="text-xs text-slate-500 mb-4">${route.description || 'Lộ trình tối ưu, tài xế chính chủ đón tiễn chu đáo.'}</p>
 
             <div class="space-y-2 py-3 border-y border-slate-100">
               <div class="flex items-center justify-between text-xs">
-                <span class="text-slate-500">Đi ghép 1 ghế:</span>
-                <span class="font-bold font-display tracking-tight text-[#0F172A]">${sharedText}</span>
+                <span class="text-[#9E7326] font-bold">Bao trọn xe (${carLabel}):</span>
+                <span class="font-bold font-display tracking-tight text-[#9E7326] text-base sm:text-lg">${charterText}</span>
               </div>
-              <div class="flex items-center justify-between text-xs">
-                <span class="text-[#9E7326] font-bold">Bao trọn xe:</span>
-                <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">${charterText}</span>
+              <div class="pt-2 border-t border-slate-100 space-y-1">
+                <div class="text-[11px] font-semibold text-slate-700">Đi ghép tiện chuyến / 1 ghế:</div>
+                <div class="flex items-center justify-between text-xs text-slate-600 pl-2">
+                  <span>• Kèm 1 vali tiêu chuẩn:</span>
+                  <span class="font-bold text-[#0F172A] font-display">${sharedLug1Text}</span>
+                </div>
+                <div class="flex items-center justify-between text-xs text-slate-600 pl-2">
+                  <span>• Kèm 2 vali / đồ nhiều:</span>
+                  <span class="font-bold text-[#0F172A] font-display">${sharedLug2Text}</span>
+                </div>
               </div>
             </div>
 
@@ -2011,10 +2217,16 @@
             </ul>
           </div>
 
-          <button type="button" onclick="selectRouteFromCard('${route.id}', 'charter')"
-            class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
-            Chọn Tuyến Này
-          </button>
+          <div class="space-y-2 pt-2">
+            <button type="button" onclick="selectRouteFromCard('${route.id}', 'charter', '${pricingCarType}')"
+              class="w-full py-2.5 rounded-xl btn-gold-shimmer text-xs font-bold uppercase tracking-wider text-slate-900 transition shadow-sm flex items-center justify-center space-x-1">
+              <span>Bao Xe (${carLabel})</span>
+            </button>
+            <button type="button" onclick="selectRouteFromCard('${route.id}', 'shared', '${pricingCarType}')"
+              class="w-full py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition text-xs font-bold text-slate-700 uppercase tracking-wider text-center">
+              Ghép Tuyến Tiết Kiệm
+            </button>
+          </div>
         `;
         container.appendChild(card);
       });
@@ -2032,6 +2244,89 @@
     const errorText = document.getElementById('errorText');
     const pickupTimeInput = document.getElementById('pickupTime');
     const flightBox = document.getElementById('flightBox');
+
+    // Chuyển tab loại xe trong bảng giá tầng 4
+    function switchPricingCarType(type) {
+      pricingCarType = type;
+      const tab5 = document.getElementById('tabPricingCar5');
+      const tab7 = document.getElementById('tabPricingCar7');
+      if (type === 'car5') {
+        if (tab5) tab5.className = 'px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 flex items-center space-x-2 bg-white text-[#9E7326] shadow-sm';
+        if (tab7) tab7.className = 'px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center space-x-2 text-slate-600 hover:text-slate-900';
+      } else {
+        if (tab7) tab7.className = 'px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 flex items-center space-x-2 bg-white text-[#9E7326] shadow-sm';
+        if (tab5) tab5.className = 'px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center space-x-2 text-slate-600 hover:text-slate-900';
+      }
+      renderDynamicPopularRoutes();
+    }
+
+    // Chuyển loại xe trong form đặt xe
+    function setCarType(type) {
+      currentCarType = type;
+      const btn5 = document.getElementById('btnCar5');
+      const btn7 = document.getElementById('btnCar7');
+      if (type === 'car5') {
+        if (btn5) btn5.className = 'py-2 px-2.5 rounded-lg text-xs font-bold transition-all duration-200 flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm';
+        if (btn7) btn7.className = 'py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center space-x-1.5 text-slate-600 hover:text-slate-900';
+      } else {
+        if (btn7) btn7.className = 'py-2 px-2.5 rounded-lg text-xs font-bold transition-all duration-200 flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm';
+        if (btn5) btn5.className = 'py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center space-x-1.5 text-slate-600 hover:text-slate-900';
+      }
+      updatePrice();
+    }
+
+    // Chọn số lượng khách đi ghép
+    function setSharedPax(count) {
+      sharedPaxCount = parseInt(count, 10) || 1;
+      const badge = document.getElementById('sharedPaxBadge');
+      if (badge) badge.textContent = `${sharedPaxCount} Khách`;
+      const btns = document.querySelectorAll('.btn-shared-pax');
+      btns.forEach((btn, idx) => {
+        if (idx + 1 === sharedPaxCount) {
+          btn.className = 'btn-shared-pax py-2 rounded-xl text-xs font-bold bg-white text-[#9E7326] shadow-sm border border-amber-300';
+        } else {
+          btn.className = 'btn-shared-pax py-2 rounded-xl text-xs font-medium bg-white/70 text-slate-700 hover:bg-white';
+        }
+      });
+      updatePrice();
+    }
+
+    // Chọn số lượng vali cho mỗi khách
+    function setSharedLuggage(type) {
+      sharedLuggageType = type;
+      const btn1 = document.getElementById('btnLuggage1');
+      const btn2 = document.getElementById('btnLuggage2');
+      if (type === 'luggage1') {
+        if (btn1) btn1.className = 'py-2 px-2.5 rounded-xl text-xs font-bold flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm border border-amber-300';
+        if (btn2) btn2.className = 'py-2 px-2.5 rounded-xl text-xs font-medium flex items-center justify-center space-x-1.5 bg-white/70 text-slate-700 hover:bg-white';
+      } else {
+        if (btn2) btn2.className = 'py-2 px-2.5 rounded-xl text-xs font-bold flex items-center justify-center space-x-1.5 bg-white text-[#9E7326] shadow-sm border border-amber-300';
+        if (btn1) btn1.className = 'py-2 px-2.5 rounded-xl text-xs font-medium flex items-center justify-center space-x-1.5 bg-white/70 text-slate-700 hover:bg-white';
+      }
+      updatePrice();
+    }
+
+    // Xử lý chuyển đổi nút gạt Bao Xe / Ghép Xe
+    function setServiceMode(mode) {
+      currentServiceMode = mode;
+      const sharedBox = document.getElementById('sharedConfigBox');
+      const charterBox = document.getElementById('charterPaxBox');
+
+      if (mode === 'charter') {
+        if (btnModeCharter) btnModeCharter.className = 'bg-white text-[#9E7326] shadow-sm font-bold flex-1 py-2 rounded-lg text-xs text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
+        if (btnModeShared) btnModeShared.className = 'text-slate-600 hover:text-slate-900 flex-1 py-2 rounded-lg text-xs font-semibold text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
+        if (modeDescription) modeDescription.textContent = 'Riêng tư tuyệt đối, đưa đón tận cửa đúng giờ quý khách chọn.';
+        if (sharedBox) sharedBox.classList.add('hidden');
+        if (charterBox) charterBox.classList.remove('hidden');
+      } else {
+        if (btnModeShared) btnModeShared.className = 'bg-white text-[#9E7326] shadow-sm font-bold flex-1 py-2 rounded-lg text-xs text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
+        if (btnModeCharter) btnModeCharter.className = 'text-slate-600 hover:text-slate-900 flex-1 py-2 rounded-lg text-xs font-semibold text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
+        if (modeDescription) modeDescription.textContent = 'Tiết kiệm chi phí, ghép tuyến cùng hướng, cam kết không bắt khách dọc đường.';
+        if (sharedBox) sharedBox.classList.remove('hidden');
+        if (charterBox) charterBox.classList.add('hidden');
+      }
+      updatePrice();
+    }
 
     // Khởi tạo thời gian mặc định (Sau hiện tại 2 tiếng)
     function initializeDefaultTime() {
@@ -2075,7 +2370,6 @@
       function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        // Easing out quad
         const easeProgress = 1 - (1 - progress) * (1 - progress);
         const currentValue = Math.round(startValue + (targetValue - startValue) * easeProgress);
 
@@ -2091,11 +2385,12 @@
       animationFrameId = requestAnimationFrame(update);
     }
 
-    // Tính toán và cập nhật giá cước hiển thị
+    // Tính toán và cập nhật giá cước hiển thị theo loại xe và hình thức
     function updatePrice() {
       if (!routeSelect) return;
       const selectedKey = routeSelect.value;
-      const routeData = getRouteById(selectedKey);
+      const rawRoute = getRouteById(selectedKey);
+      const routeData = normalizeRoute(rawRoute);
 
       checkAirportFlightBox(routeData.id || selectedKey);
 
@@ -2103,57 +2398,53 @@
       const isHoliday = !!(driverConfig && driverConfig.holidaySurcharge);
       const holidayNotice = document.getElementById('holidayBadgeNotice');
       if (holidayNotice) {
-        if (isHoliday) {
-          holidayNotice.classList.remove('hidden');
-        } else {
-          holidayNotice.classList.add('hidden');
-        }
+        holidayNotice.classList.toggle('hidden', !isHoliday);
       }
 
       const multiplier = isHoliday ? (1 + (driverConfig.surchargePercent || 20) / 100) : 1;
+      const carLabel = currentCarType === 'car7' ? 'Xe 7 chỗ' : 'Xe 5 chỗ';
 
-      if (routeData.id === 'CUSTOM' || (routeData.charterPrice === 0 && routeData.sharedPrice === 0)) {
+      // 1. Tuyến tự do hoặc báo giá riêng
+      if (routeData.id === 'CUSTOM' || (routeData.charter.car5 === 0 && routeData.charter.car7 === 0)) {
         animatePriceCounter(0, 'Báo Giá Trực Tiếp');
-        priceUnit.textContent = '/ lộ trình riêng';
+        priceUnit.textContent = `/ lộ trình riêng (${carLabel})`;
         return;
       }
 
+      // 2. Tuyến theo km
       if (routeData.id === 'INTER_PROV') {
-        const finalKmPrice = Math.round((routeData.charterPrice * multiplier) / 100) * 100;
+        const baseKm = routeData.charter[currentCarType] || 8500;
+        const finalKmPrice = Math.round((baseKm * multiplier) / 100) * 100;
         animatePriceCounter(finalKmPrice);
-        priceUnit.textContent = '/ km (Khứ hồi giảm 70%)';
+        priceUnit.textContent = `/ km (${carLabel} • Khứ hồi giảm 70%)`;
         return;
       }
 
+      // 3. Bao toàn xe (Nguyên chuyến)
       if (currentServiceMode === 'charter') {
-        const finalPrice = Math.round((routeData.charterPrice * multiplier) / 1000) * 1000;
-        animatePriceCounter(finalPrice);
-        priceUnit.textContent = routeData.charterUnit || '/ chuyến trọn gói';
-      } else {
-        if (routeData.sharedPrice > 0) {
-          const finalPrice = Math.round((routeData.sharedPrice * multiplier) / 1000) * 1000;
+        const baseCharter = routeData.charter[currentCarType] || 0;
+        if (baseCharter > 0) {
+          const finalPrice = Math.round((baseCharter * multiplier) / 1000) * 1000;
           animatePriceCounter(finalPrice);
-          priceUnit.textContent = routeData.sharedUnit || '/ ghế tiện chuyến';
+          priceUnit.textContent = `/ chuyến trọn gói (${carLabel})`;
+        } else {
+          animatePriceCounter(0, 'Báo Giá Trực Tiếp');
+          priceUnit.textContent = `/ chuyến trọn gói (${carLabel})`;
+        }
+      } else {
+        // 4. Ghép xe theo ghế & số vali
+        const sharedUnitBase = routeData.shared[currentCarType]?.[sharedLuggageType] || 0;
+        if (sharedUnitBase > 0) {
+          const unitPrice = Math.round((sharedUnitBase * multiplier) / 1000) * 1000;
+          const totalPrice = unitPrice * sharedPaxCount;
+          animatePriceCounter(totalPrice);
+          const lugLabel = sharedLuggageType === 'luggage2' ? '2 vali' : '1 vali';
+          priceUnit.textContent = `/ tổng cước (${sharedPaxCount} khách • ${lugLabel}/khách • ${carLabel})`;
         } else {
           animatePriceCounter(0, 'Liên Hệ Zalo');
-          priceUnit.textContent = '/ hỗ trợ ghép chuyến';
+          priceUnit.textContent = `/ hỗ trợ ghép chuyến (${carLabel})`;
         }
       }
-    }
-
-    // Xử lý chuyển đổi nút gạt Bao Xe / Ghép Xe
-    function setServiceMode(mode) {
-      currentServiceMode = mode;
-      if (mode === 'charter') {
-        btnModeCharter.className = 'bg-white text-[#9E7326] shadow-sm font-bold flex-1 py-2 rounded-lg text-xs text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
-        btnModeShared.className = 'text-slate-600 hover:text-slate-900 flex-1 py-2 rounded-lg text-xs font-semibold text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
-        modeDescription.textContent = 'Riêng tư tuyệt đối, đưa đón tận cửa đúng giờ quý khách chọn.';
-      } else {
-        btnModeShared.className = 'bg-white text-[#9E7326] shadow-sm font-bold flex-1 py-2 rounded-lg text-xs text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
-        btnModeCharter.className = 'text-slate-600 hover:text-slate-900 flex-1 py-2 rounded-lg text-xs font-semibold text-center transition-all duration-300 flex items-center justify-center space-x-1.5';
-        modeDescription.textContent = 'Tiết kiệm chi phí, ghép tuyến cùng hướng, cam kết không bắt khách dọc đường.';
-      }
-      updatePrice();
     }
 
     btnModeCharter.addEventListener('click', () => setServiceMode('charter'));
@@ -2161,17 +2452,17 @@
     routeSelect.addEventListener('change', updatePrice);
 
     // Hàm gọi khi bấm "Chọn tuyến này" từ bảng giá tầng 4
-    window.selectRouteFromCard = function (routeKey, mode = 'charter') {
+    window.selectRouteFromCard = function (routeKey, mode = 'charter', carType = 'car5') {
       if (routeSelect) {
         routeSelect.value = routeKey;
       }
+      setCarType(carType);
       setServiceMode(mode);
 
       // Cuộn mượt về khung đặt xe
       const bookingBox = document.getElementById('bookingBox');
       if (bookingBox) {
         bookingBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Hiệu ứng nhấp nháy viền để gây chú ý
         bookingBox.classList.add('ring-2', 'ring-[#9E7326]');
         setTimeout(() => {
           bookingBox.classList.remove('ring-2', 'ring-[#9E7326]');
@@ -2205,7 +2496,7 @@
     }
     window.hideToast = hideToast;
 
-    // Gửi thông báo ngầm sang Telegram Bot
+    // Gửi thông báo ngầm sang Telegram Bot (định dạng chi tiết loại xe, hình thức & vali)
     async function sendSilentTelegramNotification(bookingData) {
       const tgConfig = (driverConfig && driverConfig.telegram && driverConfig.telegram.botToken)
         ? driverConfig.telegram
@@ -2225,14 +2516,16 @@
       const textMessage = `🚖 *ĐẶT CHUYẾN MỚI TỪ WEBSITE ${driverDisplayName} DRIVER* 🚖\n\n` +
         `👤 *Khách hàng:* ${bookingData.customerName}\n` +
         `📞 *Số điện thoại:* ${bookingData.customerPhone}\n` +
-        `🏷️ *Hình thức:* ${bookingData.modeText}\n` +
         `📍 *Lộ trình:* ${bookingData.routeName}\n` +
+        `🚘 *Loại xe:* ${bookingData.carTypeName}\n` +
+        `🏷️ *Hình thức:* ${bookingData.modeText}\n` +
         `🏠 *Điểm đón:* ${bookingData.pickupAddress}\n` +
         `⏰ *Thời gian đón:* ${bookingData.pickupTimeFormatted}\n` +
-        `👥 *Khách & Hành lý:* ${bookingData.pax}\n` +
+        `👥 *Chi tiết khách:* ${bookingData.paxDetail}\n` +
         (bookingData.flight ? `✈️ *Mã chuyến bay:* ${bookingData.flight}\n` : '') +
-        `💰 *Cước dự tính:* ${bookingData.estimatedPrice}\n\n` +
-        `_Thời gian gửi: ${new Date().toLocaleString('vi-VN')}_`;
+        `💰 *Tổng cước dự tính:* ${bookingData.estimatedPrice}\n` +
+        (bookingData.isHoliday ? `🔔 *Ghi chú:* Đã áp dụng phụ thu Lễ/Tết\n` : '') +
+        `\n_Thời gian gửi: ${new Date().toLocaleString('vi-VN')}_`;
 
       const url = `https://api.telegram.org/bot${tgConfig.botToken}/sendMessage`;
 
@@ -2257,10 +2550,10 @@
       e.preventDefault();
 
       const routeKey = routeSelect.value;
-      const routeData = getRouteById(routeKey);
+      const rawRoute = getRouteById(routeKey);
+      const routeData = normalizeRoute(rawRoute);
       const pickupAddress = document.getElementById('pickupAddress').value.trim();
       const pickupTime = document.getElementById('pickupTime').value;
-      const paxCount = document.getElementById('paxCount').value;
       const flightNumber = document.getElementById('flightNumber').value.trim();
       const customerName = document.getElementById('customerName').value.trim();
       const customerPhone = document.getElementById('customerPhone').value.trim();
@@ -2284,11 +2577,23 @@
         return;
       }
 
-      // Xóa thông báo lỗi nếu có
       hideError();
 
-      const modeText = currentServiceMode === 'charter' ? 'Bao Toàn Xe (VIP)' : 'Đi Ghép Tiện Chuyến';
+      const carTypeName = currentCarType === 'car7' ? 'Xe 7 Chỗ (Carnival / MPV)' : 'Xe 5 Chỗ (Mazda CX-5 / Sedan)';
+      let modeText = '';
+      let paxDetail = '';
+
+      if (currentServiceMode === 'charter') {
+        modeText = 'Bao Toàn Xe (VIP)';
+        paxDetail = document.getElementById('paxCount')?.value || 'Bao xe';
+      } else {
+        const lugText = sharedLuggageType === 'luggage2' ? '2 vali/khách' : '1 vali/khách';
+        modeText = `Đi Ghép Tiện Chuyến (${sharedPaxCount} khách - ${lugText})`;
+        paxDetail = `${sharedPaxCount} khách ghép (${lugText})`;
+      }
+
       const estimatedPriceText = priceDisplay.textContent + ' ' + priceUnit.textContent;
+      const isHoliday = !!(driverConfig && driverConfig.holidaySurcharge);
 
       // Định dạng ngày giờ thân thiện
       let timeFormatted = pickupTime;
@@ -2302,32 +2607,41 @@
       const bookingData = {
         customerName,
         customerPhone,
+        carTypeName,
         modeText,
+        paxDetail,
         routeName: routeData.name,
         pickupAddress,
         pickupTimeFormatted: timeFormatted,
-        pax: paxCount,
         flight: flightNumber,
-        estimatedPrice: estimatedPriceText
+        estimatedPrice: estimatedPriceText,
+        isHoliday
       };
 
       // 1. Gửi ngầm thông báo sang Telegram (nếu có cấu hình)
       sendSilentTelegramNotification(bookingData);
 
-      // 2. Tạo nội dung Zalo Deep Link mã hóa đầy đủ thông tin
+      // 2. Tạo nội dung Zalo Deep Link mã hóa đầy đủ thông tin phân loại
       let zaloMessage = `Chào anh ${APP_CONFIG.driverName || 'Lê Tuấn'}, tôi muốn đặt xe từ website:\n\n` +
         `• Khách hàng: ${customerName}\n` +
         `• Số điện thoại: ${customerPhone}\n` +
-        `• Hình thức: ${modeText}\n` +
         `• Lộ trình: ${routeData.name}\n` +
+        `• Loại xe: ${carTypeName}\n` +
+        `• Hình thức: ${modeText}\n` +
         `• Điểm đón: ${pickupAddress}\n` +
-        `• Giờ đón: ${timeFormatted}\n` +
-        `• Số khách & Vali: ${paxCount}\n`;
+        `• Giờ đón: ${timeFormatted}\n`;
+
+      if (currentServiceMode === 'charter') {
+        zaloMessage += `• Khách & Hành lý: ${paxDetail}\n`;
+      } else {
+        zaloMessage += `• Số khách ghép: ${sharedPaxCount} người\n` +
+          `• Hành lý: ${sharedLuggageType === 'luggage2' ? '2 vali/khách' : '1 vali/khách'}\n`;
+      }
 
       if (flightNumber) {
         zaloMessage += `• Mã chuyến bay: ${flightNumber}\n`;
       }
-      zaloMessage += `• Giá cước ước tính: ${estimatedPriceText}\n\n` +
+      zaloMessage += `• Tổng cước ước tính: ${estimatedPriceText}\n\n` +
         `Nhờ anh kiểm tra và xác nhận lịch trình giúp tôi. Xin cảm ơn!`;
 
       const zaloDeepLink = `https://zalo.me/${APP_CONFIG.zaloPhone}?text=${encodeURIComponent(zaloMessage)}`;
