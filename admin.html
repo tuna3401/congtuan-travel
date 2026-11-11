@@ -412,7 +412,7 @@
               </svg>
               Quản Lý Tuyến & Giá Cước
             </h3>
-            <p class="text-xs text-slate-400 mt-0.5">Bật/tắt tuyến và chỉnh sửa mức giá hiển thị trên website</p>
+            <p class="text-xs text-slate-400 mt-0.5">Bật/tắt tuyến, chỉnh sửa mức giá và dùng nút [▲] [▼] hoặc kéo-thả để đổi thứ tự hiển thị</p>
           </div>
 
           <!-- Add New Route Button -->
@@ -1333,15 +1333,9 @@
       };
 
       let rawRoutes = Array.isArray(incoming.routes) && incoming.routes.length > 0 ? incoming.routes : DEFAULT_DRIVER_CONFIG.routes;
-      // Đảm bảo tuyến Hà Nội ⇄ Nghệ An luôn có mặt và nằm ở vị trí đầu tiên (index 0)
+      // Đảm bảo tuyến Hà Nội ⇄ Nghệ An luôn có mặt nếu cấu hình cũ chưa có (giữ nguyên thứ tự người dùng đã sắp xếp)
       if (!rawRoutes.some(r => r.id === 'HN_NA')) {
         rawRoutes = [DEFAULT_DRIVER_CONFIG.routes[0], ...rawRoutes];
-      } else {
-        const naIdx = rawRoutes.findIndex(r => r.id === 'HN_NA');
-        if (naIdx > 0) {
-          const [naRoute] = rawRoutes.splice(naIdx, 1);
-          rawRoutes.unshift(naRoute);
-        }
       }
       const routes = rawRoutes.map(normalizeRoute);
 
@@ -1849,8 +1843,66 @@
     }
 
     /**
-     * RENDER DANH SÁCH TUYẾN ĐƯỜNG (PHÂN TẦNG 5 CHỖ / 7 CHỖ / VALI)
+     * RENDER DANH SÁCH TUYẾN ĐƯỜNG (PHÂN TẦNG 5 CHỖ / 7 CHỖ / VALI & SẮP XẾP THỨ TỰ)
      */
+    let draggedRouteIndex = null;
+
+    function handleDragStart(e, index) {
+      draggedRouteIndex = index;
+      e.dataTransfer.effectAllowed = 'move';
+      try {
+        e.dataTransfer.setData('text/plain', String(index));
+      } catch (err) { }
+      e.currentTarget.classList.add('opacity-40', 'border-goldAccent', 'ring-2', 'ring-goldAccent');
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      e.currentTarget.classList.add('border-goldAccent', 'bg-slate-900/90');
+    }
+
+    function handleDragLeave(e) {
+      e.currentTarget.classList.remove('border-goldAccent', 'bg-slate-900/90');
+    }
+
+    function handleDrop(e, targetIndex) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('border-goldAccent', 'bg-slate-900/90', 'opacity-40', 'ring-2', 'ring-goldAccent');
+      if (draggedRouteIndex !== null && draggedRouteIndex !== targetIndex) {
+        const movedItem = currentConfig.routes.splice(draggedRouteIndex, 1)[0];
+        currentConfig.routes.splice(targetIndex, 0, movedItem);
+        renderRouteList();
+        saveConfiguration(false);
+        showToast(`Đã chuyển "${movedItem.name}" sang vị trí #${targetIndex + 1}`);
+      }
+      draggedRouteIndex = null;
+    }
+
+    function handleDragEnd(e) {
+      e.currentTarget.classList.remove('opacity-40', 'border-goldAccent', 'ring-2', 'ring-goldAccent', 'bg-slate-900/90');
+      draggedRouteIndex = null;
+    }
+
+    function moveRoute(index, direction) {
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= currentConfig.routes.length) return;
+      const movedItem = currentConfig.routes[index];
+      const targetItem = currentConfig.routes[targetIndex];
+      currentConfig.routes[index] = targetItem;
+      currentConfig.routes[targetIndex] = movedItem;
+      renderRouteList();
+      saveConfiguration(false);
+      showToast(`Đã chuyển "${movedItem.name}" sang vị trí #${targetIndex + 1}`);
+    }
+
+    window.moveRoute = moveRoute;
+    window.handleDragStart = handleDragStart;
+    window.handleDragOver = handleDragOver;
+    window.handleDragLeave = handleDragLeave;
+    window.handleDrop = handleDrop;
+    window.handleDragEnd = handleDragEnd;
+
     function renderRouteList() {
       const container = document.getElementById('routeListContainer');
       container.innerHTML = '';
@@ -1867,11 +1919,21 @@
         const route = normalizeRoute(rawRoute);
         currentConfig.routes[index] = route;
 
+        const isFirst = index === 0;
+        const isLast = index === currentConfig.routes.length - 1;
+
         const card = document.createElement('div');
-        card.className = `rounded-2xl p-4 border transition-all duration-200 ${route.isActive
-          ? 'bg-cockpitCard border-cockpitBorder'
+        card.className = `rounded-2xl p-4 border transition-all duration-200 cursor-default select-none ${route.isActive
+          ? 'bg-cockpitCard border-cockpitBorder hover:border-goldSand/50'
           : 'bg-cockpitCard/50 border-slate-800/80 opacity-70'
           }`;
+        card.draggable = true;
+        card.dataset.index = index;
+        card.addEventListener('dragstart', (e) => handleDragStart(e, index));
+        card.addEventListener('dragover', (e) => handleDragOver(e));
+        card.addEventListener('dragleave', (e) => handleDragLeave(e));
+        card.addEventListener('drop', (e) => handleDrop(e, index));
+        card.addEventListener('dragend', (e) => handleDragEnd(e));
 
         const isCustom = route.id === 'CUSTOM';
         const isKm = route.id === 'INTER_PROV';
@@ -1907,19 +1969,42 @@
         }
 
         card.innerHTML = `
-          <div class="flex items-start justify-between">
-            <div class="flex-1 pr-3">
-              <div class="flex items-center space-x-2">
-                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full ${route.isAirport ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-slate-800 text-goldAccent'}">
-                  ${route.badge || (route.isAirport ? 'Sân Bay' : 'Tuyến Cố Định')}
+          <div class="flex items-start justify-between gap-2.5">
+            <div class="flex items-start space-x-2.5 flex-1 min-w-0">
+              <!-- Reorder Control: Badge & Up/Down buttons -->
+              <div class="flex flex-col items-center justify-center space-y-1 pt-0.5 flex-shrink-0">
+                <span class="inline-flex items-center justify-center min-w-[28px] h-6 px-1.5 rounded-md bg-slate-900 border border-goldSand/40 text-goldAccent font-mono text-xs font-bold shadow-inner" title="Thứ tự hiển thị #${index + 1}">
+                  #${index + 1}
                 </span>
-                ${!route.isActive
+                <div class="flex items-center space-x-1">
+                  <button type="button" onclick="moveRoute(${index}, -1)" ${isFirst ? 'disabled' : ''}
+                    class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-black transition ${isFirst ? 'text-slate-600 bg-slate-900/40 cursor-not-allowed opacity-30' : 'text-slate-200 bg-slate-800 hover:bg-goldSand hover:text-black active:scale-95'}"
+                    title="${isFirst ? 'Đang ở vị trí đầu' : 'Chuyển lên vị trí trước'}">
+                    ▲
+                  </button>
+                  <button type="button" onclick="moveRoute(${index}, 1)" ${isLast ? 'disabled' : ''}
+                    class="w-6 h-6 rounded flex items-center justify-center text-[10px] font-black transition ${isLast ? 'text-slate-600 bg-slate-900/40 cursor-not-allowed opacity-30' : 'text-slate-200 bg-slate-800 hover:bg-goldSand hover:text-black active:scale-95'}"
+                    title="${isLast ? 'Đang ở vị trí cuối' : 'Chuyển xuống vị trí sau'}">
+                    ▼
+                  </button>
+                </div>
+              </div>
+
+              <!-- Route Title & Details -->
+              <div class="flex-1 min-w-0 pr-1">
+                <div class="flex items-center flex-wrap gap-1.5">
+                  <span class="cursor-grab active:cursor-grabbing text-slate-500 hover:text-goldAccent text-xs px-1 select-none font-bold" title="Kéo thả để sắp xếp thứ tự">☰</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full ${route.isAirport ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-slate-800 text-goldAccent'}">
+                    ${route.badge || (route.isAirport ? 'Sân Bay' : 'Tuyến Cố Định')}
+                  </span>
+                  ${!route.isActive
             ? '<span class="text-[10px] text-rose-400 font-bold uppercase tracking-wider bg-rose-950/60 px-2 py-0.5 rounded-full border border-rose-900">Tạm Ngưng</span>'
             : ''
           }
+                </div>
+                <h4 class="text-sm font-bold text-white mt-1 font-display truncate">${route.name}</h4>
+                <p class="text-xs text-slate-400 mt-0.5 line-clamp-1">${route.description || 'Chuyến đi an toàn, sang trọng'}</p>
               </div>
-              <h4 class="text-sm font-bold text-white mt-1.5 font-display">${route.name}</h4>
-              <p class="text-xs text-slate-400 mt-0.5 line-clamp-1">${route.description || 'Chuyến đi an toàn, sang trọng'}</p>
             </div>
 
             <!-- Switch Bật/Tắt tuyến -->

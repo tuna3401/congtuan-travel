@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 
 <head>
@@ -2087,15 +2087,9 @@
       };
 
       let rawRoutes = Array.isArray(incoming.routes) && incoming.routes.length > 0 ? incoming.routes : DEFAULT_DRIVER_CONFIG.routes;
-      // Đảm bảo tuyến Hà Nội ⇄ Nghệ An luôn có mặt và nằm ở vị trí đầu tiên (index 0)
+      // Đảm bảo tuyến Hà Nội ⇄ Nghệ An luôn có mặt nếu cấu hình cũ chưa có (giữ nguyên thứ tự người dùng đã sắp xếp)
       if (!rawRoutes.some(r => r.id === 'HN_NA')) {
         rawRoutes = [DEFAULT_DRIVER_CONFIG.routes[0], ...rawRoutes];
-      } else {
-        const naIdx = rawRoutes.findIndex(r => r.id === 'HN_NA');
-        if (naIdx > 0) {
-          const [naRoute] = rawRoutes.splice(naIdx, 1);
-          rawRoutes.unshift(naRoute);
-        }
       }
       const routes = rawRoutes.map(normalizeRoute);
 
@@ -2276,11 +2270,11 @@
     }
 
     // Render động danh sách Select Tuyến trong form đặt xe
-    function renderDynamicRouteSelect(selectedId = null) {
+    function renderDynamicRouteSelect(selectedId = null, preserveSelection = false) {
       if (!routeSelect || !driverConfig || !driverConfig.routes) return;
 
       const activeRoutes = driverConfig.routes.filter(r => r.isActive !== false);
-      const previousValue = selectedId || routeSelect.value;
+      const previousValue = preserveSelection ? routeSelect.value : null;
       routeSelect.innerHTML = '';
 
       activeRoutes.forEach(r => {
@@ -2291,9 +2285,12 @@
         routeSelect.appendChild(opt);
       });
 
-      if (previousValue && activeRoutes.some(r => r.id === previousValue)) {
+      if (selectedId && activeRoutes.some(r => r.id === selectedId)) {
+        routeSelect.value = selectedId;
+      } else if (previousValue && activeRoutes.some(r => r.id === previousValue)) {
         routeSelect.value = previousValue;
       } else if (activeRoutes.length > 0) {
+        // Tuyến vị trí #1 tự động được chọn làm mặc định khi mở trang
         routeSelect.value = activeRoutes[0].id;
       }
     }
@@ -3059,7 +3056,7 @@
                 localStorage.setItem('DRIVER_CONFIG', JSON.stringify(driverConfig));
                 applyDynamicProfile();
                 applyDynamicImages();
-                renderDynamicRouteSelect();
+                renderDynamicRouteSelect(null, true);
                 renderDynamicPopularRoutes();
                 updatePrice();
               }
@@ -3081,7 +3078,7 @@
       loadDriverConfig();
       applyDynamicProfile();
       applyDynamicImages();
-      renderDynamicRouteSelect('HN_NA');
+      renderDynamicRouteSelect();
       renderDynamicPopularRoutes();
       initializeDefaultTime();
       updatePrice();
