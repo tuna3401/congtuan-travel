@@ -1025,13 +1025,24 @@
       pin: '1990',
       holidaySurcharge: false,
       surchargePercent: 20,
+      driver_info: {
+        name: 'Thân Hải',
+        hotline: '0965110954',
+        zalo_number: '0965110954',
+        avatar_url: 'assets/images/avatar.jpg',
+        car_images: {
+          car5: 'assets/images/car-exterior.jpg',
+          car7: 'assets/images/car-interior.jpg'
+        },
+        bio_text: 'Lái xe an toàn, đón trả tận nơi, phục vụ chu đáo 24/7.'
+      },
       profile: {
         driverName: 'Thân Hải',
         brandName: 'Thân Hải DRIVER',
         tagline: 'Chuyên cơ mặt đất cá nhân',
-        hotlineDisplay: '0337.545.188',
-        hotlineTel: '0337545188',
-        zaloPhone: '0337545188',
+        hotlineDisplay: '0965.110.954',
+        hotlineTel: '0965110954',
+        zaloPhone: '0965110954',
         carModel: 'Mazda CX-5 2024 & Sedan Hạng Sang',
         carPlate: '30K - Xe riêng chính chủ không mào',
         operatingArea: 'Cầu Giấy, Nam Từ Liêm & Sân bay Quốc tế Nội Bài, Hà Nội'
@@ -1257,9 +1268,12 @@
         const raw = localStorage.getItem('DRIVER_CONFIG');
         if (raw) {
           const parsed = JSON.parse(raw);
-          // Dọn dẹp cache cũ nếu còn chứa các tuyến hardcoded cũ (legacy template)
-          if (Array.isArray(parsed.routes) && parsed.routes.some(r => r.id === 'HN_NB' || r.id === 'INTER_PROV' || r.id === 'CUSTOM')) {
-            console.log('[Cache Cleanup] Phát hiện cache localStorage chứa tuyến hardcoded cũ, tiến hành làm sạch.');
+          // Dọn dẹp cache cũ nếu còn chứa các tuyến hardcoded cũ hoặc số điện thoại cũ
+          const isStale = (Array.isArray(parsed.routes) && parsed.routes.some(r => r.id === 'HN_NB' || r.id === 'INTER_PROV' || r.id === 'CUSTOM')) ||
+            (parsed.profile && parsed.profile.hotlineTel === '0337545188') ||
+            (parsed.driver_info && (parsed.driver_info.hotline === '0337545188' || parsed.driver_info.zalo_number === '0337545188'));
+          if (isStale) {
+            console.log('[Cache Cleanup] Phát hiện cache localStorage chứa cấu hình/SĐT cũ, tiến hành làm sạch.');
             localStorage.removeItem('DRIVER_CONFIG');
             currentConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
           } else {
