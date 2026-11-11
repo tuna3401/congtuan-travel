@@ -1427,34 +1427,49 @@
      * QUẢN LÝ HỒ SƠ TÀI XẾ & LIÊN HỆ
      */
     function renderProfileUI() {
-      if (!currentConfig || !currentConfig.profile) return;
-      const p = currentConfig.profile;
-      const fields = ['driverName', 'tagline', 'hotlineDisplay', 'zaloPhone', 'carModel', 'carPlate', 'operatingArea'];
-      fields.forEach(f => {
-        const el = document.getElementById('prof_' + f);
-        if (el) el.value = p[f] || '';
-      });
+      if (!currentConfig) return;
+      const d = currentConfig.driver_info || {};
+      const p = currentConfig.profile || {};
+
+      const nameEl = document.getElementById('prof_driverName');
+      if (nameEl) nameEl.value = d.name || p.driverName || '';
+
+      const hotlineEl = document.getElementById('prof_hotline');
+      if (hotlineEl) hotlineEl.value = d.hotline || p.hotlineDisplay || p.hotlineTel || '';
+
+      const zaloEl = document.getElementById('prof_zaloNumber');
+      if (zaloEl) zaloEl.value = d.zalo_number || p.zaloPhone || '';
+
+      const bioEl = document.getElementById('prof_bioText');
+      if (bioEl) bioEl.value = d.bio_text || p.tagline || '';
 
       // Cập nhật tên tài xế trên top bar
       const topName = document.querySelector('header h2');
-      if (topName && p.driverName) {
-        topName.textContent = p.driverName + ' Driver';
+      if (topName && (d.name || p.driverName)) {
+        topName.textContent = (d.name || p.driverName) + ' Driver';
       }
     }
 
     function handleProfileInput(field, val) {
+      if (!currentConfig.driver_info) currentConfig.driver_info = {};
       if (!currentConfig.profile) currentConfig.profile = {};
-      currentConfig.profile[field] = val;
-      if (field === 'driverName') {
+
+      if (field === 'name') {
+        currentConfig.driver_info.name = val;
+        currentConfig.profile.driverName = val;
         const topName = document.querySelector('header h2');
         if (topName) topName.textContent = (val.trim() || 'Tài xế') + ' Driver';
+      } else if (field === 'hotline') {
+        currentConfig.driver_info.hotline = val;
+        currentConfig.profile.hotlineDisplay = val;
+        currentConfig.profile.hotlineTel = val.replace(/[^\d+]/g, '');
+      } else if (field === 'zalo_number') {
+        currentConfig.driver_info.zalo_number = val;
+        currentConfig.profile.zaloPhone = val.replace(/[^\d+]/g, '');
+      } else if (field === 'bio_text') {
+        currentConfig.driver_info.bio_text = val;
+        currentConfig.profile.tagline = val;
       }
-    }
-
-    function handleHotlineInput(val) {
-      if (!currentConfig.profile) currentConfig.profile = {};
-      currentConfig.profile.hotlineDisplay = val;
-      currentConfig.profile.hotlineTel = val.replace(/[^\d+]/g, '');
     }
 
     /**

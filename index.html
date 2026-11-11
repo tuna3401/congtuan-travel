@@ -191,13 +191,13 @@
             class="font-semibold text-slate-800">Thân Hải</strong> đón tiễn tận nơi</span>
       </div>
       <div class="flex items-center space-x-4">
-        <a href="tel:0965110954" data-phone-link
-          class="text-[#9E7326] hover:text-[#B8860B] transition flex items-center space-x-1 font-bold">
+        <a href="tel:0965110954" id="topbarHotlineLink" data-phone-link
+          class="driver-phone-link text-[#9E7326] hover:text-[#B8860B] transition flex items-center space-x-1 font-bold">
           <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
             <path
               d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
           </svg>
-          <span>Hotline VIP: <span data-phone-display>0965.110.954</span></span>
+          <span>Hotline VIP: <span data-phone-display class="driver-phone-display">0965.110.954</span></span>
         </a>
       </div>
     </div>
@@ -273,8 +273,8 @@
 
       <!-- CALL BUTTON & ZALO CHAT -->
       <div class="hidden sm:flex items-center space-x-3">
-        <a href="https://zalo.me/0965110954" data-zalo-link target="_blank" rel="noopener noreferrer"
-          class="px-4 py-2 rounded-xl bg-blue-50 border border-blue-200 text-[#0068FF] hover:bg-[#0068FF] hover:text-white transition flex items-center space-x-2 text-xs font-bold">
+        <a href="https://zalo.me/0965110954" id="headerZaloLink" data-zalo-link target="_blank" rel="noopener noreferrer"
+          class="driver-zalo-link px-4 py-2 rounded-xl bg-blue-50 border border-blue-200 text-[#0068FF] hover:bg-[#0068FF] hover:text-white transition flex items-center space-x-2 text-xs font-bold">
           <svg class="w-4 h-4" viewBox="0 0 48 48" fill="currentColor">
             <path
               d="M24 4C12.95 4 4 12.52 4 23.03c0 5.67 2.62 10.74 6.78 14.28-.43 2.58-1.56 5.86-3.08 7.85 3.51-.54 7.21-2.12 9.5-3.4 2.15.58 4.43.9 6.8.9 11.05 0 20-8.52 20-19.03S35.05 4 24 4z" />
@@ -282,13 +282,13 @@
           <span>Chat Zalo</span>
         </a>
 
-        <a href="tel:0965110954" data-phone-link
-          class="btn-gold-shimmer px-5 py-2.5 rounded-xl text-xs font-bold flex items-center space-x-2 shadow-md shadow-amber-500/20">
+        <a href="tel:0965110954" id="headerHotlineLink" data-phone-link
+          class="driver-phone-link btn-gold-shimmer px-5 py-2.5 rounded-xl text-xs font-bold flex items-center space-x-2 shadow-md shadow-amber-500/20">
           <svg class="w-4 h-4 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
             <path
               d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
           </svg>
-          <span data-phone-display>0965.110.954</span>
+          <span data-phone-display class="driver-phone-display">0965.110.954</span>
         </a>
       </div>
 
@@ -321,12 +321,12 @@
       <a href="#reviews" class="block text-slate-700 hover:text-[#9E7326] font-semibold py-1">Đánh Giá Khách Hàng</a>
       <a href="#faq" class="block text-slate-700 hover:text-[#9E7326] font-semibold py-1">Câu Hỏi Thường Gặp</a>
       <div class="pt-4 border-t border-slate-200 flex flex-col gap-3">
-        <a href="tel:0965110954" data-phone-link
-          class="btn-gold-shimmer text-center py-3 rounded-xl text-xs uppercase tracking-wider font-bold shadow-md">
-          Gọi Ngay: <span data-phone-display>0965.110.954</span>
+        <a href="tel:0965110954" id="mobileDrawerHotlineLink" data-phone-link
+          class="driver-phone-link btn-gold-shimmer text-center py-3 rounded-xl text-xs uppercase tracking-wider font-bold shadow-md">
+          Gọi Ngay: <span data-phone-display class="driver-phone-display">0965.110.954</span>
         </a>
-        <a href="https://zalo.me/0965110954" data-zalo-link target="_blank"
-          class="bg-[#0068FF] text-white text-center py-3 rounded-xl text-xs font-bold flex items-center justify-center space-x-2">
+        <a href="https://zalo.me/0965110954" id="mobileDrawerZaloLink" data-zalo-link target="_blank"
+          class="driver-zalo-link bg-[#0068FF] text-white text-center py-3 rounded-xl text-xs font-bold flex items-center justify-center space-x-2">
           <span>Nhắn Zalo Trực Tiếp</span>
         </a>
       </div>
@@ -775,13 +775,13 @@
                   </button>
 
                   <!-- DIRECT CALL SECONDARY -->
-                  <a href="tel:0965110954" data-phone-link
-                    class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-slate-700 transition flex items-center justify-center space-x-2">
+                  <a href="tel:0965110954" id="bookingFormHotlineLink" data-phone-link
+                    class="driver-phone-link w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-slate-700 transition flex items-center justify-center space-x-2">
                     <svg class="w-3.5 h-3.5 text-[#9E7326]" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
                     </svg>
-                    <span>Cần Xe Gấp? Gọi Ngay: <span data-phone-display>0965.110.954</span></span>
+                    <span>Cần Xe Gấp? Gọi Ngay: <span data-phone-display class="driver-phone-display">0965.110.954</span></span>
                   </a>
                 </div>
 
@@ -1354,18 +1354,18 @@
 
               <div class="pt-3 flex flex-wrap items-center gap-4">
                 <!-- GOLD CALL BUTTON -->
-                <a href="tel:0965110954" data-phone-link
-                  class="btn-gold-shimmer px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-lg shadow-amber-500/20">
+                <a href="tel:0965110954" id="contactSectionHotlineLink" data-phone-link
+                  class="driver-phone-link btn-gold-shimmer px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-lg shadow-amber-500/20">
                   <svg class="w-4 h-4 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
                   </svg>
-                  <span>Gọi Hotline: <span data-phone-display>0965.110.954</span></span>
+                  <span>Gọi Hotline: <span data-phone-display class="driver-phone-display">0965.110.954</span></span>
                 </a>
 
                 <!-- DIRECT ZALO BUTTON -->
-                <a href="https://zalo.me/0965110954" data-zalo-link target="_blank" rel="noopener noreferrer"
-                  class="px-6 py-3.5 rounded-xl bg-[#0068FF] hover:bg-[#0055d4] text-white transition text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-md">
+                <a href="https://zalo.me/0965110954" id="contactSectionZaloLink" data-zalo-link target="_blank" rel="noopener noreferrer"
+                  class="driver-zalo-link px-6 py-3.5 rounded-xl bg-[#0068FF] hover:bg-[#0055d4] text-white transition text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center space-x-2 shadow-md">
                   <svg class="w-4 h-4" viewBox="0 0 48 48" fill="currentColor">
                     <path
                       d="M24 4C12.95 4 4 12.52 4 23.03c0 5.67 2.62 10.74 6.78 14.28-.43 2.58-1.56 5.86-3.08 7.85 3.51-.54 7.21-2.12 9.5-3.4 2.15.58 4.43.9 6.8.9 11.05 0 20-8.52 20-19.03S35.05 4 24 4z" />
@@ -1452,13 +1452,13 @@
           <ul class="space-y-2 text-xs">
             <li class="flex items-center space-x-2">
               <span class="text-[#F3D692]">Hotline:</span>
-              <a href="tel:0965110954" data-phone-link class="text-white hover:text-[#F3D692] font-bold font-display"
-                data-phone-display>0965.110.954</a>
+              <a href="tel:0965110954" id="footerHotlineLink" data-phone-link class="driver-phone-link text-white hover:text-[#F3D692] font-bold font-display"
+                data-phone-display><span class="driver-phone-display">0965.110.954</span></a>
             </li>
             <li class="flex items-center space-x-2">
               <span class="text-[#F3D692]">Zalo:</span>
-              <a href="https://zalo.me/0965110954" data-zalo-link target="_blank"
-                class="text-white hover:text-[#F3D692] font-display" data-zalo-display>0965 110 954</a>
+              <a href="https://zalo.me/0965110954" id="footerZaloLink" data-zalo-link target="_blank"
+                class="driver-zalo-link text-white hover:text-[#F3D692] font-display" data-zalo-display><span class="driver-zalo-display">0965 110 954</span></a>
             </li>
             <li class="flex items-center space-x-2">
               <span class="text-[#F3D692]">Thời gian:</span>
@@ -1505,19 +1505,19 @@
     <div class="max-w-md mx-auto grid grid-cols-2 gap-2.5">
 
       <!-- BUTTON 1: CALL HOTLINE (NỀN TRẮNG XÁM, CHỮ VÀNG ĐỒNG) -->
-      <a href="tel:0965110954" data-phone-link
-        class="bg-slate-100 hover:bg-slate-200 border border-amber-600/30 text-[#9E7326] py-3 px-3 rounded-xl flex items-center justify-center space-x-2 shadow-sm font-bold transition">
+      <a href="tel:0965110954" id="floatingCallBtn" data-phone-link
+        class="driver-phone-link bg-slate-100 hover:bg-slate-200 border border-amber-600/30 text-[#9E7326] py-3 px-3 rounded-xl flex items-center justify-center space-x-2 shadow-sm font-bold transition">
         <svg class="w-4 h-4 animate-bounce text-[#9E7326]" fill="currentColor" viewBox="0 0 20 20">
           <path
             d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z" />
         </svg>
         <span class="text-xs font-bold font-display uppercase tracking-wider">Gọi <span
-            data-phone-display>0965.110.954</span></span>
+            data-phone-display class="driver-phone-display">0965.110.954</span></span>
       </a>
 
       <!-- BUTTON 2: ZALO OFFICIAL CHAT (XANH CHUẨN ZALO) -->
-      <a href="https://zalo.me/0965110954" data-zalo-link target="_blank" rel="noopener noreferrer"
-        class="bg-[#0068FF] hover:bg-[#0055d4] text-white py-3 px-3 rounded-xl flex items-center justify-center space-x-2 shadow-sm font-bold transition">
+      <a href="https://zalo.me/0965110954" id="floatingZaloBtn" data-zalo-link target="_blank" rel="noopener noreferrer"
+        class="driver-zalo-link bg-[#0068FF] hover:bg-[#0055d4] text-white py-3 px-3 rounded-xl flex items-center justify-center space-x-2 shadow-sm font-bold transition">
         <!-- Official Zalo SVG Logo -->
         <svg class="w-4 h-4" viewBox="0 0 48 48" fill="currentColor">
           <path
@@ -1898,19 +1898,21 @@
         el.textContent = bioText;
       });
 
-      // 3. Hotline Link & Display
-      document.querySelectorAll('[data-phone-link]').forEach(el => {
+      // 3. Hotline Link & Display (Hỗ trợ data-phone-link, a[href^="tel:"], .driver-phone-display, #hotlineLink, #floatingCallBtn)
+      document.querySelectorAll('[data-phone-link], a[href^="tel:"], .driver-phone-link, #hotlineLink, #floatingCallBtn').forEach(el => {
         el.href = `tel:${hotlineTel}`;
       });
-      document.querySelectorAll('[data-phone-display]').forEach(el => {
+      document.querySelectorAll('[data-phone-display], .driver-phone-display, #hotlineDisplay').forEach(el => {
         el.textContent = hotlineDisplay;
       });
 
-      // 4. Zalo Link, Display & QR Code
-      document.querySelectorAll('[data-zalo-link]').forEach(el => {
-        el.href = `https://zalo.me/${zaloPhone}`;
+      // 4. Zalo Link, Display & QR Code (Hỗ trợ data-zalo-link, a[href*="zalo.me"], .driver-zalo-link, #zaloLink, #floatingZaloBtn)
+      document.querySelectorAll('[data-zalo-link], a[href*="zalo.me"], .driver-zalo-link, #zaloLink, #floatingZaloBtn').forEach(el => {
+        if (!el.href.includes('text=')) {
+          el.href = `https://zalo.me/${zaloPhone}`;
+        }
       });
-      document.querySelectorAll('[data-zalo-display]').forEach(el => {
+      document.querySelectorAll('[data-zalo-display], .driver-zalo-display, #zaloDisplay').forEach(el => {
         el.textContent = zaloPhone;
       });
       const qrImg = document.getElementById('zaloQrCodeImg');
@@ -2688,7 +2690,9 @@
       zaloMessage += `• Tổng cước ước tính: ${estimatedPriceText}\n\n` +
         `Nhờ anh kiểm tra và xác nhận lịch trình giúp tôi. Xin cảm ơn!`;
 
-      const zaloDeepLink = `https://zalo.me/${APP_CONFIG.zaloPhone}?text=${encodeURIComponent(zaloMessage)}`;
+      const activeZalo = (driverConfig && driverConfig.driver_info && driverConfig.driver_info.zalo_number) || APP_CONFIG.zaloPhone || '0965110954';
+      const cleanZaloPhone = activeZalo.replace(/[^\d+]/g, '');
+      const zaloDeepLink = `https://zalo.me/${cleanZaloPhone}?text=${encodeURIComponent(zaloMessage)}`;
 
       // 3. Hiển thị Toast thông báo trạng thái
       showToast();
