@@ -1261,6 +1261,28 @@
     }
 
     /**
+     * DỌN DẸP CACHE CŨ TRÊN MÁY KHÁCH (CHẠY 1 LẦN DUY NHẤT KHI TẢI TRANG)
+     */
+    let hasCleanedLegacyCacheAdmin = false;
+    function cleanupLegacyLocalStorageOnceAdmin() {
+      if (hasCleanedLegacyCacheAdmin) return;
+      hasCleanedLegacyCacheAdmin = true;
+      try {
+        const raw = localStorage.getItem('DRIVER_CONFIG');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          const isStale = (Array.isArray(parsed.routes) && parsed.routes.some(r => r.id === 'HN_NB' || r.id === 'INTER_PROV' || r.id === 'CUSTOM')) ||
+            (parsed.profile && parsed.profile.hotlineTel === '0337545188') ||
+            (parsed.driver_info && (parsed.driver_info.hotline === '0337545188' || parsed.driver_info.zalo_number === '0337545188'));
+          if (isStale) {
+            console.log('[Cache Cleanup] Đã làm sạch cache cũ trên máy khách (Admin, chạy 1 lần duy nhất).');
+            localStorage.removeItem('DRIVER_CONFIG');
+          }
+        }
+      } catch (e) {}
+    }
+
+    /**
      * KHỞI TẠO DỮ LIỆU & KIỂM TRA PHIÊN
      */
     function loadConfig() {
@@ -1268,17 +1290,7 @@
         const raw = localStorage.getItem('DRIVER_CONFIG');
         if (raw) {
           const parsed = JSON.parse(raw);
-          // Dọn dẹp cache cũ nếu còn chứa các tuyến hardcoded cũ hoặc số điện thoại cũ
-          const isStale = (Array.isArray(parsed.routes) && parsed.routes.some(r => r.id === 'HN_NB' || r.id === 'INTER_PROV' || r.id === 'CUSTOM')) ||
-            (parsed.profile && parsed.profile.hotlineTel === '0337545188') ||
-            (parsed.driver_info && (parsed.driver_info.hotline === '0337545188' || parsed.driver_info.zalo_number === '0337545188'));
-          if (isStale) {
-            console.log('[Cache Cleanup] Phát hiện cache localStorage chứa cấu hình/SĐT cũ, tiến hành làm sạch.');
-            localStorage.removeItem('DRIVER_CONFIG');
-            currentConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
-          } else {
-            currentConfig = normalizeConfig(parsed);
-          }
+          currentConfig = normalizeConfig(parsed);
         } else {
           currentConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
           localStorage.setItem('DRIVER_CONFIG', JSON.stringify(currentConfig));
@@ -2311,6 +2323,7 @@
      * KHI TẢI TRANG
      */
     document.addEventListener('DOMContentLoaded', () => {
+      cleanupLegacyLocalStorageOnceAdmin();
       loadConfig();
       prefetchConfigFromCloud();
 

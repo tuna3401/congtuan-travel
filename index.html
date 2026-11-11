@@ -1836,25 +1836,34 @@
       };
     }
 
+    // Dọn dẹp cache cũ trên máy khách (chỉ chạy duy nhất 1 lần khi trang vừa tải)
+    let hasCleanedLegacyCache = false;
+    function cleanupLegacyLocalStorageOnce() {
+      if (hasCleanedLegacyCache) return;
+      hasCleanedLegacyCache = true;
+      try {
+        const raw = localStorage.getItem('DRIVER_CONFIG');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          const isStale = (Array.isArray(parsed.routes) && parsed.routes.some(r => r.id === 'HN_NB' || r.id === 'INTER_PROV' || r.id === 'CUSTOM')) ||
+            (parsed.profile && parsed.profile.hotlineTel === '0337545188') ||
+            (parsed.driver_info && (parsed.driver_info.hotline === '0337545188' || parsed.driver_info.zalo_number === '0337545188'));
+          if (isStale) {
+            console.log('[Cache Cleanup] Đã làm sạch cache cũ trên máy khách (chạy 1 lần duy nhất).');
+            localStorage.removeItem('DRIVER_CONFIG');
+          }
+        }
+      } catch (e) {}
+    }
+
     function loadDriverConfig() {
       try {
         const raw = localStorage.getItem('DRIVER_CONFIG');
         if (raw) {
           const parsed = JSON.parse(raw);
-          // Dọn dẹp cache cũ nếu còn chứa các tuyến hardcoded cũ hoặc số điện thoại cũ
-          const isStale = (Array.isArray(parsed.routes) && parsed.routes.some(r => r.id === 'HN_NB' || r.id === 'INTER_PROV' || r.id === 'CUSTOM')) ||
-            (parsed.profile && parsed.profile.hotlineTel === '0337545188') ||
-            (parsed.driver_info && (parsed.driver_info.hotline === '0337545188' || parsed.driver_info.zalo_number === '0337545188'));
-          if (isStale) {
-            console.log('[Cache Cleanup] Bỏ qua cache cũ chứa tuyến/SĐT cũ, tiến hành làm sạch.');
-            localStorage.removeItem('DRIVER_CONFIG');
-            driverConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
-          } else {
-            driverConfig = normalizeConfig(parsed);
-          }
+          driverConfig = normalizeConfig(parsed);
         } else {
           driverConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
-          localStorage.setItem('DRIVER_CONFIG', JSON.stringify(driverConfig));
         }
       } catch (e) {
         console.warn('[DriverConfig] Lỗi đọc bộ nhớ cục bộ:', e);
@@ -2762,27 +2771,35 @@
     });
 
     /**
-     * LẮNG NGHE ĐỒNG BỘ THỜI GIAN THỰC TỪ FIRESTORE (REALTIME SYNC)
-     * Tự động phản chiếu mọi thay đổi từ Admin sang Khách không cần reload
+     * LẮNG NGHE ĐỒNG BỘ THỜI GIAN THỰC TỪ FIRESTORE (READ-ONLY REALTIME SYNC)
+     * Chỉ dùng cho mục đích ĐỌC và cập nhật giao diện (DOM render)
+     * Tuyệt đối KHÔNG gọi set(), update() bên trong listener để tránh vòng lặp vô tận
      */
+    let isFirestoreListening = false;
     let unsubscribeFirestore = null;
+
     function listenToFirestore() {
       if (!db) {
         console.warn('[Firestore] SDK chưa sẵn sàng hoặc offline. Tiếp tục dùng cấu hình mặc định/bộ nhớ máy.');
         return;
       }
+      if (isFirestoreListening) {
+        return; // Đảm bảo listener chỉ được khởi tạo 1 lần duy nhất, tránh re-bind trùng lặp
+      }
+      isFirestoreListening = true;
+
       try {
-        if (unsubscribeFirestore) {
-          unsubscribeFirestore();
-        }
         unsubscribeFirestore = db.collection('settings').doc('driver_config').onSnapshot(
           (docSnap) => {
             if (docSnap.exists) {
               const cloudData = docSnap.data();
               if (cloudData) {
                 console.log('[Firestore] Nhận dữ liệu cập nhật thời gian thực từ Cloud:', cloudData);
-                mergeIncomingDriverConfig(cloudData);
-                localStorage.setItem('DRIVER_CONFIG', JSON.stringify(driverConfig));
+                // READ-ONLY: Cập nhật state in-memory và giao diện DOM, tuyệt đối KHÔNG ghi Firestore
+                driverConfig = normalizeConfig(cloudData);
+                try {
+                  localStorage.setItem('DRIVER_CONFIG', JSON.stringify(driverConfig));
+                } catch (storageErr) {}
                 applyDynamicProfile();
                 applyDynamicImages();
                 renderDynamicRouteSelect(null, true);
@@ -2798,6 +2815,7 @@
           }
         );
       } catch (err) {
+        isFirestoreListening = false;
         console.warn('[Firestore] Lỗi thiết lập listener Firestore:', err);
       }
     }
@@ -2814,15 +2832,24 @@
       listenToFirestore();
     }
 
-    // Lắng nghe thay đổi từ Admin trong trường hợp mở 2 tab cùng lúc
+    // Lắng nghe thay đổi từ Admin trong trường hợp mở 2 tab cùng lúc (chỉ cập nhật DOM, không re-bind listener)
     window.addEventListener('storage', (e) => {
-      if (e.key === 'DRIVER_CONFIG') {
-        initializeApp();
+      if (e.key === 'DRIVER_CONFIG' && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          driverConfig = normalizeConfig(parsed);
+          applyDynamicProfile();
+          applyDynamicImages();
+          renderDynamicRouteSelect(null, true);
+          renderDynamicPopularRoutes();
+          updatePrice();
+        } catch (err) {}
       }
     });
 
     // Khởi tạo trạng thái ban đầu khi DOM sẵn sàng
     document.addEventListener('DOMContentLoaded', () => {
+      cleanupLegacyLocalStorageOnce();
       initializeApp();
     });
   </script>
