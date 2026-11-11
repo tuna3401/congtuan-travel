@@ -579,14 +579,7 @@
                   <div class="relative">
                     <select id="routeSelect"
                       class="w-full bg-[#F1F5F9] border border-slate-200 text-[#0F172A] focus:border-[#9E7326] focus:bg-white focus:ring-1 focus:ring-[#9E7326] rounded-xl px-3.5 py-2.5 text-sm appearance-none cursor-pointer pr-10 transition">
-                      <option value="HN_NA" selected>Hà Nội ⇄ Nghệ An</option>
-                      <option value="HN_NB">Hà Nội ⇄ Sân Bay Nội Bài</option>
-                      <option value="HN_TH">Hà Nội ⇄ TP. Thanh Hóa</option>
-                      <option value="HN_HL">Hà Nội ⇄ TP. Hạ Long (Quảng Ninh)</option>
-                      <option value="HN_NBINH">Hà Nội ⇄ Tràng An / Ninh Bình</option>
-                      <option value="HN_HP">Hà Nội ⇄ TP. Hải Phòng (Cao Tốc 5B)</option>
-                      <option value="INTER_PROV">Liên Tỉnh Theo Km (8.500đ - 11.000đ/km)</option>
-                      <option value="CUSTOM">Tuyến Theo Yêu Cầu Riêng (Báo giá trực tiếp)</option>
+                      <option value="" disabled selected>Đang tải danh sách tuyến...</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1067,165 +1060,16 @@
         </div>
 
         <div id="popularRoutesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-          <!-- ROUTE 1: HÀ NỘI ⇄ NỘI BÀI -->
-          <div
-            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group">
-            <div
-              class="absolute -top-3 right-4 bg-gradient-to-r from-[#B8860B] to-[#D4AF37] text-white text-[10px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full shadow-md">
-              Tuyến Hot
+          <!-- Trạng thái chờ tải dữ liệu thực tế từ Cloud -->
+          <div class="col-span-full py-12 text-center text-slate-400">
+            <div class="inline-flex items-center space-x-2 text-sm">
+              <svg class="animate-spin h-5 w-5 text-[#9E7326]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Đang cập nhật bảng giá tuyến từ hệ thống...</span>
             </div>
-            <div>
-              <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1 flex items-center">
-                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                </svg>
-                Sân Bay Quốc Tế
-              </div>
-              <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">Hà Nội ⇄ Nội Bài</h3>
-              <p class="text-xs text-slate-500 mb-4">Đón tiễn 2 chiều mọi quận huyện Hà Nội lên sảnh T1, T2 Nội Bài.</p>
-
-              <div class="space-y-2 py-3 border-y border-slate-100">
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-slate-500">Đi ghép 1 ghế:</span>
-                  <span class="font-bold font-display tracking-tight text-[#0F172A]">từ 150.000 đ</span>
-                </div>
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-[#9E7326] font-bold">Bao trọn xe:</span>
-                  <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">chỉ từ 250.000 đ</span>
-                </div>
-              </div>
-
-              <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
-                <li class="flex items-center">✓ Miễn phí 60 phút chờ máy bay delay</li>
-                <li class="flex items-center">✓ Đón đúng giờ, hỗ trợ xách vali</li>
-              </ul>
-            </div>
-
-            <button type="button" onclick="selectRouteFromCard('HN_NB', 'charter')"
-              class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
-              Chọn Tuyến Này
-            </button>
           </div>
-
-          <!-- ROUTE 2: HÀ NỘI ⇄ HẠ LONG -->
-          <div
-            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group">
-            <div>
-              <div class="text-[10px] font-bold text-[#9E7326] uppercase tracking-widest mb-1 flex items-center">
-                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd"
-                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                    clip-rule="evenodd" />
-                </svg>
-                Cao Tốc 5B Mới
-              </div>
-              <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">Hà Nội ⇄ Hạ Long</h3>
-              <p class="text-xs text-slate-500 mb-4">Tuyến cao tốc Hải Phòng - Hạ Long chỉ 1h45p êm ru tới Bãi Cháy/Hòn
-                Gai.</p>
-
-              <div class="space-y-2 py-3 border-y border-slate-100">
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-slate-500">Đi ghép tiện chuyến:</span>
-                  <span class="font-bold font-display tracking-tight text-[#0F172A]">từ 350.000 đ</span>
-                </div>
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-[#9E7326] font-bold">Bao trọn xe:</span>
-                  <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">chỉ từ 1.200.000 đ</span>
-                </div>
-              </div>
-
-              <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
-                <li class="flex items-center">✓ Đã bao gồm vé cao tốc 5B</li>
-                <li class="flex items-center">✓ Đưa đón tận khách sạn, resort</li>
-              </ul>
-            </div>
-
-            <button type="button" onclick="selectRouteFromCard('HN_HL', 'charter')"
-              class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
-              Chọn Tuyến Này
-            </button>
-          </div>
-
-          <!-- ROUTE 3: HÀ NỘI ⇄ NINH BÌNH -->
-          <div
-            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group">
-            <div>
-              <div class="text-[10px] font-bold text-[#9E7326] uppercase tracking-widest mb-1 flex items-center">
-                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd"
-                    d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707l6 6A1 1 0 009 21V8.414l-5.293-5.121zm16.586 0L15 8.414V21a1 1 0 00.707-.293l6-6A1 1 0 0022 14V4a1 1 0 00-.293-.707z"
-                    clip-rule="evenodd" />
-                </svg>
-                Du Lịch & Công Tác
-              </div>
-              <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">Hà Nội ⇄ Ninh Bình</h3>
-              <p class="text-xs text-slate-500 mb-4">Tràng An, Bái Đính, Tam Cốc hoặc TP. Ninh Bình chỉ 1h15p di chuyển.
-              </p>
-
-              <div class="space-y-2 py-3 border-y border-slate-100">
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-slate-500">Đi ghép tiện chuyến:</span>
-                  <span class="font-bold font-display tracking-tight text-[#0F172A]">từ 200.000 đ</span>
-                </div>
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-[#9E7326] font-bold">Bao trọn xe:</span>
-                  <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">chỉ từ 950.000 đ</span>
-                </div>
-              </div>
-
-              <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
-                <li class="flex items-center">✓ Tuyến cao tốc Pháp Vân - Cầu Giẽ</li>
-                <li class="flex items-center">✓ Phục vụ chờ theo ngày giá ưu đãi</li>
-              </ul>
-            </div>
-
-            <button type="button" onclick="selectRouteFromCard('HN_NBINH', 'charter')"
-              class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
-              Chọn Tuyến Này
-            </button>
-          </div>
-
-          <!-- ROUTE 4: LIÊN TỈNH THEO KM -->
-          <div
-            class="bg-white border border-slate-200/90 shadow-[0_10px_35px_-8px_rgba(0,0,0,0.07)] card-hover rounded-2xl p-6 flex flex-col justify-between relative group">
-            <div>
-              <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1 flex items-center">
-                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd"
-                    d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 5a1 1 0 011 1v1a1 1 0 11-2 0V6a1 1 0 011-1zm12 0a1 1 0 011 1v1a1 1 0 11-2 0V6a1 1 0 011-1zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm14 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z"
-                    clip-rule="evenodd" />
-                </svg>
-                Lộ Trình Tự Do
-              </div>
-              <h3 class="text-xl font-bold font-display tracking-tight text-[#0F172A] mb-2">Liên Tỉnh Theo Km</h3>
-              <p class="text-xs text-slate-500 mb-4">Hải Phòng, Thái Bình, Nam Định, Phú Thọ, Vĩnh Phúc, Bắc Ninh, v.v.
-              </p>
-
-              <div class="space-y-2 py-3 border-y border-slate-100">
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-slate-500">Đơn giá km (1 chiều):</span>
-                  <span class="font-bold font-display tracking-tight text-[#0F172A]">9.000 - 10.000 đ</span>
-                </div>
-                <div class="flex items-center justify-between text-xs">
-                  <span class="text-[#9E7326] font-bold">Khứ hồi 2 chiều:</span>
-                  <span class="font-bold font-display tracking-tight text-[#9E7326] text-lg">chỉ từ 8.500 đ/km</span>
-                </div>
-              </div>
-
-              <ul class="text-[11px] text-slate-600 space-y-1.5 my-4">
-                <li class="flex items-center">✓ Giảm tới 70% chiều về</li>
-                <li class="flex items-center">✓ Xe riêng sạch thơm, không tính giờ chờ</li>
-              </ul>
-            </div>
-
-            <button type="button" onclick="selectRouteFromCard('INTER_PROV', 'charter')"
-              class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-[#9E7326] hover:text-white transition text-xs font-bold text-slate-800 uppercase tracking-wider">
-              Chọn Tuyến Này
-            </button>
-          </div>
-
         </div>
 
       </div>
@@ -1817,146 +1661,6 @@
           isActive: true,
           isAirport: false
         },
-        {
-          id: 'HN_NB',
-          name: 'Hà Nội ⇄ Sân Bay Nội Bài',
-          charter: {
-            car5: 250000,
-            car7: 350000
-          },
-          shared: {
-            car5: { seat_1p: 150000, seat_2p: 280000, seat_middle_row: 350000, extra_luggage_fee: 50000 },
-            car7: { seat_1p: 180000, seat_2p: 340000, seat_middle_row: 420000, extra_luggage_fee: 50000 }
-          },
-          charterUnit: '/ chuyến trọn gói',
-          sharedUnit: '/ ghế tiện chuyến',
-          description: 'Đón tiễn 2 chiều mọi quận huyện Hà Nội lên sảnh T1, T2 Nội Bài.',
-          badge: 'Tuyến Hot',
-          category: 'Sân Bay Quốc Tế',
-          features: ['Miễn phí 60 phút chờ máy bay delay', 'Đón đúng giờ, hỗ trợ xách vali'],
-          isActive: true,
-          isAirport: true
-        },
-        {
-          id: 'HN_TH',
-          name: 'Hà Nội ⇄ TP. Thanh Hóa',
-          charter: {
-            car5: 1800000,
-            car7: 2000000
-          },
-          shared: {
-            car5: { seat_1p: 600000, seat_2p: 1100000, seat_middle_row: 1400000, extra_luggage_fee: 100000 },
-            car7: { seat_1p: 700000, seat_2p: 1300000, seat_middle_row: 1600000, extra_luggage_fee: 100000 }
-          },
-          charterUnit: '/ chuyến trọn gói',
-          sharedUnit: '/ ghế tiện chuyến',
-          description: 'Cao tốc Mai Sơn - QL45 êm ái, đón trả tận nơi nội thành TP. Thanh Hóa & Sầm Sơn.',
-          badge: 'Cao Tốc Bắc Nam',
-          category: 'Tuyến Trọng Điểm',
-          features: ['Đã bao gồm vé cao tốc', 'Nước suối khăn lạnh miễn phí'],
-          isActive: true,
-          isAirport: false
-        },
-        {
-          id: 'HN_HL',
-          name: 'Hà Nội ⇄ TP. Hạ Long (Quảng Ninh)',
-          charter: {
-            car5: 1200000,
-            car7: 1500000
-          },
-          shared: {
-            car5: { seat_1p: 350000, seat_2p: 650000, seat_middle_row: 850000, extra_luggage_fee: 50000 },
-            car7: { seat_1p: 400000, seat_2p: 750000, seat_middle_row: 1000000, extra_luggage_fee: 50000 }
-          },
-          charterUnit: '/ chuyến trọn gói',
-          sharedUnit: '/ ghế tiện chuyến',
-          description: 'Tuyến cao tốc Hải Phòng - Hạ Long chỉ 1h45p êm ru tới Bãi Cháy/Hòn Gai.',
-          badge: 'Cao Tốc 5B',
-          category: 'Cao Tốc 5B Mới',
-          features: ['Đã bao gồm vé cao tốc 5B', 'Đưa đón tận khách sạn, resort'],
-          isActive: true,
-          isAirport: false
-        },
-        {
-          id: 'HN_NBINH',
-          name: 'Hà Nội ⇄ Tràng An / Ninh Bình',
-          charter: {
-            car5: 950000,
-            car7: 1200000
-          },
-          shared: {
-            car5: { seat_1p: 200000, seat_2p: 380000, seat_middle_row: 500000, extra_luggage_fee: 50000 },
-            car7: { seat_1p: 250000, seat_2p: 480000, seat_middle_row: 600000, extra_luggage_fee: 50000 }
-          },
-          charterUnit: '/ chuyến trọn gói',
-          sharedUnit: '/ ghế tiện chuyến',
-          description: 'Tràng An, Bái Đính, Tam Cốc hoặc TP. Ninh Bình chỉ 1h15p di chuyển.',
-          badge: 'Du Lịch',
-          category: 'Du Lịch & Công Tác',
-          features: ['Tuyến cao tốc Pháp Vân - Cầu Giẽ', 'Phục vụ chờ theo ngày giá ưu đãi'],
-          isActive: true,
-          isAirport: false
-        },
-        {
-          id: 'HN_HP',
-          name: 'Hà Nội ⇄ TP. Hải Phòng (Cao Tốc 5B)',
-          charter: {
-            car5: 1050000,
-            car7: 1350000
-          },
-          shared: {
-            car5: { seat_1p: 250000, seat_2p: 480000, seat_middle_row: 650000, extra_luggage_fee: 50000 },
-            car7: { seat_1p: 300000, seat_2p: 580000, seat_middle_row: 750000, extra_luggage_fee: 50000 }
-          },
-          charterUnit: '/ chuyến trọn gói',
-          sharedUnit: '/ ghế tiện chuyến',
-          description: 'Tuyến cao tốc Hà Nội - Hải Phòng êm ru, giao nhận tận nơi nội thành.',
-          badge: 'Cao Tốc',
-          category: 'Thành Phố Cảng',
-          features: ['Đã bao gồm phí cầu đường', 'Giao nhận tận nơi nội thành Hải Phòng'],
-          isActive: true,
-          isAirport: false
-        },
-        {
-          id: 'INTER_PROV',
-          name: 'Liên Tỉnh Theo Km (8.500đ - 11.000đ/km)',
-          charter: {
-            car5: 8500,
-            car7: 11000
-          },
-          shared: {
-            car5: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 },
-            car7: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 }
-          },
-          charterUnit: 'đ / km (tùy cự ly)',
-          sharedUnit: 'Liên hệ tài xế',
-          description: 'Hải Phòng, Thái Bình, Nam Định, PhúThọ, Vĩnh Phúc, Bắc Ninh, v.v.',
-          badge: 'Tiết Kiệm',
-          category: 'Lộ Trình Tự Do',
-          features: ['Giảm tới 70% chiều về', 'Xe riêng sạch thơm, không tính giờ chờ'],
-          isActive: true,
-          isAirport: false
-        },
-        {
-          id: 'CUSTOM',
-          name: 'Tuyến Theo Yêu Cầu Riêng (Báo giá trực tiếp)',
-          charter: {
-            car5: 0,
-            car7: 0
-          },
-          shared: {
-            car5: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 },
-            car7: { seat_1p: 0, seat_2p: 0, seat_middle_row: 0, extra_luggage_fee: 0 }
-          },
-          charterUnit: 'Báo giá trực tiếp',
-          sharedUnit: 'Báo giá trực tiếp',
-          description: 'Lộ trình thiết kế riêng biệt theo nhu cầu cá nhân hoặc đoàn công tác.',
-          badge: 'Theo Yêu Cầu',
-          category: 'Lộ Trình Cá Nhân',
-          features: ['Hỗ trợ báo giá nhanh 24/7', 'Tư vấn lộ trình tối ưu nhất'],
-          isActive: true,
-          isAirport: false
-        }
       ],
       images: {
         avatar: 'assets/images/avatar.jpg',
@@ -2086,12 +1790,8 @@
         note: hol.note || 'Phụ thu lễ/Tết'
       };
 
-      let rawRoutes = Array.isArray(incoming.routes) && incoming.routes.length > 0 ? incoming.routes : DEFAULT_DRIVER_CONFIG.routes;
-      // Đảm bảo tuyến Hà Nội ⇄ Nghệ An luôn có mặt nếu cấu hình cũ chưa có (giữ nguyên thứ tự người dùng đã sắp xếp)
-      if (!rawRoutes.some(r => r.id === 'HN_NA')) {
-        rawRoutes = [DEFAULT_DRIVER_CONFIG.routes[0], ...rawRoutes];
-      }
-      const routes = rawRoutes.map(normalizeRoute);
+      let rawRoutes = Array.isArray(incoming.routes) ? incoming.routes : DEFAULT_DRIVER_CONFIG.routes;
+      const routes = rawRoutes.map(normalizeRoute).filter(Boolean);
 
       const normalizedImages = {
         avatar: driver_info.avatar_url,
@@ -2141,7 +1841,14 @@
         const raw = localStorage.getItem('DRIVER_CONFIG');
         if (raw) {
           const parsed = JSON.parse(raw);
-          driverConfig = normalizeConfig(parsed);
+          // Dọn dẹp cache cũ nếu còn chứa các tuyến hardcoded cũ (legacy template)
+          if (Array.isArray(parsed.routes) && parsed.routes.some(r => r.id === 'HN_NB' || r.id === 'INTER_PROV' || r.id === 'CUSTOM')) {
+            console.log('[Cache Cleanup] Bỏ qua cache cũ chứa tuyến fix code.');
+            localStorage.removeItem('DRIVER_CONFIG');
+            driverConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
+          } else {
+            driverConfig = normalizeConfig(parsed);
+          }
         } else {
           driverConfig = normalizeConfig(DEFAULT_DRIVER_CONFIG);
           localStorage.setItem('DRIVER_CONFIG', JSON.stringify(driverConfig));
@@ -2277,6 +1984,11 @@
       const previousValue = preserveSelection ? routeSelect.value : null;
       routeSelect.innerHTML = '';
 
+      if (!activeRoutes || activeRoutes.length === 0) {
+        routeSelect.innerHTML = '<option value="" disabled selected>Chưa có tuyến hoạt động</option>';
+        return;
+      }
+
       activeRoutes.forEach(r => {
         const opt = document.createElement('option');
         opt.value = r.id;
@@ -2308,6 +2020,14 @@
       const holidayAmt = isHoliday ? (Number(holConfig.amount) || 50000) : 0;
 
       container.innerHTML = '';
+
+      if (!activeRoutes || activeRoutes.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400 text-sm">
+            Hiện chưa có tuyến đường nào được kích hoạt trên hệ thống. Vui lòng liên hệ tài xế qua hotline hoặc Zalo để được báo giá trực tiếp.
+          </div>`;
+        return;
+      }
 
       activeRoutes.forEach(rawRoute => {
         const route = normalizeRoute(rawRoute);
@@ -2573,7 +2293,9 @@
     // Hiển thị / ẩn ô mã chuyến bay nếu đi Nội Bài
     function checkAirportFlightBox(routeKey) {
       if (flightBox) {
-        if (routeKey === 'HN_NB') {
+        const route = getRouteById(routeKey);
+        const isAirport = route ? (!!route.isAirport || routeKey === 'HN_NB') : false;
+        if (isAirport) {
           flightBox.classList.remove('hidden');
         } else {
           flightBox.classList.add('hidden');
